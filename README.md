@@ -1,4 +1,4 @@
-WickedFlame.Stash
+WickedFlame.Scribble
 =================
 
-A background Logger for Trace messages
+A background Logger and Diagnostics component for Trace messages
