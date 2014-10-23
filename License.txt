@@ -1,4 +1,4 @@
-PersistanceMap is intended to be used in both open-source and commercial environments.
+Scribble is intended to be used in both open-source and commercial environments.
 
 Microsoft Public License (Ms-PL)
 --------------------------------
