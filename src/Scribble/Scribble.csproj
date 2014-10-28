@@ -39,8 +39,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ILogProvider.cs" />
     <Compile Include="LogEntry.cs" />
-    <Compile Include="LoggerFacade.cs" />
+    <Compile Include="Logger.cs" />
+    <Compile Include="LogManager.cs" />
     <Compile Include="LogTraceListener.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

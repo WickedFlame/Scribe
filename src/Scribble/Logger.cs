@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Scribble
 {
-    public class LoggerFacade
+    public class Logger
     {
         IList<LogEntry> _logEntries;
         public IList<LogEntry> LogEntries
@@ -20,18 +20,21 @@ namespace Scribble
         }
 
 
-        static LoggerFacade _instance;
-        public static LoggerFacade Instance
+        //static Logger _instance;
+        //public static Logger Instance
+        //{
+        //    get
+        //    {
+        //        if (_instance == null)
+        //            _instance = new Logger();
+        //        return _instance;
+        //    }
+        //}
+
+        public void Info(string message)
         {
-            get
-            {
-                if (_instance == null)
-                    _instance = new LoggerFacade();
-                return _instance;
-            }
+            LogEntries.Add(new LogEntry(message, "Info", null));
         }
-      
-		
       
         public void Log(string message, string category = null, DateTime? logtime = null)
         {
