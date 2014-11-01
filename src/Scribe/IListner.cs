@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Scribble
+namespace Scribe
 {
-    public interface ILogProvider
+    public interface IListner
     {
-        void Initialize(Logger logger);
+        void Initialize(ILoggerFactory loggerFactory);
     }
 }

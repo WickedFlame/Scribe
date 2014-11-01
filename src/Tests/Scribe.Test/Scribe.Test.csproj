@@ -6,8 +6,8 @@
     <ProjectGuid>{676459B9-938F-40DC-9D62-B95B4F346302}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Scribble.Test</RootNamespace>
-    <AssemblyName>Scribble.Test</AssemblyName>
+    <RootNamespace>Scribe.Test</RootNamespace>
+    <AssemblyName>Scribe.Test</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -50,11 +50,12 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="TraceLogger.cs" />
     <Compile Include="UnitTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Scribble\Scribble.csproj">
+    <ProjectReference Include="..\..\Scribe\Scribe.csproj">
       <Project>{a9014aee-8d87-4115-90b9-d06b6c11858b}</Project>
       <Name>Scribble</Name>
     </ProjectReference>

@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.30110.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scribble", "src\Scribble\Scribble.csproj", "{A9014AEE-8D87-4115-90B9-D06B6C11858B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scribe", "src\Scribe\Scribe.csproj", "{A9014AEE-8D87-4115-90B9-D06B6C11858B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scribble.Test", "src\Tests\Scribble.Test\Scribble.Test.csproj", "{676459B9-938F-40DC-9D62-B95B4F346302}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scribe.Test", "src\Tests\Scribe.Test\Scribe.Test.csproj", "{676459B9-938F-40DC-9D62-B95B4F346302}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

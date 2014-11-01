@@ -7,8 +7,8 @@
     <ProjectGuid>{A9014AEE-8D87-4115-90B9-D06B6C11858B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Scribble</RootNamespace>
-    <AssemblyName>Scribble</AssemblyName>
+    <RootNamespace>Scribe</RootNamespace>
+    <AssemblyName>Scribe</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -39,10 +39,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ILogProvider.cs" />
+    <Compile Include="IListner.cs" />
+    <Compile Include="ILogProcessor.cs" />
     <Compile Include="LogEntry.cs" />
+    <Compile Include="ILogger.cs" />
+    <Compile Include="ILoggerFactory.cs" />
     <Compile Include="Logger.cs" />
-    <Compile Include="LogManager.cs" />
+    <Compile Include="LoggerFactory.cs" />
+    <Compile Include="LogProcessor.cs" />
+    <Compile Include="TraceType.cs" />
+    <Compile Include="LogManager.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="LogTraceListener.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

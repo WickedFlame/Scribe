@@ -1,4 +1,4 @@
-Scribble is intended to be used in both open-source and commercial environments.
+WickedFlame.Scribe is intended to be used in both open-source and commercial environments.
 
 Microsoft Public License (Ms-PL)
 --------------------------------
