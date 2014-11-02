@@ -42,7 +42,7 @@ namespace Scribe
         }
 
         readonly Lazy<Dictionary<string, GetLogWriterCallback>> _logWriters;
-        public Dictionary<string, GetLogWriterCallback> LogWriters
+        public Dictionary<string, GetLogWriterCallback> Writers
         {
             get
             {
@@ -72,7 +72,7 @@ namespace Scribe
         public void AddLogger(ILogWriter logger, string name = null)
         {
             //_loggerFactory.Value.AddLogger(name ?? logger.GetType().Name, () => logger);
-            LogWriters.Add(name ?? logger.GetType().Name, () => logger);
+            Writers.Add(name ?? logger.GetType().Name, () => logger);
         }
 
         public void Initialize()
@@ -103,7 +103,7 @@ namespace Scribe
                     }
                 }
 
-                foreach (var element in section.LogWriters)
+                foreach (var element in section.Writers)
                 {
                     var type = Type.GetType(element.Type);
                     if (type != null)

@@ -103,7 +103,7 @@ namespace Scribe
 
             LogEntries.Add(row);
 
-            foreach (var logger in _logManager.LogWriters.Values)
+            foreach (var logger in _logManager.Writers.Values)
             {
                 logger().Write(row.Message, row.TraceType, row.Categroy, row.LogTime);
             }

@@ -9,7 +9,7 @@ namespace Scribe
 
         ILogProcessor Processor { get; }
 
-        Dictionary<string, GetLogWriterCallback> LogWriters { get; }
+        Dictionary<string, GetLogWriterCallback> Writers { get; }
 
         IEnumerable<IListener> Listeners { get; }
 
