@@ -57,7 +57,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Scribe\Scribe.csproj">
       <Project>{a9014aee-8d87-4115-90b9-d06b6c11858b}</Project>
-      <Name>Scribble</Name>
+      <Name>Scribe</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

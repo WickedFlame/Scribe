@@ -12,7 +12,7 @@ namespace Scribe.Test
         public void TestMethod1()
         {
             var manager = new LogManager();
-            manager.AddListner(new LogTraceListener());
+            manager.AddListener(new LogTraceListener());
 
             Trace.Write("Test");
             Trace.TraceError("Error message");
@@ -29,8 +29,8 @@ namespace Scribe.Test
         {
             var loggerFactory = new LoggerFactory();
             var traceLogger = new TraceLogger();
-            loggerFactory.AddLogger("tracelogger", () => traceLogger);
-            loggerFactory.AddLogger("tracelogger2", () => traceLogger);
+            loggerFactory.Manager.AddLogger(traceLogger, "tracelogger");
+            loggerFactory.Manager.AddLogger(traceLogger, "tracelogger2");
 
             var logger = loggerFactory.CreateLogger();
             logger.Write("test", TraceType.Error);
@@ -43,13 +43,13 @@ namespace Scribe.Test
         public void TestMethod3()
         {
             var manager = new LogManager();
-            manager.AddListner(new LogTraceListener());
+            //manager.AddListner(new LogTraceListener());
+            manager.AddLogger(new TraceLogger());
 
-            var traceLogger = new TraceLogger();
-            manager.AddLogger(traceLogger);
 
-            traceLogger.Write("Test");
-            traceLogger.Write("Error message");
+            var logger = manager.LoggerFactory.CreateLogger();
+            logger.Write("Test");
+            logger.Write("Error message");
 
             // give the logthread time to write logqueue
             System.Threading.Thread.Sleep(TimeSpan.FromSeconds(1));

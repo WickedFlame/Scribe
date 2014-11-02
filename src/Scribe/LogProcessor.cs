@@ -15,11 +15,22 @@ namespace Scribe
         readonly ManualResetEvent _waiting = new ManualResetEvent(false);
 
         readonly Thread _loggingThread;
-        readonly ILoggerFactory _loggerFactory;
+        //readonly ILoggerFactory _loggerFactory;
+        readonly ILogManager _logManager;
 
-        public LogProcessor(ILoggerFactory loggerFactory)
+        //public LogProcessor(ILoggerFactory loggerFactory)
+        //{
+        //    _loggerFactory = loggerFactory;
+
+        //    _loggingThread = new Thread(new ThreadStart(ProcessQueue));
+        //    _loggingThread.IsBackground = true;
+        //    // this is performed from a bg thread, to ensure the queue is serviced from a single thread
+        //    _loggingThread.Start();
+        //}
+
+        public LogProcessor(ILogManager manager)
         {
-            _loggerFactory = loggerFactory;
+            _logManager = manager;
 
             _loggingThread = new Thread(new ThreadStart(ProcessQueue));
             _loggingThread.IsBackground = true;
@@ -92,7 +103,7 @@ namespace Scribe
 
             LogEntries.Add(row);
 
-            foreach (var logger in _loggerFactory.LogProviders.Values)
+            foreach (var logger in _logManager.LogWriters.Values)
             {
                 logger().Write(row.Message, row.TraceType, row.Categroy, row.LogTime);
             }

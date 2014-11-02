@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Scribe.Test
 {
-    class TraceLogger : ILogger
+    class TraceLogger : ILogWriter
     {
         public void Write(string message, TraceType traceType = TraceType.Information, string category = null, DateTime? logtime = null)
         {

@@ -31,6 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -39,8 +40,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IListner.cs" />
+    <Compile Include="Configuration\ListenerElemen.cs" />
+    <Compile Include="Configuration\LoggerElement.cs" />
+    <Compile Include="Configuration\ListenerElementCollection.cs" />
+    <Compile Include="Configuration\LoggerElementCollection.cs" />
+    <Compile Include="Configuration\ScribeSection.cs" />
+    <Compile Include="IListener.cs" />
+    <Compile Include="ILogManager.cs" />
     <Compile Include="ILogProcessor.cs" />
+    <Compile Include="ILogWriter.cs" />
     <Compile Include="LogEntry.cs" />
     <Compile Include="ILogger.cs" />
     <Compile Include="ILoggerFactory.cs" />
@@ -54,6 +62,7 @@
     <Compile Include="LogTraceListener.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

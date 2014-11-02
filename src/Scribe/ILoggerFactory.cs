@@ -4,9 +4,11 @@ namespace Scribe
 {
     public interface ILoggerFactory
     {
-        Dictionary<string, CreateLoggerCallback> LogProviders { get; }
+        //Dictionary<string, CreateLoggerCallback> LogProviders { get; }
 
-        void AddLogger(string name, CreateLoggerCallback loggerProvider);
+        //IEnumerable<IListener> Listeners { get; }
+
+        //void AddLogger(string name, CreateLoggerCallback loggerProvider);
 
         ILogger CreateLogger();
 

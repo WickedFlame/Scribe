@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scribe", "src\Scribe\Scribe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scribe.Test", "src\Tests\Scribe.Test\Scribe.Test.csproj", "{676459B9-938F-40DC-9D62-B95B4F346302}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{774A3CFC-5D20-4FDD-9E3A-F0618E33CAFD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scribe.Configuration.Test", "src\Tests\Scribe.Configuration.Test\Scribe.Configuration.Test.csproj", "{3CB6AC13-576B-404A-AB45-68DC1FA38EAB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,8 +25,16 @@ Global
 		{676459B9-938F-40DC-9D62-B95B4F346302}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{676459B9-938F-40DC-9D62-B95B4F346302}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{676459B9-938F-40DC-9D62-B95B4F346302}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3CB6AC13-576B-404A-AB45-68DC1FA38EAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3CB6AC13-576B-404A-AB45-68DC1FA38EAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3CB6AC13-576B-404A-AB45-68DC1FA38EAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3CB6AC13-576B-404A-AB45-68DC1FA38EAB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{676459B9-938F-40DC-9D62-B95B4F346302} = {774A3CFC-5D20-4FDD-9E3A-F0618E33CAFD}
+		{3CB6AC13-576B-404A-AB45-68DC1FA38EAB} = {774A3CFC-5D20-4FDD-9E3A-F0618E33CAFD}
 	EndGlobalSection
 EndGlobal

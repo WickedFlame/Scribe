@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 
 namespace Scribe
 {
-    public class LogTraceListener : TraceListener, IListner
+    public class LogTraceListener : TraceListener, IListener
     {
         ILogger _logger;
 
