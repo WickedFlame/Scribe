@@ -2,33 +2,32 @@
 
 namespace Scribe
 {
-    public delegate ILogWriter GetLogWriterCallback();
+    
+
+    //public delegate ILogger GetLoggerCallback();
 
     public class LoggerFactory : ILoggerFactory
     {
-        //readonly Lazy<ILogProcessor> _processor;
+        //TODO: Does LoggerCallback have to be static???
+        public Func<ILogger> LoggerCallback { get; set; }
 
         public LoggerFactory()
         {
-            //_processor = new Lazy<ILogProcessor>(() => new LogProcessor(this));
-            //_listeners = new Lazy<IList<IListener>>(() => new List<IListener>());
-            //_logProviders = new Lazy<Dictionary<string, CreateLoggerCallback>>(() => new Dictionary<string, CreateLoggerCallback>());
+            //TODO: Does LoggerCallback have to be static???
+            LoggerCallback = () => new Logger(this);
 
-            _logManager = new Lazy<ILogManager>(() => new LogManager());
+            _logManager = new Lazy<ILogManager>(() => new LogManager(this));
             if (LogManager.HasConfiguration())
                 Manager.Initialize();
         }
 
         public LoggerFactory(ILogManager manager)
         {
-            //_processor = new Lazy<ILogProcessor>(() => new LogProcessor(this));
-            //_listeners = new Lazy<IList<IListener>>(() => new List<IListener>());
-            //_logProviders = new Lazy<Dictionary<string, CreateLoggerCallback>>(() => new Dictionary<string, CreateLoggerCallback>());
+            //TODO: Does LoggerCallback have to be static???
+            LoggerCallback = () => new Logger(this);
 
             _logManager = new Lazy<ILogManager>(() => manager);
         }
-
-
 
         readonly Lazy<ILogManager> _logManager;
         public ILogManager Manager
@@ -39,57 +38,21 @@ namespace Scribe
             }
         }
       
-		
-        //public ILogProcessor Processor
-        //{
-        //    get
-        //    {
-        //        return Manager.Processor;
-        //    }
-        //}
-      
-		
-
-
-        //readonly Lazy<Dictionary<string, CreateLoggerCallback>> _logProviders;
-        //public Dictionary<string, CreateLoggerCallback> LogProviders
-        //{
-        //    get
-        //    {
-        //        return _logProviders.Value;
-        //    }
-        //}
-
-        //readonly Lazy<IList<IListener>> _listeners;
-        //public IEnumerable<IListener> Listeners
-        //{
-        //    get
-        //    {
-        //        return _listeners.Value;
-        //    }
-        //}
-
-        //public void AddListener(IListener listener)
-        //{
-        //    _listeners.Value.Add(listener);
-        //}
-
-        //public void AddLogger(string name, CreateLoggerCallback loggerProvider)
-        //{
-        //    if (!LogProviders.ContainsKey(name))
-        //    {
-        //        LogProviders.Add(name, loggerProvider);
-        //    }
-        //}
-
         public ILogger CreateLogger()
         {
-            return new Logger(this);
+            //TODO: Does LoggerCallback have to be static???
+            // if there is an override call that one
+            //if (LoggerCallback != null)
+            //    return LoggerCallback();
+
+            //return new Logger(this);
+
+            //TODO: Does LoggerCallback have to be static???
+            return LoggerCallback();
         }
 
         public ILogProcessor GetProcessor()
         {
-            //return _processor.Value;
             return Manager.Processor;
         }
     }

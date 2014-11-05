@@ -3,6 +3,8 @@ using System.Collections.Generic;
 
 namespace Scribe
 {
+    public delegate ILogWriter GetLogWriterCallback();
+
     public interface ILogManager
     {
         ILoggerFactory LoggerFactory { get; }

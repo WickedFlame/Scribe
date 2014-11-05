@@ -12,8 +12,19 @@ namespace Scribe
 
         public LogManager()
         {
-            _loggerFactory = new Lazy<LoggerFactory>(() => new LoggerFactory());
             _loggerFactory = new Lazy<LoggerFactory>(() => new LoggerFactory(this));
+
+
+            _processor = new Lazy<ILogProcessor>(() => new LogProcessor(this));
+            _listeners = new Lazy<IList<IListener>>(() => new List<IListener>());
+            _logWriters = new Lazy<Dictionary<string, GetLogWriterCallback>>(() => new Dictionary<string, GetLogWriterCallback>());
+
+            Initialize();
+        }
+
+        public LogManager(LoggerFactory loggerFactory)
+        {
+            _loggerFactory = new Lazy<LoggerFactory>(() => loggerFactory);
 
 
             _processor = new Lazy<ILogProcessor>(() => new LogProcessor(this));
