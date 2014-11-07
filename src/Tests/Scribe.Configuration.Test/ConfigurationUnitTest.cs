@@ -14,7 +14,7 @@ namespace Scribe.Configuration.Test
             var manager = factory.Manager;
 
             Assert.IsTrue(manager.Listeners.Any());
-            Assert.IsTrue(manager.Listeners.First().GetType() == typeof(LogTraceListener));
+            Assert.IsTrue(manager.Listeners.First().GetType() == typeof(TraceLogListener));
 
             Assert.IsTrue(manager.Writers.Any());
             Assert.IsTrue(manager.Writers.First().Value().GetType() == typeof(MockLogWriter));
@@ -26,7 +26,7 @@ namespace Scribe.Configuration.Test
             var manager = new LogManager();
 
             Assert.IsTrue(manager.Listeners.Any());
-            Assert.IsTrue(manager.Listeners.First().GetType() == typeof(LogTraceListener));
+            Assert.IsTrue(manager.Listeners.First().GetType() == typeof(TraceLogListener));
 
             Assert.IsTrue(manager.Writers.Any());
             Assert.IsTrue(manager.Writers.First().Value().GetType() == typeof(MockLogWriter));

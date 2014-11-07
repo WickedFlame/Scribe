@@ -3,7 +3,7 @@ using System.Diagnostics;
 
 namespace Scribe.Test
 {
-    class TraceLogger : ILogWriter
+    class TraceLoggerWriter : ILogWriter
     {
         public void Write(string message, TraceType traceType = TraceType.Information, string category = null, DateTime? logtime = null)
         {

@@ -12,7 +12,7 @@ namespace Scribe.Test
         public void TestMethod1()
         {
             var manager = new LogManager();
-            manager.AddListener(new LogTraceListener());
+            manager.AddListener(new TraceLogListener());
 
             Trace.Write("Test");
             Trace.TraceError("Error message");
@@ -28,7 +28,7 @@ namespace Scribe.Test
         public void TestMethod2()
         {
             var loggerFactory = new LoggerFactory();
-            var traceLogger = new TraceLogger();
+            var traceLogger = new TraceLoggerWriter();
             loggerFactory.Manager.AddLogger(traceLogger, "tracelogger");
             loggerFactory.Manager.AddLogger(traceLogger, "tracelogger2");
 
@@ -44,7 +44,7 @@ namespace Scribe.Test
         {
             var manager = new LogManager();
             //manager.AddListner(new LogTraceListener());
-            manager.AddLogger(new TraceLogger());
+            manager.AddLogger(new TraceLoggerWriter());
 
 
             var logger = manager.LoggerFactory.CreateLogger();

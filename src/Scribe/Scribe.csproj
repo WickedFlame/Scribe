@@ -56,7 +56,7 @@
     <Compile Include="LogManager.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="LogTraceListener.cs" />
+    <Compile Include="TraceLogListener.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

@@ -97,10 +97,6 @@ namespace Scribe
 
         protected void LogMessageAsync(LogEntry row)
         {
-            //TODO: Test if a logentry already exists so the Traceing can be stopped
-
-
-
             LogEntries.Add(row);
 
             foreach (var logger in _logManager.Writers.Values)
