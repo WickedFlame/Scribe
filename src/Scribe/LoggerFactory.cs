@@ -14,7 +14,10 @@ namespace Scribe
         public LoggerFactory()
         {
             //TODO: Does LoggerCallback have to be static???
-            LoggerCallback = () => new Logger(this);
+            if (LoggerCallback == null)
+            {
+                LoggerCallback = () => new Logger(this);
+            }
 
             _logManager = new Lazy<ILogManager>(() => new LogManager(this));
             if (LogManager.HasConfiguration())
