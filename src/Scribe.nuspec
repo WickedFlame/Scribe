@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>Scribe</id>
+    <version>0.1.1</version>
+    <title>Scribe</title>
+    <authors>Christian Walpen</authors>
+    <owners>Christian Walpen</owners>
+    <licenseUrl>https://github.com/WickedFlame/Scribe/raw/master/License.txt</licenseUrl>
+    <projectUrl>http://wicked-flame.blogspot.ch</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A lightweight Diagnostics and Logging component</description>
+    <summary>A lightweight Diagnostics and Logging component</summary>
+    <tags>Logging, Diagnostics, Tracing</tags>
+  </metadata>
+  <files>
+    <file src="Scribe\bin\Release\Scribe.dll" target="lib\net45\Scribe.dll" />
+    <file src="Scribe\bin\Release\Scribe.XML" target="lib\net45\Scribe.XML" />
+  </files>
+</package>
