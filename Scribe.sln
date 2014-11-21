@@ -11,6 +11,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{774A3CFC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scribe.Configuration.Test", "src\Tests\Scribe.Configuration.Test\Scribe.Configuration.Test.csproj", "{3CB6AC13-576B-404A-AB45-68DC1FA38EAB}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E6A4F8E7-D88D-46C1-AB63-8A4616C5126C}"
+	ProjectSection(SolutionItems) = preProject
+		src\Scribe.nuspec = src\Scribe.nuspec
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

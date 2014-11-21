@@ -7,5 +7,7 @@ TestResults
 *.jtconfig
 *.suo
 *.snk
+*.snk
+.JustCode
 .JustCode/PersistanceMap.solution-user.settings.xml
 .JustCode/PersistanceMap.solution-user.settings.xml

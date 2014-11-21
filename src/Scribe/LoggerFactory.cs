@@ -9,16 +9,10 @@ namespace Scribe
     public class LoggerFactory : ILoggerFactory
     {
         //TODO: Does LoggerCallback have to be static???
-        public Func<ILogger> LoggerCallback { get; set; }
+        public static Func<ILogger> LoggerCallback { get; set; }
 
         public LoggerFactory()
         {
-            //TODO: Does LoggerCallback have to be static???
-            if (LoggerCallback == null)
-            {
-                LoggerCallback = () => new Logger(this);
-            }
-
             _logManager = new Lazy<ILogManager>(() => new LogManager(this));
             if (LogManager.HasConfiguration())
                 Manager.Initialize();
@@ -27,7 +21,7 @@ namespace Scribe
         public LoggerFactory(ILogManager manager)
         {
             //TODO: Does LoggerCallback have to be static???
-            LoggerCallback = () => new Logger(this);
+            //LoggerCallback = () => new Logger(this);
 
             _logManager = new Lazy<ILogManager>(() => manager);
         }
@@ -43,15 +37,12 @@ namespace Scribe
       
         public ILogger CreateLogger()
         {
-            //TODO: Does LoggerCallback have to be static???
             // if there is an override call that one
-            //if (LoggerCallback != null)
-            //    return LoggerCallback();
+            if (LoggerCallback != null)
+                return LoggerCallback();
 
-            //return new Logger(this);
-
-            //TODO: Does LoggerCallback have to be static???
-            return LoggerCallback();
+            // return a default logger
+            return new Logger(this);
         }
 
         public ILogProcessor GetProcessor()
