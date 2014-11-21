@@ -8,9 +8,14 @@ namespace Scribe
 
     public class LoggerFactory : ILoggerFactory
     {
-        //TODO: Does LoggerCallback have to be static???
+        /// <summary>
+        /// Gets or sets a custom logger that will be used to log messages
+        /// </summary>
         public static Func<ILogger> LoggerCallback { get; set; }
 
+        /// <summary>
+        /// Creates a new LoggerFactory. The LogManager will be created when neede
+        /// </summary>
         public LoggerFactory()
         {
             _logManager = new Lazy<ILogManager>(() => new LogManager(this));
@@ -18,6 +23,10 @@ namespace Scribe
                 Manager.Initialize();
         }
 
+        /// <summary>
+        /// Creates a new LoggerFactory with the LogManager passed as parameter
+        /// </summary>
+        /// <param name="manager"></param>
         public LoggerFactory(ILogManager manager)
         {
             //TODO: Does LoggerCallback have to be static???
@@ -27,6 +36,9 @@ namespace Scribe
         }
 
         readonly Lazy<ILogManager> _logManager;
+        /// <summary>
+        /// Gets the ILogManager associated with this LoggerFactory
+        /// </summary>
         public ILogManager Manager
         {
             get
@@ -35,7 +47,11 @@ namespace Scribe
             }
         }
       
-        public ILogger CreateLogger()
+        /// <summary>
+        /// Gets a instance of the ILogger
+        /// </summary>
+        /// <returns></returns>
+        public ILogger GetLogger()
         {
             // if there is an override call that one
             if (LoggerCallback != null)
@@ -45,6 +61,10 @@ namespace Scribe
             return new Logger(this);
         }
 
+        /// <summary>
+        /// Gets a instance of the ILogProcessor
+        /// </summary>
+        /// <returns></returns>
         public ILogProcessor GetProcessor()
         {
             return Manager.Processor;

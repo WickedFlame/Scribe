@@ -1,7 +1,9 @@
-using System.Collections.Generic;
 
 namespace Scribe
 {
+    /// <summary>
+    /// Represents a ILoggerFactory that provides a ILogger
+    /// </summary>
     public interface ILoggerFactory
     {
         //Dictionary<string, CreateLoggerCallback> LogProviders { get; }
@@ -10,8 +12,16 @@ namespace Scribe
 
         //void AddLogger(string name, CreateLoggerCallback loggerProvider);
 
-        ILogger CreateLogger();
+        /// <summary>
+        /// Gets a instance of the ILogger
+        /// </summary>
+        /// <returns></returns>
+        ILogger GetLogger();
 
+        /// <summary>
+        /// Gets a instance of the ILogProcessor
+        /// </summary>
+        /// <returns></returns>
         ILogProcessor GetProcessor();
     }
 }

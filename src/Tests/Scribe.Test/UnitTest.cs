@@ -32,10 +32,10 @@ namespace Scribe.Test
             loggerFactory.Manager.AddLogger(traceLogger, "tracelogger");
             loggerFactory.Manager.AddLogger(traceLogger, "tracelogger2");
 
-            var logger = loggerFactory.CreateLogger();
+            var logger = loggerFactory.GetLogger();
             logger.Write("test", TraceType.Error);
 
-            logger = loggerFactory.CreateLogger();
+            logger = loggerFactory.GetLogger();
             logger.Write("logger 2", TraceType.Critical);
         }
 
@@ -47,7 +47,7 @@ namespace Scribe.Test
             manager.AddLogger(new TraceLoggerWriter());
 
 
-            var logger = manager.LoggerFactory.CreateLogger();
+            var logger = manager.LoggerFactory.GetLogger();
             logger.Write("Test");
             logger.Write("Error message");
 

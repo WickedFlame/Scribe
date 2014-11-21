@@ -17,7 +17,7 @@ namespace Scribe
 
         public void Initialize(ILoggerFactory loggerFactory)
         {
-            _logger = new Lazy<ILogger>(() => loggerFactory.CreateLogger());
+            _logger = new Lazy<ILogger>(() => loggerFactory.GetLogger());
 
             Trace.Listeners.Add(this);
         }
