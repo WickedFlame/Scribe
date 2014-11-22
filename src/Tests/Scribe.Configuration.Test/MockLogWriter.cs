@@ -18,9 +18,16 @@ namespace Scribe.Configuration.Test
         }
       
 		
-        public void Write(string message, TraceType traceType = TraceType.Information, string category = null, DateTime? logtime = null)
+        //public void Write(string message, TraceType traceType = TraceType.Information, string category = null, DateTime? logtime = null)
+        //{
+        //    LogEntries.Add(new LogEntry(message, traceType, category, logtime));
+        //}
+
+
+        public void Write<T>(T message, TraceType traceType = TraceType.Information, string category = null, DateTime? logtime = null, Func<T, string> formatter = null)
         {
-            LogEntries.Add(new LogEntry(message, traceType, category, logtime));
+            var msg = formatter != null ? formatter(message) : message.ToString();
+            LogEntries.Add(new LogEntry(msg, traceType, category, logtime));
         }
     }
 }

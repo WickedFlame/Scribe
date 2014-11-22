@@ -31,7 +31,7 @@
     <DocumentationFile>bin\Release\Scribe.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
-    <SignAssembly>true</SignAssembly>
+    <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
     <AssemblyOriginatorKeyFile>..\Scribe.snk</AssemblyOriginatorKeyFile>
@@ -67,8 +67,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Scribe.snk">
-	<Link>Properties\Scribe.snk</Link>
-	</None>
+      <Link>Properties\Scribe.snk</Link>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
