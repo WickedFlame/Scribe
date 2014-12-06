@@ -15,27 +15,23 @@ namespace Scribe
         readonly ManualResetEvent _waiting = new ManualResetEvent(false);
 
         readonly Thread _loggingThread;
-        //readonly ILoggerFactory _loggerFactory;
+        readonly Thread _mainThread;
+
         readonly ILogManager _logManager;
-
-        //public LogProcessor(ILoggerFactory loggerFactory)
-        //{
-        //    _loggerFactory = loggerFactory;
-
-        //    _loggingThread = new Thread(new ThreadStart(ProcessQueue));
-        //    _loggingThread.IsBackground = true;
-        //    // this is performed from a bg thread, to ensure the queue is serviced from a single thread
-        //    _loggingThread.Start();
-        //}
+        private bool _isThreadAlive;
 
         public LogProcessor(ILogManager manager)
         {
             _logManager = manager;
-
+            _isThreadAlive = true;
             _loggingThread = new Thread(new ThreadStart(ProcessQueue));
             _loggingThread.IsBackground = true;
             // this is performed from a bg thread, to ensure the queue is serviced from a single thread
             _loggingThread.Start();
+
+
+            // find a way to close the child thread when main thread completes
+            _mainThread = Thread.CurrentThread;
         }
 
         IEnumerable<LogEntry> ILogProcessor.LogEntries
@@ -60,7 +56,7 @@ namespace Scribe
 
         void ProcessQueue()
         {
-            while (true)
+            while (_isThreadAlive)
             {
                 _waiting.Set();
                 int i = ManualResetEvent.WaitAny(new WaitHandle[] { _hasNewItems, _terminate });
@@ -82,6 +78,12 @@ namespace Scribe
                 {
                     log();
                 }
+
+                // let the thread wait for next run
+                Thread.Sleep(TimeSpan.FromSeconds(0.5));
+
+                if (!_mainThread.IsAlive)
+                    return;
             }
         }
 
@@ -89,13 +91,13 @@ namespace Scribe
         {
             lock (_queue)
             {
-                _queue.Enqueue(() => LogMessageAsync(row));
+                _queue.Enqueue(() => AsyncLogMessage(row));
             }
 
             _hasNewItems.Set();
         }
 
-        protected void LogMessageAsync(LogEntry row)
+        protected void AsyncLogMessage(LogEntry row)
         {
             LogEntries.Add(row);
 

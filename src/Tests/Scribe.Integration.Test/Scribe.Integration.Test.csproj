@@ -4,15 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A9014AEE-8D87-4115-90B9-D06B6C11858B}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{B9C26BA9-E594-49A4-B98B-534B0B7AF7F2}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Scribe</RootNamespace>
-    <AssemblyName>Scribe</AssemblyName>
+    <RootNamespace>Scribe.Integration.Test</RootNamespace>
+    <AssemblyName>Scribe.Integration.Test</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,54 +23,36 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Release\Scribe.XML</DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup>
-    <SignAssembly>true</SignAssembly>
-  </PropertyGroup>
-  <PropertyGroup>
-    <AssemblyOriginatorKeyFile>..\Scribe.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Configuration\ListenerElemen.cs" />
-    <Compile Include="Configuration\LoggerElement.cs" />
-    <Compile Include="Configuration\ListenerElementCollection.cs" />
-    <Compile Include="Configuration\LoggerElementCollection.cs" />
-    <Compile Include="Configuration\ScribeSection.cs" />
-    <Compile Include="IListener.cs" />
-    <Compile Include="ILogManager.cs" />
-    <Compile Include="ILogProcessor.cs" />
-    <Compile Include="ILogWriter.cs" />
-    <Compile Include="LogEntry.cs" />
-    <Compile Include="ILogger.cs" />
-    <Compile Include="ILoggerFactory.cs" />
-    <Compile Include="Logger.cs" />
-    <Compile Include="LoggerFactory.cs" />
-    <Compile Include="LogProcessor.cs" />
-    <Compile Include="ScribeBootstrapper.cs" />
-    <Compile Include="TraceType.cs" />
-    <Compile Include="LogManager.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="TraceLogListener.cs" />
+    <Compile Include="ConsoleLogWriter.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\Scribe.snk">
-      <Link>Properties\Scribe.snk</Link>
-    </None>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Scribe\Scribe.csproj">
+      <Project>{a9014aee-8d87-4115-90b9-d06b6c11858b}</Project>
+      <Name>Scribe</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
