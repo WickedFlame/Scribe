@@ -35,6 +35,25 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="nunit.core">
+      <HintPath>..\..\..\packages\NUnitTestAdapter.2.0.0-beta\lib\nunit.core.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="nunit.core.interfaces">
+      <HintPath>..\..\..\packages\NUnitTestAdapter.2.0.0-beta\lib\nunit.core.interfaces.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>..\..\..\packages\NUnit.3.0.0-beta-1\lib\net45\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.util">
+      <HintPath>..\..\..\packages\NUnitTestAdapter.2.0.0-beta\lib\nunit.util.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="NUnit.VisualStudio.TestAdapter">
+      <HintPath>..\..\..\packages\NUnitTestAdapter.2.0.0-beta\lib\NUnit.VisualStudio.TestAdapter.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="System" />
   </ItemGroup>
   <Choose>
@@ -50,8 +69,10 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="LoggerTests.cs" />
+    <Compile Include="Component\TraceLogListnerTests.cs" />
     <Compile Include="TraceLogWriter.cs" />
-    <Compile Include="UnitTest.cs" />
+    <Compile Include="TraceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -59,6 +80,9 @@
       <Project>{a9014aee-8d87-4115-90b9-d06b6c11858b}</Project>
       <Name>Scribe</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
