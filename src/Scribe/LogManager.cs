@@ -75,14 +75,11 @@ namespace Scribe
             listener.Initialize(LoggerFactory);
 
             // keep a reference to the listener
-            //_loggerFactory.Value.AddListener(listener);
-
             _listeners.Value.Add(listener);
         }
 
         public void AddLogger(ILogWriter logger, string name = null)
         {
-            //_loggerFactory.Value.AddLogger(name ?? logger.GetType().Name, () => logger);
             Writers.Add(name ?? logger.GetType().Name, () => logger);
         }
 

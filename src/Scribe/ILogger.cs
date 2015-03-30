@@ -2,6 +2,9 @@
 
 namespace Scribe
 {
+    /// <summary>
+    /// Interface that defines the basic functions for the logger
+    /// </summary>
     public interface ILogger
     {
         ///// <summary>

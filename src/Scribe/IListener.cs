@@ -6,6 +6,10 @@ namespace Scribe
     /// </summary>
     public interface IListener
     {
+        /// <summary>
+        /// Initialize the logger with the loggerfactory
+        /// </summary>
+        /// <param name="loggerFactory">The loggerfactory containing the logging mechanism</param>
         void Initialize(ILoggerFactory loggerFactory);
     }
 }

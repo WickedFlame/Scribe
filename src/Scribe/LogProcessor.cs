@@ -24,11 +24,11 @@ namespace Scribe
         {
             _logManager = manager;
             _isThreadAlive = true;
+
+            // this is performed from a bg thread, to ensure the queue is serviced from a single thread
             _loggingThread = new Thread(new ThreadStart(ProcessQueue));
             _loggingThread.IsBackground = true;
-            // this is performed from a bg thread, to ensure the queue is serviced from a single thread
             _loggingThread.Start();
-
 
             // find a way to close the child thread when main thread completes
             _mainThread = Thread.CurrentThread;
@@ -60,6 +60,7 @@ namespace Scribe
             {
                 _waiting.Set();
                 int i = ManualResetEvent.WaitAny(new WaitHandle[] { _hasNewItems, _terminate });
+
                 // terminate was signaled 
                 if (i == 1) 
                     return;
