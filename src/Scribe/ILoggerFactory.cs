@@ -23,5 +23,7 @@ namespace Scribe
         /// </summary>
         /// <returns></returns>
         ILogProcessor GetProcessor();
+
+        void AddLogger(ILogWriter logger, string name = null);
     }
 }

@@ -1,24 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace Scribe
 {
     internal class LogProcessor : ILogProcessor, IDisposable
     {
-        readonly Queue<Action> _queue = new Queue<Action>();
-        readonly ManualResetEvent _hasNewItems = new ManualResetEvent(false);
-        readonly ManualResetEvent _terminate = new ManualResetEvent(false);
-        readonly ManualResetEvent _waiting = new ManualResetEvent(false);
+        private readonly Queue<Action> _queue = new Queue<Action>();
+        private readonly ManualResetEvent _hasNewItems = new ManualResetEvent(false);
+        private readonly ManualResetEvent _terminate = new ManualResetEvent(false);
+        private readonly ManualResetEvent _waiting = new ManualResetEvent(false);
 
-        readonly Thread _loggingThread;
-        readonly Thread _mainThread;
+        private readonly Thread _loggingThread;
+        private readonly Thread _mainThread;
 
-        readonly ILogManager _logManager;
+        private readonly ILogManager _logManager;
         private bool _isThreadAlive;
+        private IList<ILogEntry> _logEntries;
 
         public LogProcessor(ILogManager manager)
         {
@@ -34,7 +32,7 @@ namespace Scribe
             _mainThread = Thread.CurrentThread;
         }
 
-        IEnumerable<LogEntry> ILogProcessor.LogEntries
+        IEnumerable<ILogEntry> ILogProcessor.LogEntries
         {
             get
             {
@@ -42,19 +40,20 @@ namespace Scribe
             }
         }
 
-        IList<LogEntry> _logEntries;
-        public IList<LogEntry> LogEntries
+        public IList<ILogEntry> LogEntries
         {
             get
             {
                 if (_logEntries == null)
-                    _logEntries = new List<LogEntry>();
+                {
+                    _logEntries = new List<ILogEntry>();
+                }
+
                 return _logEntries;
             }
         }
 
-
-        void ProcessQueue()
+        private void ProcessQueue()
         {
             while (_isThreadAlive)
             {
@@ -62,8 +61,10 @@ namespace Scribe
                 int i = ManualResetEvent.WaitAny(new WaitHandle[] { _hasNewItems, _terminate });
 
                 // terminate was signaled 
-                if (i == 1) 
+                if (i == 1)
+                {
                     return;
+                }
 
                 _hasNewItems.Reset();
                 _waiting.Reset();
@@ -84,11 +85,13 @@ namespace Scribe
                 Thread.Sleep(TimeSpan.FromSeconds(0.5));
 
                 if (!_mainThread.IsAlive)
+                {
                     return;
+                }
             }
         }
 
-        public void ProcessLog(LogEntry row)
+        public void ProcessLog(ILogEntry row)
         {
             lock (_queue)
             {
@@ -98,13 +101,13 @@ namespace Scribe
             _hasNewItems.Set();
         }
 
-        protected void AsyncLogMessage(LogEntry row)
+        protected void AsyncLogMessage(ILogEntry row)
         {
             LogEntries.Add(row);
 
             foreach (var logger in _logManager.Writers.Values)
             {
-                logger().Write(row.Message, row.TraceType, row.Categroy, row.LogTime);
+                logger().Write(row.Message, row.LogLevel, category: row.Category, logtime: row.LogTime);
             }
         }
 

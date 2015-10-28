@@ -30,14 +30,14 @@ namespace Scribe.Test
         {
             var loggerFactory = new LoggerFactory();
             var traceLogger = new TraceLogWriter();
-            loggerFactory.Manager.AddLogger(traceLogger, "tracelogger");
-            loggerFactory.Manager.AddLogger(traceLogger, "tracelogger2");
+            loggerFactory.AddLogger(traceLogger, "tracelogger");
+            loggerFactory.AddLogger(traceLogger, "tracelogger2");
 
             var logger = loggerFactory.GetLogger();
-            logger.Write("test", TraceType.Error);
+            logger.Write("test", LogLevel.Error);
 
             logger = loggerFactory.GetLogger();
-            logger.Write("logger 2", TraceType.Critical);
+            logger.Write("logger 2", LogLevel.Critical);
         }
 
         [TestMethod]
@@ -58,7 +58,5 @@ namespace Scribe.Test
             var processor = manager.LoggerFactory.GetProcessor();
             Assert.IsTrue(processor.LogEntries.First().Message == "Test");
         }
-
-        
     }
 }

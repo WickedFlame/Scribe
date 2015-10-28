@@ -11,7 +11,7 @@ namespace Scribe.Test
         //}
 
 
-        public void Write<T>(T messageObject, TraceType traceType = TraceType.Information, string category = null, DateTime? logtime = null, Func<T, string> formatter = null)
+        public void Write<T>(T messageObject, LogLevel traceType = LogLevel.Information, string category = null, DateTime? logtime = null, Func<T, string> formatter = null)
         {
             var message = formatter != null ? formatter(messageObject) : messageObject.ToString();
             Trace.WriteLine(message);

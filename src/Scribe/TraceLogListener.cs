@@ -23,7 +23,7 @@ namespace Scribe
             Trace.Listeners.Add(this);
         }
 
-        private void Log(string message, TraceType traceType = TraceType.Information, string category = null)
+        private void Log(string message, LogLevel loglevel = LogLevel.Information, string category = null)
         {
             if (Logger == null)
             {
@@ -31,7 +31,7 @@ namespace Scribe
                 return;
             }
 
-            Logger.Write(message, traceType, category);
+            Logger.Write(message, loglevel, category: category);
         }
 
         public override void Write(string message)
@@ -55,16 +55,16 @@ namespace Scribe
             var traceType = Convert(eventType);
             switch (traceType)
             {
-                case TraceType.Error:
-                case TraceType.Critical:
+                case LogLevel.Error:
+                case LogLevel.Critical:
                     sb.AppendLine();
                     sb.AppendLine("StackTrace:");
                     sb.AppendLine(eventCache.Callstack);
                     break;
 
-                case TraceType.Information:
-                case TraceType.Verbose:
-                case TraceType.Warning:
+                case LogLevel.Information:
+                case LogLevel.Verbose:
+                case LogLevel.Warning:
                     break;
             }
 
@@ -85,16 +85,16 @@ namespace Scribe
             var traceType = Convert(eventType);
             switch (traceType)
             {
-                case TraceType.Error:
-                case TraceType.Critical:
+                case LogLevel.Error:
+                case LogLevel.Critical:
                     sb.AppendLine();
                     sb.AppendLine("StackTrace:");
                     sb.AppendLine(eventCache.Callstack);
                     break;
 
-                case TraceType.Information:
-                case TraceType.Verbose:
-                case TraceType.Warning:
+                case LogLevel.Information:
+                case LogLevel.Verbose:
+                case LogLevel.Warning:
                     break;
             }
 
@@ -111,16 +111,16 @@ namespace Scribe
             var traceType = Convert(eventType);
             switch (traceType)
             {
-                case TraceType.Error:
-                case TraceType.Critical:
+                case LogLevel.Error:
+                case LogLevel.Critical:
                     sb.AppendLine();
                     sb.AppendLine("StackTrace:");
                     sb.AppendLine(eventCache.Callstack);
                     break;
 
-                case TraceType.Information:
-                case TraceType.Verbose:
-                case TraceType.Warning:
+                case LogLevel.Information:
+                case LogLevel.Verbose:
+                case LogLevel.Warning:
                     break;
             }
 
@@ -138,16 +138,16 @@ namespace Scribe
             var traceType = Convert(eventType);
             switch (traceType)
             {
-                case TraceType.Error:
-                case TraceType.Critical:
+                case LogLevel.Error:
+                case LogLevel.Critical:
                     sb.AppendLine();
                     sb.AppendLine("StackTrace:");
                     sb.AppendLine(eventCache.Callstack);
                     break;
 
-                case TraceType.Information:
-                case TraceType.Verbose:
-                case TraceType.Warning:
+                case LogLevel.Information:
+                case LogLevel.Verbose:
+                case LogLevel.Warning:
                     break;
             }
 
@@ -165,16 +165,16 @@ namespace Scribe
             var traceType = Convert(eventType);
             switch (traceType)
             {
-                case TraceType.Error:
-                case TraceType.Critical:
+                case LogLevel.Error:
+                case LogLevel.Critical:
                     sb.AppendLine();
                     sb.AppendLine("StackTrace:");
                     sb.AppendLine(eventCache.Callstack);
                     break;
 
-                case TraceType.Information:
-                case TraceType.Verbose:
-                case TraceType.Warning:
+                case LogLevel.Information:
+                case LogLevel.Verbose:
+                case LogLevel.Warning:
                     break;
             }
 
@@ -250,7 +250,7 @@ namespace Scribe
 
         public override void Fail(string message)
         {
-            Log(message, TraceType.Critical);
+            Log(message, LogLevel.Critical);
         }
 
         public override void Fail(string message, string detailMessage)
@@ -261,32 +261,32 @@ namespace Scribe
             sb.AppendLine("Detail:");
             sb.AppendLine(detailMessage);
 
-            Log(sb.ToString(), TraceType.Critical);
+            Log(sb.ToString(), LogLevel.Critical);
         }
 
-        private static TraceType Convert(TraceEventType traceEventType)
+        private static LogLevel Convert(TraceEventType traceEventType)
         {
-            var traceType = TraceType.Information;
+            var traceType = LogLevel.Information;
             switch (traceEventType)
             {
                 case TraceEventType.Critical:
-                    traceType = TraceType.Critical;
+                    traceType = LogLevel.Critical;
                     break;
 
                 case TraceEventType.Error:
-                    traceType = TraceType.Error;
+                    traceType = LogLevel.Error;
                     break;
 
                 case TraceEventType.Verbose:
-                    traceType = TraceType.Verbose;
+                    traceType = LogLevel.Verbose;
                     break;
 
                 case TraceEventType.Warning:
-                    traceType = TraceType.Warning;
+                    traceType = LogLevel.Warning;
                     break;
 
                 case TraceEventType.Information:
-                    traceType = TraceType.Information;
+                    traceType = LogLevel.Information;
                     break;
 
                 case TraceEventType.Resume:
@@ -295,7 +295,7 @@ namespace Scribe
                 case TraceEventType.Suspend:
                 case TraceEventType.Transfer:
                 default:
-                    traceType = TraceType.Information;
+                    traceType = LogLevel.Information;
                     break;
             }
 

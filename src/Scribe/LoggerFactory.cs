@@ -2,16 +2,9 @@
 
 namespace Scribe
 {
-    
-
-    //public delegate ILogger GetLoggerCallback();
-
     public class LoggerFactory : ILoggerFactory
     {
-        /// <summary>
-        /// Gets or sets a custom logger that will be used to log messages
-        /// </summary>
-        public static Func<ILogger> LoggerCallback { get; set; }
+        private readonly Lazy<ILogManager> _logManager;
 
         /// <summary>
         /// Creates a new LoggerFactory. The LogManager will be created when neede
@@ -20,22 +13,25 @@ namespace Scribe
         {
             _logManager = new Lazy<ILogManager>(() => new LogManager(this));
             if (LogManager.HasConfiguration())
+            {
                 Manager.Initialize();
+            }
         }
 
         /// <summary>
         /// Creates a new LoggerFactory with the LogManager passed as parameter
         /// </summary>
-        /// <param name="manager"></param>
+        /// <param name="manager">The logmanager for this instance</param>
         public LoggerFactory(ILogManager manager)
         {
-            //TODO: Does LoggerCallback have to be static???
-            //LoggerCallback = () => new Logger(this);
-
             _logManager = new Lazy<ILogManager>(() => manager);
         }
 
-        readonly Lazy<ILogManager> _logManager;
+        /// <summary>
+        /// Gets or sets a custom logger that will be used to log messages
+        /// </summary>
+        public static Func<ILogger> LoggerCallback { get; set; }
+
         /// <summary>
         /// Gets the ILogManager associated with this LoggerFactory
         /// </summary>
@@ -46,16 +42,18 @@ namespace Scribe
                 return _logManager.Value;
             }
         }
-      
+
         /// <summary>
         /// Gets a instance of the ILogger
         /// </summary>
-        /// <returns></returns>
+        /// <returns>A logger</returns>
         public ILogger GetLogger()
         {
             // if there is an override call that one
             if (LoggerCallback != null)
+            {
                 return LoggerCallback();
+            }
 
             // return a default logger
             return new Logger(this);
@@ -64,10 +62,15 @@ namespace Scribe
         /// <summary>
         /// Gets a instance of the ILogProcessor
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The Logprocessor</returns>
         public ILogProcessor GetProcessor()
         {
             return Manager.Processor;
+        }
+
+        public void AddLogger(ILogWriter logger, string name = null)
+        {
+            Manager.AddLogger(logger, name);
         }
     }
 }

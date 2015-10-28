@@ -49,6 +49,8 @@
     <Compile Include="Configuration\LoggerElementCollection.cs" />
     <Compile Include="Configuration\ScribeSection.cs" />
     <Compile Include="IListener.cs" />
+    <Compile Include="ILogEntry.cs" />
+    <Compile Include="LoggerExtensions.cs" />
     <Compile Include="ILogManager.cs" />
     <Compile Include="ILogProcessor.cs" />
     <Compile Include="ILogWriter.cs" />
@@ -58,8 +60,9 @@
     <Compile Include="Logger.cs" />
     <Compile Include="LoggerFactory.cs" />
     <Compile Include="LogProcessor.cs" />
+    <Compile Include="Priority.cs" />
     <Compile Include="ScribeBootstrapper.cs" />
-    <Compile Include="TraceType.cs" />
+    <Compile Include="LogLevel.cs" />
     <Compile Include="LogManager.cs">
       <SubType>Code</SubType>
     </Compile>

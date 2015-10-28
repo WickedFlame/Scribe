@@ -10,13 +10,13 @@ namespace Scribe
         /// <summary>
         /// Gets a collection of processed log entries
         /// </summary>
-        IEnumerable<LogEntry> LogEntries { get; }
+        IEnumerable<ILogEntry> LogEntries { get; }
 
         /// <summary>
         /// Processes and stores the log
         /// </summary>
         /// <param name="row"></param>
-        void ProcessLog(LogEntry row);
+        void ProcessLog(ILogEntry row);
 
         /// <summary>
         /// Flush the log store

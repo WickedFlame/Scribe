@@ -58,7 +58,7 @@ namespace Scribe.Test.Component
 
             Assert.IsTrue(logprocessor.LogEntries.Count() == 1);
             Assert.IsTrue(logprocessor.LogEntries.First().Message == "Scribe.LoggerFactory");
-            Assert.IsTrue(logprocessor.LogEntries.First().Categroy == "TestCategory");
+            Assert.IsTrue(logprocessor.LogEntries.First().Category == "TestCategory");
         }
 
         [TestMethod]
@@ -75,7 +75,7 @@ namespace Scribe.Test.Component
 
             Assert.IsTrue(logprocessor.LogEntries.Count() == 1);
             Assert.IsTrue(logprocessor.LogEntries.First().Message == "Test message");
-            Assert.IsTrue(logprocessor.LogEntries.First().Categroy == "TestCategory");
+            Assert.IsTrue(logprocessor.LogEntries.First().Category == "TestCategory");
         }
         
         [TestMethod]
@@ -124,7 +124,7 @@ namespace Scribe.Test.Component
 
             Assert.IsTrue(logprocessor.LogEntries.Count() == 1);
             Assert.IsTrue(logprocessor.LogEntries.First().Message == "Scribe.LoggerFactory");
-            Assert.IsTrue(logprocessor.LogEntries.First().Categroy == "TestCategory");
+            Assert.IsTrue(logprocessor.LogEntries.First().Category == "TestCategory");
         }
 
         [TestMethod]
@@ -141,7 +141,7 @@ namespace Scribe.Test.Component
 
             Assert.IsTrue(logprocessor.LogEntries.Count() == 1);
             Assert.IsTrue(logprocessor.LogEntries.First().Message == "Test message");
-            Assert.IsTrue(logprocessor.LogEntries.First().Categroy == "TestCategory");
+            Assert.IsTrue(logprocessor.LogEntries.First().Category == "TestCategory");
         }
 
         [TestMethod]
@@ -159,7 +159,7 @@ namespace Scribe.Test.Component
             Assert.IsTrue(logprocessor.LogEntries.Count() == 1);
             Assert.IsTrue(logprocessor.LogEntries.First().Message.StartsWith("Error message"));
             Assert.IsTrue(logprocessor.LogEntries.First().Message.Contains("StackTrace"));
-            Assert.IsTrue(logprocessor.LogEntries.First().TraceType == TraceType.Error);
+            Assert.IsTrue(logprocessor.LogEntries.First().LogLevel == LogLevel.Error);
         }
 
         [TestMethod]
@@ -177,7 +177,7 @@ namespace Scribe.Test.Component
             Assert.IsTrue(logprocessor.LogEntries.Count() == 1);
             Assert.IsTrue(logprocessor.LogEntries.First().Message.StartsWith("Error message parama 1 Scribe.LoggerFactory"));
             Assert.IsTrue(logprocessor.LogEntries.First().Message.Contains("StackTrace"));
-            Assert.IsTrue(logprocessor.LogEntries.First().TraceType ==  TraceType.Error);
+            Assert.IsTrue(logprocessor.LogEntries.First().LogLevel ==  LogLevel.Error);
         }
 
         [TestMethod]
@@ -196,7 +196,7 @@ namespace Scribe.Test.Component
             Assert.IsTrue(logprocessor.LogEntries.First().Message.StartsWith("Information message"));
             // No StackTrace
             Assert.IsFalse(logprocessor.LogEntries.First().Message.Contains("StackTrace"));
-            Assert.IsTrue(logprocessor.LogEntries.First().TraceType == TraceType.Information);
+            Assert.IsTrue(logprocessor.LogEntries.First().LogLevel == LogLevel.Information);
         }
 
         [TestMethod]
@@ -215,7 +215,7 @@ namespace Scribe.Test.Component
             Assert.IsTrue(logprocessor.LogEntries.First().Message.StartsWith("Information message parama 1 Scribe.LoggerFactory"));
             // No StackTrace
             Assert.IsFalse(logprocessor.LogEntries.First().Message.Contains("StackTrace"));
-            Assert.IsTrue(logprocessor.LogEntries.First().TraceType == TraceType.Information);
+            Assert.IsTrue(logprocessor.LogEntries.First().LogLevel == LogLevel.Information);
         }
 
         [TestMethod]
@@ -234,7 +234,7 @@ namespace Scribe.Test.Component
             Assert.IsTrue(logprocessor.LogEntries.First().Message.StartsWith("Warning message"));
             // No StackTrace
             Assert.IsFalse(logprocessor.LogEntries.First().Message.Contains("StackTrace"));
-            Assert.IsTrue(logprocessor.LogEntries.First().TraceType == TraceType.Warning);
+            Assert.IsTrue(logprocessor.LogEntries.First().LogLevel == LogLevel.Warning);
         }
 
         [TestMethod]
@@ -253,7 +253,7 @@ namespace Scribe.Test.Component
             Assert.IsTrue(logprocessor.LogEntries.First().Message.StartsWith("Warning message parama 1 Scribe.LoggerFactory"));
             // No StackTrace
             Assert.IsFalse(logprocessor.LogEntries.First().Message.Contains("StackTrace"));
-            Assert.IsTrue(logprocessor.LogEntries.First().TraceType == TraceType.Warning);
+            Assert.IsTrue(logprocessor.LogEntries.First().LogLevel == LogLevel.Warning);
         }
 
         //[TestMethod]
