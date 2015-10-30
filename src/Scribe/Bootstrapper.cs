@@ -1,7 +1,7 @@
 ﻿
 namespace Scribe
 {
-    public class ScribeBootstrapper
+    public class Bootstrapper
     {
         public void Initialize()
         {

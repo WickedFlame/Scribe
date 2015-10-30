@@ -11,7 +11,7 @@ namespace Scribe.Integration.Test
     {
         static void Main(string[] args)
         {
-            var bootstrapper = new ScribeBootstrapper();
+            var bootstrapper = new Bootstrapper();
             bootstrapper.Initialize();
 
             for (int i = 1; i <= 10; i++)

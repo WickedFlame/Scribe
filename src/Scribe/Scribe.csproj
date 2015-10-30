@@ -61,7 +61,7 @@
     <Compile Include="LoggerFactory.cs" />
     <Compile Include="LogProcessor.cs" />
     <Compile Include="Priority.cs" />
-    <Compile Include="ScribeBootstrapper.cs" />
+    <Compile Include="Bootstrapper.cs" />
     <Compile Include="LogLevel.cs" />
     <Compile Include="LogManager.cs">
       <SubType>Code</SubType>
