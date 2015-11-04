@@ -1,16 +1,14 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Scribe.Test
 {
-    [TestClass]
+    [TestFixture]
     public class LoggerTests
     {
-        [TestMethod]
+        [Test]
         public void LoggExceptionWithFormatter()
         {
             var exception1 = new Exception("Exception 1");

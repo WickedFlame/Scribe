@@ -1,15 +1,14 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
+using System;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
 
 namespace Scribe.Test
 {
-    [TestClass]
+    [TestFixture]
     public class TraceTests
     {
-        [TestMethod]
+        [Test]
         public void BasicTraceListnerTest()
         {
             var manager = new LogManager();
@@ -25,7 +24,7 @@ namespace Scribe.Test
             Assert.IsTrue(processor.LogEntries.First().Message == "Test");
         }
 
-        [TestMethod]
+        [Test]
         public void TraceLoggerWriterWithMulltipleWritersTest()
         {
             var loggerFactory = new LoggerFactory();
@@ -40,7 +39,7 @@ namespace Scribe.Test
             logger.Write("logger 2", LogLevel.Critical);
         }
 
-        [TestMethod]
+        [Test]
         public void BasicTraceLoggerWritertest()
         {
             var manager = new LogManager();

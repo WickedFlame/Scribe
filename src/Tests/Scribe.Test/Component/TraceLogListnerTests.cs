@@ -1,18 +1,14 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
+﻿using NUnit.Framework;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace Scribe.Test.Component
 {
-    [TestClass]
+    [TestFixture]
     public class TraceLogListnerTests
     {
-        [TestMethod]
+        [Test]
         public void TraceWriteObject()
         {
             var loggerFactory = new LoggerFactory();
@@ -28,7 +24,7 @@ namespace Scribe.Test.Component
             Assert.IsTrue(logprocessor.LogEntries.First().Message == "Scribe.LoggerFactory");
         }
 
-        [TestMethod]
+        [Test]
         public void TraceWriteMessage()
         {
             var loggerFactory = new LoggerFactory();
@@ -44,7 +40,7 @@ namespace Scribe.Test.Component
             Assert.IsTrue(logprocessor.LogEntries.First().Message == "Test message");
         }
 
-        [TestMethod]
+        [Test]
         public void TraceWriteObjectWithCategory()
         {
             var loggerFactory = new LoggerFactory();
@@ -61,7 +57,7 @@ namespace Scribe.Test.Component
             Assert.IsTrue(logprocessor.LogEntries.First().Category == "TestCategory");
         }
 
-        [TestMethod]
+        [Test]
         public void TraceWriteMessageWithCategory()
         {
             var loggerFactory = new LoggerFactory();
@@ -78,7 +74,7 @@ namespace Scribe.Test.Component
             Assert.IsTrue(logprocessor.LogEntries.First().Category == "TestCategory");
         }
         
-        [TestMethod]
+        [Test]
         public void TraceWriteLineObject()
         {
             var loggerFactory = new LoggerFactory();
@@ -94,7 +90,7 @@ namespace Scribe.Test.Component
             Assert.IsTrue(logprocessor.LogEntries.First().Message == "Scribe.LoggerFactory");
         }
 
-        [TestMethod]
+        [Test]
         public void TraceWriteLineMessage()
         {
             var loggerFactory = new LoggerFactory();
@@ -110,7 +106,7 @@ namespace Scribe.Test.Component
             Assert.IsTrue(logprocessor.LogEntries.First().Message == "Test message");
         }
 
-        [TestMethod]
+        [Test]
         public void TraceWriteLineObjectWithCategory()
         {
             var loggerFactory = new LoggerFactory();
@@ -127,7 +123,7 @@ namespace Scribe.Test.Component
             Assert.IsTrue(logprocessor.LogEntries.First().Category == "TestCategory");
         }
 
-        [TestMethod]
+        [Test]
         public void TraceWriteLineMessageWithCategory()
         {
             var loggerFactory = new LoggerFactory();
@@ -144,7 +140,7 @@ namespace Scribe.Test.Component
             Assert.IsTrue(logprocessor.LogEntries.First().Category == "TestCategory");
         }
 
-        [TestMethod]
+        [Test]
         public void TraceTraceError()
         {
             var loggerFactory = new LoggerFactory();
@@ -162,7 +158,7 @@ namespace Scribe.Test.Component
             Assert.IsTrue(logprocessor.LogEntries.First().LogLevel == LogLevel.Error);
         }
 
-        [TestMethod]
+        [Test]
         public void TraceTraceErrorWithParams()
         {
             var loggerFactory = new LoggerFactory();
@@ -180,7 +176,7 @@ namespace Scribe.Test.Component
             Assert.IsTrue(logprocessor.LogEntries.First().LogLevel ==  LogLevel.Error);
         }
 
-        [TestMethod]
+        [Test]
         public void TraceTraceInformation()
         {
             var loggerFactory = new LoggerFactory();
@@ -199,7 +195,7 @@ namespace Scribe.Test.Component
             Assert.IsTrue(logprocessor.LogEntries.First().LogLevel == LogLevel.Information);
         }
 
-        [TestMethod]
+        [Test]
         public void TraceTraceInformationWithParams()
         {
             var loggerFactory = new LoggerFactory();
@@ -218,7 +214,7 @@ namespace Scribe.Test.Component
             Assert.IsTrue(logprocessor.LogEntries.First().LogLevel == LogLevel.Information);
         }
 
-        [TestMethod]
+        [Test]
         public void TraceTraceWarning()
         {
             var loggerFactory = new LoggerFactory();
@@ -237,7 +233,7 @@ namespace Scribe.Test.Component
             Assert.IsTrue(logprocessor.LogEntries.First().LogLevel == LogLevel.Warning);
         }
 
-        [TestMethod]
+        [Test]
         public void TraceTraceWarningWithParams()
         {
             var loggerFactory = new LoggerFactory();
@@ -256,7 +252,7 @@ namespace Scribe.Test.Component
             Assert.IsTrue(logprocessor.LogEntries.First().LogLevel == LogLevel.Warning);
         }
 
-        //[TestMethod]
+        //[Test]
         //public void TraceFail()
         //{
         //    var loggerFactory = new LoggerFactory();
@@ -273,7 +269,7 @@ namespace Scribe.Test.Component
         //    Assert.IsTrue(logprocessor.LogEntries.First().TraceType == TraceType.Critical);
         //}
 
-        //[TestMethod]
+        //[Test]
         //public void TraceFailWithDetail()
         //{
         //    var loggerFactory = new LoggerFactory();
@@ -292,7 +288,7 @@ namespace Scribe.Test.Component
         //    Assert.IsTrue(logprocessor.LogEntries.First().TraceType == TraceType.Critical);
         //}
 
-        //[TestMethod]
+        //[Test]
         //public void TraceAssert()
         //{
         //    var loggerFactory = new LoggerFactory();
