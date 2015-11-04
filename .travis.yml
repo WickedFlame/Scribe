@@ -1,0 +1,24 @@
+# language: csharp
+# solution: Scribe.sln
+ 
+# install:
+#   - sudo apt-get install nunit-console
+#   - nuget restore Scribe.sln
+ 
+# script:
+#   - xbuild /p:Configuration=Release Scribe.sln
+#   - nunit-console ./src/Tests/Scribe.UnitTest/bin/Release/Scribe.UnitTest.dll
+  
+# Travis is now container based which doesn't support sudo
+sudo: false
+language: csharp
+solution: Scribe.sln
+ 
+install:
+  - nuget restore Scribe.sln
+  - nuget install NUnit.Runners -Version 2.6.4 -OutputDirectory testrunner
+ 
+script:
+  - xbuild /p:Configuration=Release Scribe.sln
+  - mono ./testrunner/NUnit.Runners.2.6.4/tools/nunit-console.exe ./src/Tests/Scribe.Test/bin/Release/Scribe.Test.dll
+  - mono ./testrunner/NUnit.Runners.2.6.4/tools/nunit-console.exe ./src/Tests/Scribe.Configuration.Test/bin/Release/Scribe.Configuration.Test.dll

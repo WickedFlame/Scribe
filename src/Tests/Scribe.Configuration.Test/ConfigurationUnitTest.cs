@@ -1,14 +1,14 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
 using System.Diagnostics;
+using NUnit.Framework;
 
 namespace Scribe.Configuration.Test
 {
-    [TestClass]
+    [TestFixture]
     public class ConfigurationUnitTest
     {
-        [TestMethod]
+        [Test]
         public void TestConfigurationWithLoggerFactory()
         {
             var factory = new LoggerFactory();
@@ -42,7 +42,7 @@ namespace Scribe.Configuration.Test
             Assert.IsTrue(writer.LogEntries.Count == 20);
         }
 
-        [TestMethod]
+        [Test]
         public void TestConfigurationWithLogManager()
         {
             var manager = new LogManager();
