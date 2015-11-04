@@ -8,16 +8,22 @@ namespace Scribe.Test.Component
     [TestFixture]
     public class TraceLogListnerTests
     {
+        private LoggerFactory CreateLoggerFactor()
+        {
+            var loggerFactory = new LoggerFactory();
+            loggerFactory.AddListener(new TraceLogListener());
+            loggerFactory.SetProcessor(new LogProcessor(loggerFactory.Manager));
+
+            return loggerFactory;
+        }
+
         [Test]
         public void TraceWriteObject()
         {
-            var loggerFactory = new LoggerFactory();
-            loggerFactory.Manager.AddListener(new TraceLogListener());
+            var loggerFactory = CreateLoggerFactor();
 
             Trace.Write(loggerFactory);
-
-            Thread.Sleep(500);
-
+            
             var logprocessor = loggerFactory.GetProcessor();
 
             Assert.IsTrue(logprocessor.LogEntries.Count() == 1);
@@ -27,13 +33,10 @@ namespace Scribe.Test.Component
         [Test]
         public void TraceWriteMessage()
         {
-            var loggerFactory = new LoggerFactory();
-            loggerFactory.Manager.AddListener(new TraceLogListener());
+            var loggerFactory = CreateLoggerFactor();
 
             Trace.Write("Test message");
-
-            Thread.Sleep(500);
-
+            
             var logprocessor = loggerFactory.GetProcessor();
 
             Assert.IsTrue(logprocessor.LogEntries.Count() == 1);
@@ -43,13 +46,10 @@ namespace Scribe.Test.Component
         [Test]
         public void TraceWriteObjectWithCategory()
         {
-            var loggerFactory = new LoggerFactory();
-            loggerFactory.Manager.AddListener(new TraceLogListener());
+            var loggerFactory = CreateLoggerFactor();
 
             Trace.Write(loggerFactory, "TestCategory");
-
-            Thread.Sleep(500);
-
+            
             var logprocessor = loggerFactory.GetProcessor();
 
             Assert.IsTrue(logprocessor.LogEntries.Count() == 1);
@@ -60,13 +60,10 @@ namespace Scribe.Test.Component
         [Test]
         public void TraceWriteMessageWithCategory()
         {
-            var loggerFactory = new LoggerFactory();
-            loggerFactory.Manager.AddListener(new TraceLogListener());
+            var loggerFactory = CreateLoggerFactor();
 
             Trace.Write("Test message", "TestCategory");
-
-            Thread.Sleep(500);
-
+            
             var logprocessor = loggerFactory.GetProcessor();
 
             Assert.IsTrue(logprocessor.LogEntries.Count() == 1);
@@ -77,13 +74,10 @@ namespace Scribe.Test.Component
         [Test]
         public void TraceWriteLineObject()
         {
-            var loggerFactory = new LoggerFactory();
-            loggerFactory.Manager.AddListener(new TraceLogListener());
+            var loggerFactory = CreateLoggerFactor();
 
             Trace.WriteLine(loggerFactory);
-
-            Thread.Sleep(500);
-
+            
             var logprocessor = loggerFactory.GetProcessor();
 
             Assert.IsTrue(logprocessor.LogEntries.Count() == 1);
@@ -93,13 +87,10 @@ namespace Scribe.Test.Component
         [Test]
         public void TraceWriteLineMessage()
         {
-            var loggerFactory = new LoggerFactory();
-            loggerFactory.Manager.AddListener(new TraceLogListener());
+            var loggerFactory = CreateLoggerFactor();
 
             Trace.WriteLine("Test message");
-
-            Thread.Sleep(500);
-
+            
             var logprocessor = loggerFactory.GetProcessor();
 
             Assert.IsTrue(logprocessor.LogEntries.Count() == 1);
@@ -109,13 +100,10 @@ namespace Scribe.Test.Component
         [Test]
         public void TraceWriteLineObjectWithCategory()
         {
-            var loggerFactory = new LoggerFactory();
-            loggerFactory.Manager.AddListener(new TraceLogListener());
+            var loggerFactory = CreateLoggerFactor();
 
             Trace.WriteLine(loggerFactory, "TestCategory");
-
-            Thread.Sleep(500);
-
+            
             var logprocessor = loggerFactory.GetProcessor();
 
             Assert.IsTrue(logprocessor.LogEntries.Count() == 1);
@@ -126,13 +114,10 @@ namespace Scribe.Test.Component
         [Test]
         public void TraceWriteLineMessageWithCategory()
         {
-            var loggerFactory = new LoggerFactory();
-            loggerFactory.Manager.AddListener(new TraceLogListener());
+            var loggerFactory = CreateLoggerFactor();
 
             Trace.WriteLine("Test message", "TestCategory");
-
-            Thread.Sleep(500);
-
+            
             var logprocessor = loggerFactory.GetProcessor();
 
             Assert.IsTrue(logprocessor.LogEntries.Count() == 1);
@@ -143,13 +128,10 @@ namespace Scribe.Test.Component
         [Test]
         public void TraceTraceError()
         {
-            var loggerFactory = new LoggerFactory();
-            loggerFactory.Manager.AddListener(new TraceLogListener());
+            var loggerFactory = CreateLoggerFactor();
 
             Trace.TraceError("Error message");
-
-            Thread.Sleep(500);
-
+            
             var logprocessor = loggerFactory.GetProcessor();
 
             Assert.IsTrue(logprocessor.LogEntries.Count() == 1);
@@ -161,13 +143,10 @@ namespace Scribe.Test.Component
         [Test]
         public void TraceTraceErrorWithParams()
         {
-            var loggerFactory = new LoggerFactory();
-            loggerFactory.Manager.AddListener(new TraceLogListener());
+            var loggerFactory = CreateLoggerFactor();
 
             Trace.TraceError("Error message {0} {1}", "parama 1", loggerFactory);
-
-            Thread.Sleep(500);
-
+            
             var logprocessor = loggerFactory.GetProcessor();
 
             Assert.IsTrue(logprocessor.LogEntries.Count() == 1);
@@ -179,13 +158,10 @@ namespace Scribe.Test.Component
         [Test]
         public void TraceTraceInformation()
         {
-            var loggerFactory = new LoggerFactory();
-            loggerFactory.Manager.AddListener(new TraceLogListener());
+            var loggerFactory = CreateLoggerFactor();
 
             Trace.TraceInformation("Information message");
-
-            Thread.Sleep(500);
-
+            
             var logprocessor = loggerFactory.GetProcessor();
 
             Assert.IsTrue(logprocessor.LogEntries.Count() == 1);
@@ -198,13 +174,10 @@ namespace Scribe.Test.Component
         [Test]
         public void TraceTraceInformationWithParams()
         {
-            var loggerFactory = new LoggerFactory();
-            loggerFactory.Manager.AddListener(new TraceLogListener());
+            var loggerFactory = CreateLoggerFactor();
 
             Trace.TraceInformation("Information message {0} {1}", "parama 1", loggerFactory);
-
-            Thread.Sleep(500);
-
+            
             var logprocessor = loggerFactory.GetProcessor();
 
             Assert.IsTrue(logprocessor.LogEntries.Count() == 1);
@@ -217,13 +190,10 @@ namespace Scribe.Test.Component
         [Test]
         public void TraceTraceWarning()
         {
-            var loggerFactory = new LoggerFactory();
-            loggerFactory.Manager.AddListener(new TraceLogListener());
+            var loggerFactory = CreateLoggerFactor();
 
             Trace.TraceWarning("Warning message");
-
-            Thread.Sleep(500);
-
+            
             var logprocessor = loggerFactory.GetProcessor();
 
             Assert.IsTrue(logprocessor.LogEntries.Count() == 1);
@@ -236,13 +206,10 @@ namespace Scribe.Test.Component
         [Test]
         public void TraceTraceWarningWithParams()
         {
-            var loggerFactory = new LoggerFactory();
-            loggerFactory.Manager.AddListener(new TraceLogListener());
+            var loggerFactory = CreateLoggerFactor();
 
             Trace.TraceWarning("Warning message {0} {1}", "parama 1", loggerFactory);
             
-            Thread.Sleep(500);
-
             var logprocessor = loggerFactory.GetProcessor();
 
             Assert.IsTrue(logprocessor.LogEntries.Count() == 1);
@@ -251,58 +218,5 @@ namespace Scribe.Test.Component
             Assert.IsFalse(logprocessor.LogEntries.First().Message.Contains("StackTrace"));
             Assert.IsTrue(logprocessor.LogEntries.First().LogLevel == LogLevel.Warning);
         }
-
-        //[Test]
-        //public void TraceFail()
-        //{
-        //    var loggerFactory = new LoggerFactory();
-        //    loggerFactory.Manager.AddListener(new TraceLogListener());
-
-        //    Trace.Fail("Fail");
-
-        //    Thread.Sleep(500);
-
-        //    var logprocessor = loggerFactory.GetProcessor();
-
-        //    Assert.IsTrue(logprocessor.LogEntries.Count() == 1);
-        //    Assert.IsTrue(logprocessor.LogEntries.First().Message.StartsWith("Fail"));
-        //    Assert.IsTrue(logprocessor.LogEntries.First().TraceType == TraceType.Critical);
-        //}
-
-        //[Test]
-        //public void TraceFailWithDetail()
-        //{
-        //    var loggerFactory = new LoggerFactory();
-        //    loggerFactory.Manager.AddListener(new TraceLogListener());
-
-        //    Trace.Fail("Fail", "The complete message");
-
-        //    Thread.Sleep(500);
-
-        //    var logprocessor = loggerFactory.GetProcessor();
-
-        //    Assert.IsTrue(logprocessor.LogEntries.Count() == 1);
-        //    Assert.IsTrue(logprocessor.LogEntries.First().Message.StartsWith("Fail"));
-        //    Assert.IsTrue(logprocessor.LogEntries.First().Message.Contains("Detail"));
-        //    Assert.IsTrue(logprocessor.LogEntries.First().Message.Contains("The complete message"));
-        //    Assert.IsTrue(logprocessor.LogEntries.First().TraceType == TraceType.Critical);
-        //}
-
-        //[Test]
-        //public void TraceAssert()
-        //{
-        //    var loggerFactory = new LoggerFactory();
-        //    loggerFactory.Manager.AddListener(new TraceLogListener());
-
-        //    Trace.Assert(false,"Fail");
-
-        //    Thread.Sleep(500);
-
-        //    var logprocessor = loggerFactory.GetProcessor();
-
-        //    Assert.IsTrue(logprocessor.LogEntries.Count() == 1);
-        //    Assert.IsTrue(logprocessor.LogEntries.First().Message.StartsWith("Fail"));
-        //    Assert.IsTrue(logprocessor.LogEntries.First().TraceType == TraceType.Critical);
-        //}
     }
 }

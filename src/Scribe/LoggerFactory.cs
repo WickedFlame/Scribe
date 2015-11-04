@@ -68,9 +68,32 @@ namespace Scribe
             return Manager.Processor;
         }
 
-        public void AddLogger(ILogWriter logger, string name = null)
+        /// <summary>
+        /// Set a logprocessor that is used to pass the log entires from the listeners to the writers
+        /// </summary>
+        /// <param name="processor">The processor</param>
+        public void SetProcessor(ILogProcessor processor)
         {
-            Manager.AddLogger(logger, name);
+            Manager.SetProcessor(processor);
+        }
+
+        /// <summary>
+        /// Add a log listener to the log manager
+        /// </summary>
+        /// <param name="listener">The listener</param>
+        public void AddListener(IListener listener)
+        {
+            AddListener(listener);
+        }
+
+        /// <summary>
+        /// Add a log writer to the log manager
+        /// </summary>
+        /// <param name="writer">The log writer</param>
+        /// <param name="name">The name of the log wirter</param>
+        public void AddWriter(ILogWriter writer, string name = null)
+        {
+            Manager.AddWriter(writer, name);
         }
     }
 }

@@ -29,8 +29,8 @@ namespace Scribe.Test
         {
             var loggerFactory = new LoggerFactory();
             var traceLogger = new TraceLogWriter();
-            loggerFactory.AddLogger(traceLogger, "tracelogger");
-            loggerFactory.AddLogger(traceLogger, "tracelogger2");
+            loggerFactory.AddWriter(traceLogger, "tracelogger");
+            loggerFactory.AddWriter(traceLogger, "tracelogger2");
 
             var logger = loggerFactory.GetLogger();
             logger.Write("test", LogLevel.Error);
@@ -44,7 +44,7 @@ namespace Scribe.Test
         {
             var manager = new LogManager();
             //manager.AddListner(new LogTraceListener());
-            manager.AddLogger(new TraceLogWriter());
+            manager.AddWriter(new TraceLogWriter());
 
 
             var logger = manager.LoggerFactory.GetLogger();

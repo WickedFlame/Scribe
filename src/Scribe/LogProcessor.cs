@@ -1,125 +1,43 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Scribe
 {
-    internal class LogProcessor : ILogProcessor, IDisposable
+    public class LogProcessor : ILogProcessor
     {
-        private readonly Queue<Action> _queue = new Queue<Action>();
-        private readonly ManualResetEvent _hasNewItems = new ManualResetEvent(false);
-        private readonly ManualResetEvent _terminate = new ManualResetEvent(false);
-        private readonly ManualResetEvent _waiting = new ManualResetEvent(false);
-
-        private readonly Thread _loggingThread;
-        private readonly Thread _mainThread;
-
         private readonly ILogManager _logManager;
-        private bool _isThreadAlive;
-        private IList<ILogEntry> _logEntries;
+        private readonly List<ILogEntry> _logEntries;
 
         public LogProcessor(ILogManager manager)
         {
             _logManager = manager;
-            _isThreadAlive = true;
-
-            // this is performed from a bg thread, to ensure the queue is serviced from a single thread
-            _loggingThread = new Thread(new ThreadStart(ProcessQueue));
-            _loggingThread.IsBackground = true;
-            _loggingThread.Start();
-
-            // find a way to close the child thread when main thread completes
-            _mainThread = Thread.CurrentThread;
+            _logEntries = new List<ILogEntry>();
         }
 
-        IEnumerable<ILogEntry> ILogProcessor.LogEntries
+        public IEnumerable<ILogEntry> LogEntries
         {
             get
             {
-                return LogEntries;
-            }
-        }
-
-        public IList<ILogEntry> LogEntries
-        {
-            get
-            {
-                if (_logEntries == null)
-                {
-                    _logEntries = new List<ILogEntry>();
-                }
-
                 return _logEntries;
-            }
-        }
-
-        private void ProcessQueue()
-        {
-            while (_isThreadAlive)
-            {
-                _waiting.Set();
-                int i = ManualResetEvent.WaitAny(new WaitHandle[] { _hasNewItems, _terminate });
-
-                // terminate was signaled 
-                if (i == 1)
-                {
-                    return;
-                }
-
-                _hasNewItems.Reset();
-                _waiting.Reset();
-
-                Queue<Action> queueCopy;
-                lock (_queue)
-                {
-                    queueCopy = new Queue<Action>(_queue);
-                    _queue.Clear();
-                }
-
-                foreach (var log in queueCopy)
-                {
-                    log();
-                }
-
-                // let the thread wait for next run
-                Thread.Sleep(TimeSpan.FromSeconds(0.5));
-
-                if (!_mainThread.IsAlive)
-                {
-                    return;
-                }
-            }
-        }
-
-        public void ProcessLog(ILogEntry row)
-        {
-            lock (_queue)
-            {
-                _queue.Enqueue(() => AsyncLogMessage(row));
-            }
-
-            _hasNewItems.Set();
-        }
-
-        protected void AsyncLogMessage(ILogEntry row)
-        {
-            LogEntries.Add(row);
-
-            foreach (var logger in _logManager.Writers.Values)
-            {
-                logger().Write(row.Message, row.LogLevel, category: row.Category, logtime: row.LogTime);
             }
         }
 
         public void Flush()
         {
-            _waiting.WaitOne();
+            _logEntries.Clear();
         }
 
-        public void Dispose()
+        public void ProcessLog(ILogEntry row)
         {
-            _terminate.Set();
-            _loggingThread.Join();
+            _logEntries.Add(row);
+
+            foreach (var logger in _logManager.Writers.Values)
+            {
+                logger().Write(row.Message, row.LogLevel, category: row.Category, logtime: row.LogTime);
+            }
         }
     }
 }

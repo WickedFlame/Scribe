@@ -8,14 +8,15 @@ namespace Scribe
 {
     public class LogManager : ILogManager
     {
-        bool _isInitialized;
+        private bool _isInitialized;
+        private Lazy<ILogProcessor> _processor;
 
         public LogManager()
         {
             _loggerFactory = new Lazy<LoggerFactory>(() => new LoggerFactory(this));
 
 
-            _processor = new Lazy<ILogProcessor>(() => new LogProcessor(this));
+            _processor = new Lazy<ILogProcessor>(() => new AsncLogProcessor(this));
             _listeners = new Lazy<IList<IListener>>(() => new List<IListener>());
             _logWriters = new Lazy<Dictionary<string, GetLogWriterCallback>>(() => new Dictionary<string, GetLogWriterCallback>());
 
@@ -27,7 +28,7 @@ namespace Scribe
             _loggerFactory = new Lazy<LoggerFactory>(() => loggerFactory);
 
 
-            _processor = new Lazy<ILogProcessor>(() => new LogProcessor(this));
+            _processor = new Lazy<ILogProcessor>(() => new AsncLogProcessor(this));
             _listeners = new Lazy<IList<IListener>>(() => new List<IListener>());
             _logWriters = new Lazy<Dictionary<string, GetLogWriterCallback>>(() => new Dictionary<string, GetLogWriterCallback>());
 
@@ -43,7 +44,6 @@ namespace Scribe
             }
         }
 
-        readonly Lazy<ILogProcessor> _processor;
         public ILogProcessor Processor
         {
             get
@@ -69,7 +69,21 @@ namespace Scribe
                 return _listeners.Value;
             }
         }
-        
+
+        /// <summary>
+        /// Set a logprocessor that is used to pass the log entires from the listeners to the writers
+        /// </summary>
+        /// <param name="processor">The processor</param>
+        public void SetProcessor(ILogProcessor processor)
+        {
+            var reference = processor;
+            _processor = new Lazy<ILogProcessor>(() => reference);
+        }
+
+        /// <summary>
+        /// Add a log listener to the log manager
+        /// </summary>
+        /// <param name="listener">The listener</param>
         public void AddListener(IListener listener)
         {
             listener.Initialize(LoggerFactory);
@@ -78,9 +92,14 @@ namespace Scribe
             _listeners.Value.Add(listener);
         }
 
-        public void AddLogger(ILogWriter logger, string name = null)
+        /// <summary>
+        /// Add a log writer to the log manager
+        /// </summary>
+        /// <param name="writer">The log writer</param>
+        /// <param name="name">The name of the log wirter</param>
+        public void AddWriter(ILogWriter writer, string name = null)
         {
-            Writers.Add(name ?? logger.GetType().Name, () => logger);
+            Writers.Add(name ?? writer.GetType().Name, () => writer);
         }
 
         public void Initialize()
@@ -119,7 +138,7 @@ namespace Scribe
                         var instance = Activator.CreateInstance(type) as ILogWriter;
                         if (instance != null)
                         {
-                            AddLogger(instance, instance.GetType().Name);
+                            AddWriter(instance, instance.GetType().Name);
                         }
                     }
                     else

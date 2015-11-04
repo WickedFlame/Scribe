@@ -13,6 +13,7 @@ namespace Scribe.Configuration.Test
         {
             var factory = new LoggerFactory();
             var manager = factory.Manager;
+            manager.SetProcessor(new LogProcessor(manager));
 
             Assert.IsTrue(manager.Listeners.Any());
             Assert.IsTrue(manager.Listeners.First().GetType() == typeof(TraceLogListener));
@@ -28,7 +29,7 @@ namespace Scribe.Configuration.Test
                 Trace.WriteLine("Test " + i);
             }
 
-            System.Threading.Thread.Sleep(TimeSpan.FromSeconds(1));
+            //System.Threading.Thread.Sleep(TimeSpan.FromSeconds(1));
 
             Assert.IsTrue(writer.LogEntries.Count == 10);
 
@@ -37,7 +38,7 @@ namespace Scribe.Configuration.Test
                 Trace.WriteLine("Test " + i);
             }
 
-            System.Threading.Thread.Sleep(TimeSpan.FromSeconds(1));
+            //System.Threading.Thread.Sleep(TimeSpan.FromSeconds(1));
 
             Assert.IsTrue(writer.LogEntries.Count == 20);
         }
@@ -46,6 +47,7 @@ namespace Scribe.Configuration.Test
         public void TestConfigurationWithLogManager()
         {
             var manager = new LogManager();
+            manager.SetProcessor(new LogProcessor(manager));
 
             Assert.IsTrue(manager.Listeners.Any());
             Assert.IsTrue(manager.Listeners.First().GetType() == typeof(TraceLogListener));
@@ -61,7 +63,7 @@ namespace Scribe.Configuration.Test
                 Trace.WriteLine("Test " + i);
             }
 
-            System.Threading.Thread.Sleep(TimeSpan.FromSeconds(1));
+            //System.Threading.Thread.Sleep(TimeSpan.FromSeconds(1));
 
             Assert.IsTrue(writer.LogEntries.Count == 10);
 
@@ -70,7 +72,7 @@ namespace Scribe.Configuration.Test
                 Trace.WriteLine("Test " + i);
             }
 
-            System.Threading.Thread.Sleep(TimeSpan.FromSeconds(1));
+            //System.Threading.Thread.Sleep(TimeSpan.FromSeconds(1));
 
             Assert.IsTrue(writer.LogEntries.Count == 20);
         }
