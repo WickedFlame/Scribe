@@ -2,6 +2,9 @@
 
 namespace Scribe
 {
+    /// <summary>
+    /// A log entry
+    /// </summary>
     public class LogEntry : ILogEntry
     {
         public LogEntry(string message, LogLevel logLevel = LogLevel.Information, Priority priority = Priority.Medium, string category = null, DateTime? logtime = null)
@@ -13,14 +16,29 @@ namespace Scribe
             LogTime = logtime ?? DateTime.UtcNow;
         }
 
+        /// <summary>
+        /// Gets te log message
+        /// </summary>
         public string Message { get; private set; }
 
+        /// <summary>
+        /// Gets the log level
+        /// </summary>
         public LogLevel LogLevel { get; private set; }
 
+        /// <summary>
+        /// Gets the log priority
+        /// </summary>
         public Priority Priority { get; private set; }
 
+        /// <summary>
+        /// Gets the log category
+        /// </summary>
         public string Category { get; private set; }
 
+        /// <summary>
+        /// Gets the log time
+        /// </summary>
         public DateTime LogTime { get; private set; }
 
         public override string ToString()

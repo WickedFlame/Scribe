@@ -6,22 +6,16 @@ namespace Scribe
     /// </summary>
     public interface ILoggerFactory
     {
-        //Dictionary<string, CreateLoggerCallback> LogProviders { get; }
-
-        //IEnumerable<IListener> Listeners { get; }
-
-        //void AddLogger(string name, CreateLoggerCallback loggerProvider);
-
         /// <summary>
         /// Gets a instance of the ILogger
         /// </summary>
-        /// <returns></returns>
+        /// <returns>A new instance of a ILogger</returns>
         ILogger GetLogger();
 
         /// <summary>
         /// Gets a instance of the ILogProcessor
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The log processor</returns>
         ILogProcessor GetProcessor();
 
         /// <summary>

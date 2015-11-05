@@ -15,7 +15,7 @@ namespace Scribe
         /// <summary>
         /// Processes and stores the log
         /// </summary>
-        /// <param name="row"></param>
+        /// <param name="row">The log entry</param>
         void ProcessLog(ILogEntry row);
 
         /// <summary>

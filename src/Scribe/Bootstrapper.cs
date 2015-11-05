@@ -3,6 +3,9 @@ namespace Scribe
 {
     public class Bootstrapper
     {
+        /// <summary>
+        /// Initialize the logger
+        /// </summary>
         public void Initialize()
         {
             BeforeInitialize();
@@ -17,11 +20,15 @@ namespace Scribe
         /// <summary>
         /// Virtual method that gets called befor the initialization is started
         /// </summary>
-        protected virtual void BeforeInitialize() { }
+        protected virtual void BeforeInitialize() 
+        { 
+        }
 
         /// <summary>
         /// Virtual method that gets called when Scribe is started
         /// </summary>
-        protected virtual void OnStartup() { }
+        protected virtual void OnStartup() 
+        { 
+        }
     }
 }

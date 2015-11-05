@@ -8,6 +8,10 @@ namespace Scribe
 {
     public class LogManager : ILogManager
     {
+        private readonly Lazy<LoggerFactory> _loggerFactory;
+        private readonly Lazy<Dictionary<string, GetLogWriterCallback>> _logWriters;
+        private readonly Lazy<IList<IListener>> _listeners;
+
         private bool _isInitialized;
         private Lazy<ILogProcessor> _processor;
 
@@ -35,7 +39,6 @@ namespace Scribe
             Initialize();
         }
 
-        readonly Lazy<LoggerFactory> _loggerFactory;
         public ILoggerFactory LoggerFactory
         {
             get
@@ -52,7 +55,6 @@ namespace Scribe
             }
         }
 
-        readonly Lazy<Dictionary<string, GetLogWriterCallback>> _logWriters;
         public Dictionary<string, GetLogWriterCallback> Writers
         {
             get
@@ -61,7 +63,6 @@ namespace Scribe
             }
         }
 
-        readonly Lazy<IList<IListener>> _listeners;
         public IEnumerable<IListener> Listeners
         {
             get
@@ -102,10 +103,15 @@ namespace Scribe
             Writers.Add(name ?? writer.GetType().Name, () => writer);
         }
 
+        /// <summary>
+        /// Initialize the log manager from the Config files
+        /// </summary>
         public void Initialize()
         {
             if (_isInitialized)
+            {
                 return;
+            }
 
             var section = ConfigurationManager.GetSection("scribe") as ScribeSection;
             if (section != null)

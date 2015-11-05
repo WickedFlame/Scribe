@@ -13,12 +13,10 @@ namespace Scribe.Test
         {
             var manager = new LogManager();
             manager.AddListener(new TraceLogListener());
+            manager.SetProcessor(new LogProcessor(manager));
 
             Trace.Write("Test");
             Trace.TraceError("Error message");
-
-            // give the logthread time to write logqueue
-            System.Threading.Thread.Sleep(TimeSpan.FromSeconds(1));
 
             var processor = manager.LoggerFactory.GetProcessor();
             Assert.IsTrue(processor.LogEntries.First().Message == "Test");
@@ -43,17 +41,13 @@ namespace Scribe.Test
         public void BasicTraceLoggerWritertest()
         {
             var manager = new LogManager();
-            //manager.AddListner(new LogTraceListener());
             manager.AddWriter(new TraceLogWriter());
-
+            manager.SetProcessor(new LogProcessor(manager));
 
             var logger = manager.LoggerFactory.GetLogger();
             logger.Write("Test");
             logger.Write("Error message");
-
-            // give the logthread time to write logqueue
-            System.Threading.Thread.Sleep(TimeSpan.FromSeconds(1));
-
+            
             var processor = manager.LoggerFactory.GetProcessor();
             Assert.IsTrue(processor.LogEntries.First().Message == "Test");
         }

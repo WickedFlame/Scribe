@@ -83,7 +83,7 @@ namespace Scribe
         /// <param name="listener">The listener</param>
         public void AddListener(IListener listener)
         {
-            AddListener(listener);
+            Manager.AddListener(listener);
         }
 
         /// <summary>
