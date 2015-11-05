@@ -12,10 +12,10 @@ namespace Scribe
         public LoggerFactory()
         {
             _logManager = new Lazy<ILogManager>(() => new LogManager(this));
-            if (LogManager.HasConfiguration())
-            {
-                Manager.Initialize();
-            }
+            //if (LogManager.HasConfiguration())
+            //{
+            //    Manager.Initialize();
+            //}
         }
 
         /// <summary>

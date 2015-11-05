@@ -113,49 +113,49 @@ namespace Scribe
                 return;
             }
 
-            var section = ConfigurationManager.GetSection("scribe") as ScribeSection;
-            if (section != null)
-            {
-                foreach (var element in section.Listeners)
-                {
-                    var type = Type.GetType(element.Type);
-                    if (type != null)
-                    {
-                        var instance = Activator.CreateInstance(type) as IListener;
-                        if (instance != null)
-                        {
-                            AddListener(instance);
-                        }
-                    }
-                    else
-                    {
-                        var message = string.Format("#### Scribe - Configuration error: Listener {0} cannot be created because the Type does not exist or does not derive from {1}.", element.Type, typeof(IListener).Name);
-                        var logger = LoggerFactory.GetLogger();
-                        logger.Write(message, LogLevel.Warning, category: "Configuration", logtime: DateTime.Now);
-                        Trace.WriteLine(message);
-                    }
-                }
+            //var section = ConfigurationManager.GetSection("scribe") as ScribeSection;
+            //if (section != null)
+            //{
+            //    foreach (var element in section.Listeners)
+            //    {
+            //        var type = Type.GetType(element.Type);
+            //        if (type != null)
+            //        {
+            //            var instance = Activator.CreateInstance(type) as IListener;
+            //            if (instance != null)
+            //            {
+            //                AddListener(instance);
+            //            }
+            //        }
+            //        else
+            //        {
+            //            var message = string.Format("#### Scribe - Configuration error: Listener {0} cannot be created because the Type does not exist or does not derive from {1}.", element.Type, typeof(IListener).Name);
+            //            var logger = LoggerFactory.GetLogger();
+            //            logger.Write(message, LogLevel.Warning, category: "Configuration", logtime: DateTime.Now);
+            //            Trace.WriteLine(message);
+            //        }
+            //    }
 
-                foreach (var element in section.Writers)
-                {
-                    var type = Type.GetType(element.Type);
-                    if (type != null)
-                    {
-                        var instance = Activator.CreateInstance(type) as ILogWriter;
-                        if (instance != null)
-                        {
-                            AddWriter(instance, instance.GetType().Name);
-                        }
-                    }
-                    else
-                    {
-                        var message = string.Format("#### Scribe - Configuration error: LogWiter {0} cannot be created because the Type does not exist or does not derive from {1}.", element.Type, typeof(ILogWriter).Name);
-                        var logger = LoggerFactory.GetLogger();
-                        logger.Write(message, LogLevel.Warning, category: "Configuration", logtime: DateTime.Now);
-                        Trace.WriteLine(message);
-                    }
-                }
-            }
+            //    foreach (var element in section.Writers)
+            //    {
+            //        var type = Type.GetType(element.Type);
+            //        if (type != null)
+            //        {
+            //            var instance = Activator.CreateInstance(type) as ILogWriter;
+            //            if (instance != null)
+            //            {
+            //                AddWriter(instance, instance.GetType().Name);
+            //            }
+            //        }
+            //        else
+            //        {
+            //            var message = string.Format("#### Scribe - Configuration error: LogWiter {0} cannot be created because the Type does not exist or does not derive from {1}.", element.Type, typeof(ILogWriter).Name);
+            //            var logger = LoggerFactory.GetLogger();
+            //            logger.Write(message, LogLevel.Warning, category: "Configuration", logtime: DateTime.Now);
+            //            Trace.WriteLine(message);
+            //        }
+            //    }
+            //}
 
             _isInitialized = true;
         }

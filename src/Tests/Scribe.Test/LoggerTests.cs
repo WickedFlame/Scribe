@@ -17,6 +17,7 @@ namespace Scribe.Test
             var manager = new LogManager();
             manager.SetProcessor(new LogProcessor(manager));
             var logger = manager.LoggerFactory.GetLogger();
+
             logger.Write(exception2, formatter: e =>
             {
                 var sb = new StringBuilder();

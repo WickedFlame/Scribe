@@ -7,7 +7,7 @@ namespace Scribe
 {
     public class TraceLogListener : TraceListener, IListener
     {
-        Lazy<ILogger> _logger;
+        private Lazy<ILogger> _logger;
 
         protected ILogger Logger
         {
