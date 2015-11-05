@@ -1,7 +1,7 @@
-﻿using NUnit.Framework;
+﻿#define TRACE
 using System.Diagnostics;
 using System.Linq;
-using System.Threading;
+using NUnit.Framework;
 
 namespace Scribe.Test.Component
 {
