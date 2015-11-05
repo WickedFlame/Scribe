@@ -1,4 +1,5 @@
-﻿using System;
+﻿#define TRACE
+using System;
 using System.Diagnostics;
 using System.Text;
 
