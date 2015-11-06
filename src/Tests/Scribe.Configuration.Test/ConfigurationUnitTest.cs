@@ -28,18 +28,14 @@ namespace Scribe.Configuration.Test
             {
                 Trace.WriteLine("Test " + i);
             }
-
-            //System.Threading.Thread.Sleep(TimeSpan.FromSeconds(1));
-
+            
             Assert.IsTrue(writer.LogEntries.Count == 10);
 
             for (int i = 1; i <= 10; i++)
             {
                 Trace.WriteLine("Test " + i);
             }
-
-            //System.Threading.Thread.Sleep(TimeSpan.FromSeconds(1));
-
+            
             Assert.IsTrue(writer.LogEntries.Count == 20);
         }
 
@@ -62,18 +58,14 @@ namespace Scribe.Configuration.Test
             {
                 Trace.WriteLine("Test " + i);
             }
-
-            //System.Threading.Thread.Sleep(TimeSpan.FromSeconds(1));
-
+            
             Assert.IsTrue(writer.LogEntries.Count == 10);
 
             for (int i = 1; i <= 10; i++)
             {
                 Trace.WriteLine("Test " + i);
             }
-
-            //System.Threading.Thread.Sleep(TimeSpan.FromSeconds(1));
-
+            
             Assert.IsTrue(writer.LogEntries.Count == 20);
         }
     }

@@ -196,11 +196,13 @@ namespace Scribe.Test.Component
             
             var logprocessor = loggerFactory.GetProcessor();
 
+            var entry = logprocessor.LogEntries.First();
+
             Assert.IsTrue(logprocessor.LogEntries.Count() == 1);
-            Assert.IsTrue(logprocessor.LogEntries.First().Message.StartsWith("Warning message"));
+            Assert.IsTrue(entry.Message.StartsWith("Warning message"));
             // No StackTrace
-            Assert.IsFalse(logprocessor.LogEntries.First().Message.Contains("StackTrace"));
-            Assert.IsTrue(logprocessor.LogEntries.First().LogLevel == LogLevel.Warning);
+            Assert.IsFalse(entry.Message.Contains("StackTrace"));
+            Assert.IsTrue(entry.LogLevel == LogLevel.Warning);
         }
 
         [Test]
