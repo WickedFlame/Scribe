@@ -138,7 +138,7 @@ namespace Scribe.Test.Component
             //Assert.IsTrue(logprocessor.LogEntries.Count() == 1);
 
             Assert.IsNotNull(entry);
-            Assert.IsTrue(entry.Message.StartsWith("Error message"), entry.Message);
+            Assert.IsTrue(entry.Message.StartsWith("Error message"), entry.ToString());
             //Assert.IsTrue(entry.Message.Contains("StackTrace"));
             //Assert.IsTrue(entry.LogLevel.Equals(LogLevel.Error));
         }
