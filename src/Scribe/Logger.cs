@@ -5,7 +5,7 @@ namespace Scribe
     /// <summary>
     /// The default logger
     /// </summary>
-    internal class Logger : ILogger
+    public class Logger : ILogger
     {
         private readonly Lazy<ILogProcessor> _logProcessor;
 
