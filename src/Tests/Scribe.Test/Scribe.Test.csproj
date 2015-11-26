@@ -78,6 +78,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnitTest\LoggerFactoryTests.cs" />
     <Compile Include="UnitTest\LoggerTests.cs" />
+    <Compile Include="UnitTest\LogManagerTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Scribe\Scribe.csproj">
