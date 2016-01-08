@@ -10,7 +10,7 @@ namespace Scribe
         /// <summary>
         /// Gets a collection of processed log entries
         /// </summary>
-        IEnumerable<ILogEntry> LogEntries { get; }
+        IEnumerable<ILogEntry> ProcessedLogs { get; }
 
         /// <summary>
         /// Processes and stores the log

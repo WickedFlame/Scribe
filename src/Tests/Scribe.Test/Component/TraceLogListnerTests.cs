@@ -16,7 +16,7 @@ namespace Scribe.Test.Component
             IsRunningOnMono = Type.GetType("Mono.Runtime") != null;
         }
 
-        private LoggerFactory CreateLoggerFactor()
+        private LoggerFactory CreateLoggerFactory()
         {
             var loggerFactory = new LoggerFactory();
             loggerFactory.AddListener(new TraceLogListener());
@@ -28,15 +28,15 @@ namespace Scribe.Test.Component
         [Test]
         public void TraceWriteObject()
         {
-            var loggerFactory = CreateLoggerFactor();
+            var loggerFactory = CreateLoggerFactory();
 
             Trace.Write(loggerFactory);
             
             var logprocessor = loggerFactory.GetProcessor();
 
-            Assert.IsTrue(logprocessor.LogEntries.Count() == 1);
+            Assert.IsTrue(logprocessor.ProcessedLogs.Count() == 1);
 
-            var entry = logprocessor.LogEntries.First();
+            var entry = logprocessor.ProcessedLogs.First();
             Assert.IsNotNull(entry);
             if (IsRunningOnMono)
             {
@@ -50,15 +50,15 @@ namespace Scribe.Test.Component
         [Test]
         public void TraceWriteMessage()
         {
-            var loggerFactory = CreateLoggerFactor();
+            var loggerFactory = CreateLoggerFactory();
 
             Trace.Write("Test message");
             
             var logprocessor = loggerFactory.GetProcessor();
 
-            Assert.IsTrue(logprocessor.LogEntries.Count() == 1);
+            Assert.IsTrue(logprocessor.ProcessedLogs.Count() == 1);
 
-            var entry = logprocessor.LogEntries.First();
+            var entry = logprocessor.ProcessedLogs.First();
             Assert.IsNotNull(entry);
             if (IsRunningOnMono)
             {
@@ -72,15 +72,15 @@ namespace Scribe.Test.Component
         [Test]
         public void TraceWriteObjectWithCategory()
         {
-            var loggerFactory = CreateLoggerFactor();
+            var loggerFactory = CreateLoggerFactory();
 
             Trace.Write(loggerFactory, "TestCategory");
             
             var logprocessor = loggerFactory.GetProcessor();
 
-            Assert.IsTrue(logprocessor.LogEntries.Count() == 1);
+            Assert.IsTrue(logprocessor.ProcessedLogs.Count() == 1);
 
-            var entry = logprocessor.LogEntries.First();
+            var entry = logprocessor.ProcessedLogs.First();
             Assert.IsNotNull(entry);
 
             Assert.IsTrue(entry.Message == "Scribe.LoggerFactory");
@@ -90,15 +90,15 @@ namespace Scribe.Test.Component
         [Test]
         public void TraceWriteMessageWithCategory()
         {
-            var loggerFactory = CreateLoggerFactor();
+            var loggerFactory = CreateLoggerFactory();
 
             Trace.Write("Test message", "TestCategory");
             
             var logprocessor = loggerFactory.GetProcessor();
 
-            Assert.IsTrue(logprocessor.LogEntries.Count() == 1);
+            Assert.IsTrue(logprocessor.ProcessedLogs.Count() == 1);
 
-            var entry = logprocessor.LogEntries.First();
+            var entry = logprocessor.ProcessedLogs.First();
             Assert.IsNotNull(entry);
             if (IsRunningOnMono)
             {
@@ -113,15 +113,15 @@ namespace Scribe.Test.Component
         [Test]
         public void TraceWriteLineObject()
         {
-            var loggerFactory = CreateLoggerFactor();
+            var loggerFactory = CreateLoggerFactory();
 
             Trace.WriteLine(loggerFactory);
             
             var logprocessor = loggerFactory.GetProcessor();
 
-            Assert.IsTrue(logprocessor.LogEntries.Count() == 1);
+            Assert.IsTrue(logprocessor.ProcessedLogs.Count() == 1);
 
-            var entry = logprocessor.LogEntries.First();
+            var entry = logprocessor.ProcessedLogs.First();
             Assert.IsNotNull(entry);
             if (IsRunningOnMono)
             {
@@ -135,15 +135,15 @@ namespace Scribe.Test.Component
         [Test]
         public void TraceWriteLineMessage()
         {
-            var loggerFactory = CreateLoggerFactor();
+            var loggerFactory = CreateLoggerFactory();
 
             Trace.WriteLine("Test message");
             
             var logprocessor = loggerFactory.GetProcessor();
 
-            Assert.IsTrue(logprocessor.LogEntries.Count() == 1);
+            Assert.IsTrue(logprocessor.ProcessedLogs.Count() == 1);
 
-            var entry = logprocessor.LogEntries.First();
+            var entry = logprocessor.ProcessedLogs.First();
             Assert.IsNotNull(entry);
             if (IsRunningOnMono)
             {
@@ -157,15 +157,15 @@ namespace Scribe.Test.Component
         [Test]
         public void TraceWriteLineObjectWithCategory()
         {
-            var loggerFactory = CreateLoggerFactor();
+            var loggerFactory = CreateLoggerFactory();
 
             Trace.WriteLine(loggerFactory, "TestCategory");
             
             var logprocessor = loggerFactory.GetProcessor();
 
-            Assert.IsTrue(logprocessor.LogEntries.Count() == 1);
+            Assert.IsTrue(logprocessor.ProcessedLogs.Count() == 1);
 
-            var entry = logprocessor.LogEntries.First();
+            var entry = logprocessor.ProcessedLogs.First();
             Assert.IsNotNull(entry);
             if (IsRunningOnMono)
             {
@@ -180,15 +180,15 @@ namespace Scribe.Test.Component
         [Test]
         public void TraceWriteLineMessageWithCategory()
         {
-            var loggerFactory = CreateLoggerFactor();
+            var loggerFactory = CreateLoggerFactory();
 
             Trace.WriteLine("Test message", "TestCategory");
             
             var logprocessor = loggerFactory.GetProcessor();
 
-            Assert.IsTrue(logprocessor.LogEntries.Count() == 1);
+            Assert.IsTrue(logprocessor.ProcessedLogs.Count() == 1);
 
-            var entry = logprocessor.LogEntries.First();
+            var entry = logprocessor.ProcessedLogs.First();
             Assert.IsNotNull(entry);
             if (IsRunningOnMono)
             {
@@ -203,13 +203,13 @@ namespace Scribe.Test.Component
         [Test]
         public void TraceTraceError()
         {
-            var loggerFactory = CreateLoggerFactor();
+            var loggerFactory = CreateLoggerFactory();
 
             Trace.TraceError("Error message");
             
             var logprocessor = loggerFactory.GetProcessor();
 
-            var entry = logprocessor.LogEntries.First();
+            var entry = logprocessor.ProcessedLogs.First();
             Assert.IsNotNull(entry);
             if (IsRunningOnMono)
             {
@@ -225,15 +225,15 @@ namespace Scribe.Test.Component
         [Test]
         public void TraceTraceErrorWithParams()
         {
-            var loggerFactory = CreateLoggerFactor();
+            var loggerFactory = CreateLoggerFactory();
 
             Trace.TraceError("Error message {0} {1}", "parama 1", loggerFactory);
             
             var logprocessor = loggerFactory.GetProcessor();
 
-            Assert.IsTrue(logprocessor.LogEntries.Count() == 1);
+            Assert.IsTrue(logprocessor.ProcessedLogs.Count() == 1);
 
-            var entry = logprocessor.LogEntries.First();
+            var entry = logprocessor.ProcessedLogs.First();
             Assert.IsNotNull(entry);
             if (IsRunningOnMono)
             {
@@ -249,15 +249,15 @@ namespace Scribe.Test.Component
         [Test]
         public void TraceTraceInformation()
         {
-            var loggerFactory = CreateLoggerFactor();
+            var loggerFactory = CreateLoggerFactory();
 
             Trace.TraceInformation("Information message");
             
             var logprocessor = loggerFactory.GetProcessor();
 
-            Assert.IsTrue(logprocessor.LogEntries.Count() == 1);
+            Assert.IsTrue(logprocessor.ProcessedLogs.Count() == 1);
 
-            var entry = logprocessor.LogEntries.First();
+            var entry = logprocessor.ProcessedLogs.First();
             Assert.IsNotNull(entry);
             if (IsRunningOnMono)
             {
@@ -275,15 +275,15 @@ namespace Scribe.Test.Component
         [Test]
         public void TraceTraceInformationWithParams()
         {
-            var loggerFactory = CreateLoggerFactor();
+            var loggerFactory = CreateLoggerFactory();
 
             Trace.TraceInformation("Information message {0} {1}", "parama 1", loggerFactory);
             
             var logprocessor = loggerFactory.GetProcessor();
 
-            Assert.IsTrue(logprocessor.LogEntries.Count() == 1);
+            Assert.IsTrue(logprocessor.ProcessedLogs.Count() == 1);
 
-            var entry = logprocessor.LogEntries.First();
+            var entry = logprocessor.ProcessedLogs.First();
             Assert.IsNotNull(entry);
             if (IsRunningOnMono)
             {
@@ -300,15 +300,15 @@ namespace Scribe.Test.Component
         [Test]
         public void TraceTraceWarning()
         {
-            var loggerFactory = CreateLoggerFactor();
+            var loggerFactory = CreateLoggerFactory();
 
             Trace.TraceWarning("Warning message");
             
             var logprocessor = loggerFactory.GetProcessor();
             
-            Assert.IsTrue(logprocessor.LogEntries.Count() == 1);
+            Assert.IsTrue(logprocessor.ProcessedLogs.Count() == 1);
 
-            var entry = logprocessor.LogEntries.First();
+            var entry = logprocessor.ProcessedLogs.First();
             Assert.IsNotNull(entry);
             if (IsRunningOnMono)
             {
@@ -325,15 +325,15 @@ namespace Scribe.Test.Component
         [Test]
         public void TraceTraceWarningWithParams()
         {
-            var loggerFactory = CreateLoggerFactor();
+            var loggerFactory = CreateLoggerFactory();
 
             Trace.TraceWarning("Warning message {0} {1}", "parama 1", loggerFactory);
             
             var logprocessor = loggerFactory.GetProcessor();
 
-            Assert.IsTrue(logprocessor.LogEntries.Count() == 1);
+            Assert.IsTrue(logprocessor.ProcessedLogs.Count() == 1);
 
-            var entry = logprocessor.LogEntries.First();
+            var entry = logprocessor.ProcessedLogs.First();
             Assert.IsNotNull(entry);
             if (IsRunningOnMono)
             {

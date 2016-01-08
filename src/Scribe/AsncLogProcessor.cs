@@ -34,7 +34,7 @@ namespace Scribe
             _mainThread = Thread.CurrentThread;
         }
 
-        public IEnumerable<ILogEntry> LogEntries
+        public IEnumerable<ILogEntry> ProcessedLogs
         {
             get
             {

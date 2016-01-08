@@ -13,7 +13,7 @@ namespace Scribe
             _logEntries = new List<ILogEntry>();
         }
 
-        public IEnumerable<ILogEntry> LogEntries
+        public IEnumerable<ILogEntry> ProcessedLogs
         {
             get
             {

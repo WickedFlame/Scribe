@@ -45,10 +45,22 @@ namespace Scribe.Test.UnitTest
             var result = factory.GetLogger();
 
             Assert.AreSame(logger, result);
+
+            LoggerFactory.LoggerCallback = null;
         }
 
         [Test]
-        public void LoggerFactory_GetLogger()
+        public void Scribe_LoggerFactory_GetLogger()
+        {
+            var factory = new LoggerFactory();
+
+            var first = factory.GetLogger();
+
+            Assert.That(first, Is.Not.Null);
+        }
+
+        [Test]
+        public void Scribe_LoggerFactory_GetLogger_Multiple_Loggers()
         {
             var factory = new LoggerFactory();
 

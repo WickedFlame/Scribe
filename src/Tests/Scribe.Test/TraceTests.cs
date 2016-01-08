@@ -19,7 +19,7 @@ namespace Scribe.Test
             Trace.TraceError("Error message");
 
             var processor = manager.LoggerFactory.GetProcessor();
-            Assert.IsTrue(processor.LogEntries.First().Message == "Test");
+            Assert.IsTrue(processor.ProcessedLogs.First().Message == "Test");
         }
 
         [Test]
@@ -49,7 +49,7 @@ namespace Scribe.Test
             logger.Write("Error message");
             
             var processor = manager.LoggerFactory.GetProcessor();
-            Assert.IsTrue(processor.LogEntries.First().Message == "Test");
+            Assert.IsTrue(processor.ProcessedLogs.First().Message == "Test");
         }
     }
 }

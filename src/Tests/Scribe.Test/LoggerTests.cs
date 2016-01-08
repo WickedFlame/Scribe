@@ -32,8 +32,7 @@ namespace Scribe.Test
             });
 
             var processor = manager.LoggerFactory.GetProcessor();
-            Assert.IsTrue(processor.LogEntries.Any());
-            //Assert.IsTrue(processor.LogEntries.First().Message == "Exception 2\r\nException 1\r\n");
+            Assert.IsTrue(processor.ProcessedLogs.Any());
         }
     }
 }

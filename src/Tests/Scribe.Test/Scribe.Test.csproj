@@ -70,6 +70,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Component\LoggerTests.cs" />
     <Compile Include="Component\LogProcessorTests.cs" />
     <Compile Include="LoggerTests.cs" />
     <Compile Include="Component\TraceLogListnerTests.cs" />

@@ -12,7 +12,7 @@ namespace Scribe.Test.Component
             var processor = new LogProcessor(new LogManager());
             processor.ProcessLog(new LogEntry("Message"));
 
-            Assert.IsTrue(processor.LogEntries.Count() == 1);
+            Assert.IsTrue(processor.ProcessedLogs.Count() == 1);
         }
 
         [Test]
@@ -21,11 +21,11 @@ namespace Scribe.Test.Component
             var processor = new LogProcessor(new LogManager());
             processor.ProcessLog(new LogEntry("Message"));
 
-            Assert.IsTrue(processor.LogEntries.Any());
+            Assert.IsTrue(processor.ProcessedLogs.Any());
 
             processor.Flush();
 
-            Assert.IsFalse(processor.LogEntries.Any());
+            Assert.IsFalse(processor.ProcessedLogs.Any());
         }
     }
 }

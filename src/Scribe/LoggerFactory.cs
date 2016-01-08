@@ -4,14 +4,14 @@ namespace Scribe
 {
     public class LoggerFactory : ILoggerFactory
     {
-        private readonly Lazy<ILogManager> _logManager;
+        private readonly ILogManager _logManager;
 
         /// <summary>
         /// Creates a new LoggerFactory. The LogManager will be created when neede
         /// </summary>
         public LoggerFactory()
         {
-            _logManager = new Lazy<ILogManager>(() => new LogManager(this));
+            _logManager = new LogManager(this);
             if (LogManager.HasConfiguration())
             {
                 Manager.Initialize();
@@ -24,7 +24,7 @@ namespace Scribe
         /// <param name="manager">The logmanager for this instance</param>
         public LoggerFactory(ILogManager manager)
         {
-            _logManager = new Lazy<ILogManager>(() => manager);
+            _logManager = manager;
         }
 
         /// <summary>
@@ -39,7 +39,7 @@ namespace Scribe
         {
             get
             {
-                return _logManager.Value;
+                return _logManager;
             }
         }
 

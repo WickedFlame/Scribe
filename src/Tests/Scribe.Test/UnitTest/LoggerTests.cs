@@ -7,7 +7,7 @@ namespace Scribe.Test.UnitTest
     public class LoggerTests
     {
         [Test]
-        public void Logger_WriteTest()
+        public void Scribe_Logger_WriteTest()
         {
             var factory = new LoggerFactory();
             var processor = new LogProcessor(factory.Manager);
@@ -17,7 +17,7 @@ namespace Scribe.Test.UnitTest
 
             logger.Write(new LogEntry("test"));
 
-            Assert.IsTrue(processor.LogEntries.Count() == 1);
+            Assert.IsTrue(processor.ProcessedLogs.Count() == 1);
         }
     }
 }
