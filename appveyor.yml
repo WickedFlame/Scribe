@@ -69,7 +69,8 @@ build:
 test:
   # assemblies to test - optional
   assemblies:
-    - '**\*.Tests.dll'
+    - '**\Scribe.Configuration.Test.dll'
+    - '**\Scribe.Test.dll'
 
 #  categories:
 #    - UI
