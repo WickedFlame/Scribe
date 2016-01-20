@@ -96,7 +96,7 @@ namespace Scribe
 
             foreach (var logger in _logManager.Writers.Values)
             {
-                logger().Write(row.Message, row.LogLevel, category: row.Category, logtime: row.LogTime);
+                logger().Write(new LogEntry(row.Message, row.LogLevel, row.Priority, row.Category, row.LogTime));
             }
         }
 

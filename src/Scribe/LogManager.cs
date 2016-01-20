@@ -131,7 +131,7 @@ namespace Scribe
                     {
                         var message = string.Format("#### Scribe - Configuration error: Listener {0} cannot be created because the Type does not exist or does not derive from {1}.", element.Type, typeof(IListener).Name);
                         var logger = LoggerFactory.GetLogger();
-                        logger.Write(message, LogLevel.Warning, category: "Configuration", logtime: DateTime.Now);
+                        logger.Write(new LogEntry(message, LogLevel.Warning, Priority.High, "Configuration", DateTime.Now));
                         Trace.WriteLine(message);
                     }
                 }
@@ -151,7 +151,7 @@ namespace Scribe
                     {
                         var message = string.Format("#### Scribe - Configuration error: LogWiter {0} cannot be created because the Type does not exist or does not derive from {1}.", element.Type, typeof(ILogWriter).Name);
                         var logger = LoggerFactory.GetLogger();
-                        logger.Write(message, LogLevel.Warning, category: "Configuration", logtime: DateTime.Now);
+                        logger.Write(new LogEntry(message, LogLevel.Warning, Priority.High, "Configuration", DateTime.Now));
                         Trace.WriteLine(message);
                     }
                 }
