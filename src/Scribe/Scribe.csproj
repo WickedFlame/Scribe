@@ -50,7 +50,9 @@
     <Compile Include="Configuration\ScribeSection.cs" />
     <Compile Include="IListener.cs" />
     <Compile Include="ILogEntry.cs" />
+    <Compile Include="LogEntryFormatProvider.cs" />
     <Compile Include="LoggerConfiguration.cs" />
+    <Compile Include="LoggerConfigurationExtensions.cs" />
     <Compile Include="LoggerExtensions.cs" />
     <Compile Include="ILogManager.cs" />
     <Compile Include="ILogProcessor.cs" />

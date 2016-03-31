@@ -28,13 +28,6 @@ namespace Scribe
             return this;
         }
 
-        public LoggerConfiguration AddTraceWriter()
-        {
-            _writers.Add(new TraceLogWriter());
-
-            return this;
-        }
-
         //public LoggerConfiguration SetLogLevel(LogLevel loglevel)
         //{
         //    throw new NotImplementedException();

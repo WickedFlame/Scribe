@@ -100,40 +100,5 @@ namespace Scribe.Test
 
             Assert.That(factory.Manager.Listeners.All(l => l is TraceLogListener));
         }
-
-        [Test]
-        public void Scribe_LoggerConfiguration_AddTraceWriter()
-        {
-            var configuration = new LoggerConfiguration();
-            configuration.AddTraceWriter();
-
-            var factory = configuration.CreateLogger() as LoggerFactory;
-
-            Assert.IsInstanceOf<TraceLogWriter>(factory.Manager.Writers.Single());
-        }
-
-        [Test]
-        public void Scribe_LoggerConfiguration_AddTraceWriter_Fluent()
-        {
-            var factory = new LoggerConfiguration()
-                .AddTraceWriter()
-                .CreateLogger() as LoggerFactory;
-
-            Assert.IsInstanceOf<TraceLogWriter>(factory.Manager.Writers.Single());
-        }
-
-
-
-
-
-        [Test]
-        public void Scribe_LoggerConfiguration()
-        {
-            var configuration = new LoggerConfiguration();
-
-            var factory = configuration.CreateLogger();
-
-            Assert.IsInstanceOf<LoggerFactory>(factory);
-        }
     }
 }
