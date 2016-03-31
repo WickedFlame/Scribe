@@ -22,7 +22,7 @@ namespace Scribe.Test
         {
             public void Write(ILogEntry logEntry)
             {
-                Trace.WriteLine(logEntry.ToString());
+                // just mock the ILogger...
             }
         }
     }
