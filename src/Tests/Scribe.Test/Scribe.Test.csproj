@@ -57,6 +57,7 @@
     <Compile Include="Component\LogProcessorTests.cs" />
     <Compile Include="LoggerConfigurationExtensionTests.cs" />
     <Compile Include="LoggerConfigurationTests.cs" />
+    <Compile Include="LoggerFactoryTests.cs" />
     <Compile Include="LoggerTests.cs" />
     <Compile Include="Component\TraceLogListnerTests.cs" />
     <Compile Include="LogEntryFormatProviderTests.cs" />

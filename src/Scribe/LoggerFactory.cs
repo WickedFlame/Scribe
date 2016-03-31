@@ -30,7 +30,7 @@ namespace Scribe
         /// <summary>
         /// Gets or sets a custom logger that will be used to log messages
         /// </summary>
-        public static Func<ILogger> LoggerCallback { get; set; }
+        public static Func<ILogger> CustomLogger { get; set; }
 
         /// <summary>
         /// Gets the ILogManager associated with this LoggerFactory
@@ -50,9 +50,9 @@ namespace Scribe
         public ILogger GetLogger()
         {
             // if there is an override call that one
-            if (LoggerCallback != null)
+            if (CustomLogger != null)
             {
-                return LoggerCallback();
+                return CustomLogger();
             }
 
             // return a default logger
