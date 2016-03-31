@@ -16,6 +16,9 @@ namespace Scribe.Test
             var logger = factory.GetLogger();
 
             Assert.AreSame(customLogger, logger);
+
+            // revert logger to default
+            LoggerFactory.CustomLogger = null;
         }
 
         private class CustomLogger : ILogger
