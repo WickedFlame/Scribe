@@ -8,68 +8,56 @@ namespace Scribe
 {
     public class LogManager : ILogManager
     {
-        private readonly Lazy<LoggerFactory> _loggerFactory;
-        private readonly Lazy<Dictionary<string, GetLogWriterCallback>> _logWriters;
-        private readonly Lazy<IList<IListener>> _listeners;
+        private readonly LoggerFactory _loggerFactory;
+        private readonly IList<ILogWriter> _logWriters;
+        private readonly IList<IListener> _listeners;
 
         private bool _isInitialized;
         private Lazy<ILogProcessor> _processor;
 
         public LogManager()
         {
-            _loggerFactory = new Lazy<LoggerFactory>(() => new LoggerFactory(this));
+            _loggerFactory = new LoggerFactory(this);
 
 
             _processor = new Lazy<ILogProcessor>(() => new AsncLogProcessor(this));
-            _listeners = new Lazy<IList<IListener>>(() => new List<IListener>());
-            _logWriters = new Lazy<Dictionary<string, GetLogWriterCallback>>(() => new Dictionary<string, GetLogWriterCallback>());
+            _listeners = new List<IListener>();
+            _logWriters = new List<ILogWriter>();
 
             Initialize();
         }
 
         public LogManager(LoggerFactory loggerFactory)
         {
-            _loggerFactory = new Lazy<LoggerFactory>(() => loggerFactory);
+            _loggerFactory = loggerFactory;
 
 
             _processor = new Lazy<ILogProcessor>(() => new AsncLogProcessor(this));
-            _listeners = new Lazy<IList<IListener>>(() => new List<IListener>());
-            _logWriters = new Lazy<Dictionary<string, GetLogWriterCallback>>(() => new Dictionary<string, GetLogWriterCallback>());
+            _listeners = new List<IListener>();
+            _logWriters = new List<ILogWriter>();
 
             Initialize();
         }
 
-        public ILoggerFactory LoggerFactory
-        {
-            get
-            {
-                return _loggerFactory.Value;
-            }
-        }
+        /// <summary>
+        /// Gets the ILoggerFactory associated with this manager
+        /// </summary>
+        public ILoggerFactory LoggerFactory => _loggerFactory;
 
-        public ILogProcessor Processor
-        {
-            get
-            {
-                return _processor.Value;
-            }
-        }
+        /// <summary>
+        /// Gets the ILogProcessor associated with this manager
+        /// </summary>
+        public ILogProcessor Processor => _processor.Value;
+        
+        /// <summary>
+        /// Gets the log writers assigned to this manager
+        /// </summary>
+        public IEnumerable<ILogWriter> Writers => _logWriters;
 
-        public Dictionary<string, GetLogWriterCallback> Writers
-        {
-            get
-            {
-                return _logWriters.Value;
-            }
-        }
-
-        public IEnumerable<IListener> Listeners
-        {
-            get
-            {
-                return _listeners.Value;
-            }
-        }
+        /// <summary>
+        /// Gets the log listeners assigned to this manager
+        /// </summary>
+        public IEnumerable<IListener> Listeners =>  _listeners;
 
         /// <summary>
         /// Set a logprocessor that is used to pass the log entires from the listeners to the writers
@@ -90,17 +78,25 @@ namespace Scribe
             listener.Initialize(LoggerFactory);
 
             // keep a reference to the listener
-            _listeners.Value.Add(listener);
+            _listeners.Add(listener);
         }
 
+        ///// <summary>
+        ///// Add a log writer to the log manager
+        ///// </summary>
+        ///// <param name="writer">The log writer</param>
+        ///// <param name="name">The name of the log wirter</param>
+        //public void AddWriter(ILogWriter writer, string name = null)
+        //{
+        //    _logWriters.Add(name ?? writer.GetType().Name, writer);
+        //}
         /// <summary>
         /// Add a log writer to the log manager
         /// </summary>
         /// <param name="writer">The log writer</param>
-        /// <param name="name">The name of the log wirter</param>
-        public void AddWriter(ILogWriter writer, string name = null)
+        public void AddWriter(ILogWriter writer)
         {
-            Writers.Add(name ?? writer.GetType().Name, () => writer);
+            _logWriters.Add(writer);
         }
 
         /// <summary>
@@ -144,7 +140,7 @@ namespace Scribe
                         var instance = Activator.CreateInstance(type) as ILogWriter;
                         if (instance != null)
                         {
-                            AddWriter(instance, instance.GetType().Name);
+                            AddWriter(instance);
                         }
                     }
                     else

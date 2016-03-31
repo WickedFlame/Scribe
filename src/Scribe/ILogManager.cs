@@ -3,16 +3,26 @@ using System.Collections.Generic;
 
 namespace Scribe
 {
-    public delegate ILogWriter GetLogWriterCallback();
-
     public interface ILogManager
     {
+        /// <summary>
+        /// Gets the ILoggerFactory associated with this manager
+        /// </summary>
         ILoggerFactory LoggerFactory { get; }
 
+        /// <summary>
+        /// Gets the ILogProcessor associated with this manager
+        /// </summary>
         ILogProcessor Processor { get; }
 
-        Dictionary<string, GetLogWriterCallback> Writers { get; }
+        /// <summary>
+        /// Gets the log writers assigned to this manager
+        /// </summary>
+        IEnumerable<ILogWriter> Writers { get; }
 
+        /// <summary>
+        /// Gets the log listeners assigned to this manager
+        /// </summary>
         IEnumerable<IListener> Listeners { get; }
 
         /// <summary>
@@ -31,8 +41,7 @@ namespace Scribe
         /// Add a log writer to the log manager
         /// </summary>
         /// <param name="writer">The log writer</param>
-        /// <param name="name">The name of the log wirter</param>
-        void AddWriter(ILogWriter writer, string name = null);
+        void AddWriter(ILogWriter writer);
 
         void Initialize();
     }

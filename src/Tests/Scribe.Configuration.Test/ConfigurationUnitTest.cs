@@ -19,9 +19,9 @@ namespace Scribe.Configuration.Test
             Assert.IsTrue(manager.Listeners.First().GetType() == typeof(TraceLogListener));
 
             Assert.IsTrue(manager.Writers.Any());
-            Assert.IsTrue(manager.Writers.First().Value().GetType() == typeof(MockLogWriter));
+            Assert.IsTrue(manager.Writers.First().GetType() == typeof(MockLogWriter));
 
-            var writer = manager.Writers.First().Value() as MockLogWriter;
+            var writer = manager.Writers.First() as MockLogWriter;
             writer.LogEntries.Clear();
 
             for (int i = 1; i <= 10; i++)
@@ -53,9 +53,9 @@ namespace Scribe.Configuration.Test
             Assert.IsTrue(manager.Listeners.First().GetType() == typeof(TraceLogListener));
 
             Assert.IsTrue(manager.Writers.Any());
-            Assert.IsTrue(manager.Writers.First().Value().GetType() == typeof(MockLogWriter));
+            Assert.IsTrue(manager.Writers.First().GetType() == typeof(MockLogWriter));
 
-            var writer = manager.Writers.First().Value() as MockLogWriter;
+            var writer = manager.Writers.First() as MockLogWriter;
             writer.LogEntries.Clear();
 
             for (int i = 1; i <= 10; i++)

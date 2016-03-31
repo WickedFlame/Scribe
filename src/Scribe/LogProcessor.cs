@@ -30,9 +30,9 @@ namespace Scribe
         {
             _logEntries.Add(row);
 
-            foreach (var logger in _logManager.Writers.Values)
+            foreach (var logger in _logManager.Writers)
             {
-                logger().Write(row.Message, row.LogLevel, category: row.Category, logtime: row.LogTime);
+                logger.Write(row.Message, row.LogLevel, category: row.Category, logtime: row.LogTime);
             }
         }
     }

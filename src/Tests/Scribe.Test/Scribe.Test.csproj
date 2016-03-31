@@ -55,9 +55,9 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Component\LogProcessorTests.cs" />
+    <Compile Include="LoggerConfigurationTests.cs" />
     <Compile Include="LoggerTests.cs" />
     <Compile Include="Component\TraceLogListnerTests.cs" />
-    <Compile Include="TraceLogWriter.cs" />
     <Compile Include="TraceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

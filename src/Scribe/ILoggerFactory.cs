@@ -34,7 +34,6 @@ namespace Scribe
         /// Add a log writer to the log manager
         /// </summary>
         /// <param name="writer">The log writer</param>
-        /// <param name="name">The name of the log wirter</param>
-        void AddWriter(ILogWriter writer, string name = null);
+        void AddWriter(ILogWriter writer);
     }
 }

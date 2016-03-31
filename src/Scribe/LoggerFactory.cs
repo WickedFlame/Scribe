@@ -90,10 +90,9 @@ namespace Scribe
         /// Add a log writer to the log manager
         /// </summary>
         /// <param name="writer">The log writer</param>
-        /// <param name="name">The name of the log wirter</param>
-        public void AddWriter(ILogWriter writer, string name = null)
+        public void AddWriter(ILogWriter writer)
         {
-            Manager.AddWriter(writer, name);
+            Manager.AddWriter(writer);
         }
     }
 }

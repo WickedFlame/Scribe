@@ -1,5 +1,4 @@
 ﻿using NUnit.Framework;
-using System;
 using System.Diagnostics;
 using System.Linq;
 
@@ -27,8 +26,8 @@ namespace Scribe.Test
         {
             var loggerFactory = new LoggerFactory();
             var traceLogger = new TraceLogWriter();
-            loggerFactory.AddWriter(traceLogger, "tracelogger");
-            loggerFactory.AddWriter(traceLogger, "tracelogger2");
+            loggerFactory.AddWriter(traceLogger);
+            loggerFactory.AddWriter(traceLogger);
 
             var logger = loggerFactory.GetLogger();
             logger.Write("test", LogLevel.Error);
