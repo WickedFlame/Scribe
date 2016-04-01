@@ -48,9 +48,10 @@
     <Compile Include="Configuration\ListenerElementCollection.cs" />
     <Compile Include="Configuration\LoggerElementCollection.cs" />
     <Compile Include="Configuration\ScribeSection.cs" />
+    <Compile Include="FileLogWriter.cs" />
     <Compile Include="IListener.cs" />
     <Compile Include="ILogEntry.cs" />
-    <Compile Include="LogEntryFormatProvider.cs" />
+    <Compile Include="Format\LogEntryFormatProvider.cs" />
     <Compile Include="LoggerConfiguration.cs" />
     <Compile Include="LoggerConfigurationExtensions.cs" />
     <Compile Include="LoggerExtensions.cs" />

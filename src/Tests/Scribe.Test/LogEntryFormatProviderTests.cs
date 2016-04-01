@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using Scribe.Format;
 
 namespace Scribe.Test
 {
