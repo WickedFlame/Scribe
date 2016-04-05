@@ -16,7 +16,7 @@ namespace Scribe.Configuration.Test
             manager.SetProcessor(new LogProcessor(manager));
 
             Assert.IsTrue(manager.Listeners.Any());
-            Assert.IsTrue(manager.Listeners.First().GetType() == typeof(TraceLogListener));
+            Assert.IsTrue(manager.Listeners.First().GetType() == typeof(TraceListener));
 
             Assert.IsTrue(manager.Writers.Any());
             Assert.IsTrue(manager.Writers.First().GetType() == typeof(MockLogWriter));
@@ -50,7 +50,7 @@ namespace Scribe.Configuration.Test
             manager.SetProcessor(new LogProcessor(manager));
 
             Assert.IsTrue(manager.Listeners.Any());
-            Assert.IsTrue(manager.Listeners.First().GetType() == typeof(TraceLogListener));
+            Assert.IsTrue(manager.Listeners.First().GetType() == typeof(TraceListener));
 
             Assert.IsTrue(manager.Writers.Any());
             Assert.IsTrue(manager.Writers.First().GetType() == typeof(MockLogWriter));

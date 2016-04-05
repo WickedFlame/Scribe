@@ -1,5 +1,4 @@
-﻿#define TRACE
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Linq;
 using NUnit.Framework;
 
@@ -11,9 +10,9 @@ namespace Scribe.Test.Component
         private LoggerFactory CreateLoggerFactor()
         {
             var loggerFactory = new LoggerFactory();
-            loggerFactory.AddListener(new TraceLogListener());
+            loggerFactory.AddListener(new TraceListener());
             loggerFactory.SetProcessor(new LogProcessor(loggerFactory.Manager));
-
+            
             return loggerFactory;
         }
 

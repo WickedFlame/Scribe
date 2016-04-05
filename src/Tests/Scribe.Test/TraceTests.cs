@@ -11,7 +11,7 @@ namespace Scribe.Test
         public void BasicTraceListnerTest()
         {
             var manager = new LogManager();
-            manager.AddListener(new TraceLogListener());
+            manager.AddListener(new TraceListener());
             manager.SetProcessor(new LogProcessor(manager));
 
             Trace.Write("Test");

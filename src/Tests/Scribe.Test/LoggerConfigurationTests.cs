@@ -68,7 +68,7 @@ namespace Scribe.Test
         [Test]
         public void Scribe_LoggerConfiguration_AddListener()
         {
-            var listener = new TraceLogListener();
+            var listener = new TraceListener();
 
             var configuration = new LoggerConfiguration();
             configuration.AddListener(listener);
@@ -81,7 +81,7 @@ namespace Scribe.Test
         [Test]
         public void Scribe_LoggerConfiguration_AddListener_Fluent()
         {
-            var listener = new TraceLogListener();
+            var listener = new TraceListener();
 
             var factory = new LoggerConfiguration()
                 .AddListener(listener)
@@ -94,11 +94,11 @@ namespace Scribe.Test
         public void Scribe_LoggerConfiguration_AddListener_Multiple_Fluent()
         {
             var factory = new LoggerConfiguration()
-                .AddListener(new TraceLogListener())
-                .AddListener(new TraceLogListener())
+                .AddListener(new TraceListener())
+                .AddListener(new TraceListener())
                 .CreateLogger() as LoggerFactory;
 
-            Assert.That(factory.Manager.Listeners.All(l => l is TraceLogListener));
+            Assert.That(factory.Manager.Listeners.All(l => l is TraceListener));
         }
     }
 }

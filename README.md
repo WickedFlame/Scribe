@@ -3,21 +3,30 @@ WickedFlame.Scribe
 [![Build Status](https://travis-ci.org/WickedFlame/Scribe.svg?branch=master)](https://travis-ci.org/WickedFlame/Scribe)
 [![Build status](https://ci.appveyor.com/api/projects/status/bxv7l0mb06wpej04/branch/master?svg=true)](https://ci.appveyor.com/project/chriswalpen/scribe/branch/master)
 
-Scribe is a background Logger and Diagnostics component that collects and logs Trace messages. Scribe can be completely configured in the application configuration without leaving any traces in the client code. 
-Default or custom Loggers can be applied through the configuration or at runtime.
+Scribe is a background Logger and Diagnostics component that collects, logs or delegates Log messages. Scribe can be completely configured in the application configuration without leaving any traces in the client code. 
+Default or custom Loggers or Listeners can be applied through the configuration or at runtime.
 
-```csharp
-var manager = new LogManager();
-manager.AddListener(new TraceLogListener());
-
-// using the trace-system to log
-Trace.Write("Test");
-```
 ```csharp
 var loggerFactory = new LoggerFactory();
-loggerFactory.AddLogger(new TraceLogWriter(), "tracelogger");
 
-// using the custom logger to log
+// add a log writer that Trace all Messages
+loggerFactory.AddWriter(new TraceLogWriter());
+
+// using the logger to log
 var logger = loggerFactory.GetLogger();
 logger.Write("test", LogLevel.Error);
 ```
+
+Scribe can handle multiple Log Sources. For example all that is Traced to the Output to can be Logged with the help of the Scribe.TraceListener.  
+All that has to be implemented is the IListener interface.
+```csharp
+var manager = new LogManager();
+manager.AddListener(new Scribe.TraceListener());
+
+// using the trace-system to log
+Trace.Write("Test");
+Trace.TraceError("Error message");
+```
+
+The configuration for the Listeners and Writers is per LoggerFactory instance.  
+The Loggers themselves all use the configuration defined in the LoggerFactory and can be created as many as desired.

@@ -1,11 +1,10 @@
-﻿#define TRACE
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.Text;
 
 namespace Scribe
 {
-    public class TraceLogListener : TraceListener, IListener
+    public class TraceListener : System.Diagnostics.TraceListener, IListener
     {
         private Lazy<ILogger> _logger;
 

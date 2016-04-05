@@ -13,14 +13,14 @@ namespace Scribe
         private readonly IList<IListener> _listeners;
 
         private bool _isInitialized;
-        private Lazy<ILogProcessor> _processor;
+        private ILogProcessor _processor;
 
         public LogManager()
         {
             _loggerFactory = new LoggerFactory(this);
 
 
-            _processor = new Lazy<ILogProcessor>(() => new AsncLogProcessor(this));
+            _processor = new AsncLogProcessor(this);
             _listeners = new List<IListener>();
             _logWriters = new List<ILogWriter>();
 
@@ -32,7 +32,7 @@ namespace Scribe
             _loggerFactory = loggerFactory;
 
 
-            _processor = new Lazy<ILogProcessor>(() => new AsncLogProcessor(this));
+            _processor = new AsncLogProcessor(this);
             _listeners = new List<IListener>();
             _logWriters = new List<ILogWriter>();
 
@@ -47,7 +47,7 @@ namespace Scribe
         /// <summary>
         /// Gets the ILogProcessor associated with this manager
         /// </summary>
-        public ILogProcessor Processor => _processor.Value;
+        public ILogProcessor Processor => _processor;
         
         /// <summary>
         /// Gets the log writers assigned to this manager
@@ -65,8 +65,7 @@ namespace Scribe
         /// <param name="processor">The processor</param>
         public void SetProcessor(ILogProcessor processor)
         {
-            var reference = processor;
-            _processor = new Lazy<ILogProcessor>(() => reference);
+            _processor = processor;
         }
 
         /// <summary>
@@ -80,16 +79,7 @@ namespace Scribe
             // keep a reference to the listener
             _listeners.Add(listener);
         }
-
-        ///// <summary>
-        ///// Add a log writer to the log manager
-        ///// </summary>
-        ///// <param name="writer">The log writer</param>
-        ///// <param name="name">The name of the log wirter</param>
-        //public void AddWriter(ILogWriter writer, string name = null)
-        //{
-        //    _logWriters.Add(name ?? writer.GetType().Name, writer);
-        //}
+        
         /// <summary>
         /// Add a log writer to the log manager
         /// </summary>
@@ -125,10 +115,12 @@ namespace Scribe
                     }
                     else
                     {
-                        var message = string.Format("#### Scribe - Configuration error: Listener {0} cannot be created because the Type does not exist or does not derive from {1}.", element.Type, typeof(IListener).Name);
-                        var logger = LoggerFactory.GetLogger();
-                        logger.Write(message, LogLevel.Warning, category: "Configuration", logtime: DateTime.Now);
+                        var message = $"#### Scribe - Configuration error:\nListener {element.Type} cannot be created because the Type does not exist or does not derive from {typeof(IListener).Name}.";
+                        //var logger = LoggerFactory.GetLogger();
+                        //logger.Write(message, LogLevel.Warning, category: "Configuration", logtime: DateTime.Now);
                         Trace.WriteLine(message);
+
+                        throw new Exception(message);
                     }
                 }
 
@@ -145,10 +137,12 @@ namespace Scribe
                     }
                     else
                     {
-                        var message = string.Format("#### Scribe - Configuration error: LogWiter {0} cannot be created because the Type does not exist or does not derive from {1}.", element.Type, typeof(ILogWriter).Name);
-                        var logger = LoggerFactory.GetLogger();
-                        logger.Write(message, LogLevel.Warning, category: "Configuration", logtime: DateTime.Now);
+                        var message = $"#### Scribe - Configuration error:\nLogWiter {element.Type} cannot be created because the Type does not exist or does not derive from {typeof(ILogWriter).Name}.";
+                        //var logger = LoggerFactory.GetLogger();
+                        //logger.Write(message, LogLevel.Warning, category: "Configuration", logtime: DateTime.Now);
                         Trace.WriteLine(message);
+
+                        throw new Exception(message);
                     }
                 }
             }
