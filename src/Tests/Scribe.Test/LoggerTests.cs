@@ -15,7 +15,7 @@ namespace Scribe.Test
             var exception2 = new Exception("Exception 2", exception1);
 
             var manager = new LogManager();
-            manager.SetProcessor(new LogProcessor(manager));
+            manager.SetProcessor(new LogProcessor());
             var logger = manager.LoggerFactory.GetLogger();
 
             logger.Write(exception2, formatter: e =>

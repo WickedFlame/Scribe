@@ -7,6 +7,8 @@ namespace Scribe
     {
         private readonly IList<IListener> _listners;
         private readonly IList<ILogWriter> _writers;
+        private ILogProcessor _processor;
+        private LogLevel _loglevel = LogLevel.Verbose;
 
         public LoggerConfiguration()
         {
@@ -28,14 +30,34 @@ namespace Scribe
             return this;
         }
 
-        //public LoggerConfiguration SetLogLevel(LogLevel loglevel)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        public LoggerConfiguration SetProcessor(ILogProcessor processor)
+        {
+            _processor = processor;
+
+            return this;
+        }
+
+        public LoggerConfiguration SetMinimalLogLevel(LogLevel loglevel)
+        {
+            _loglevel = loglevel;
+
+            return this;
+        }
 
         public ILoggerFactory CreateLogger()
         {
             var factory = new LoggerFactory();
+            if (_processor != null)
+            {
+                factory.SetProcessor(_processor);
+            }
+
+            if (_loglevel < LogLevel.Verbose)
+            {
+                var processor = factory.GetProcessor();
+                processor.MinimalLogLevel = _loglevel;
+            }
+
             foreach (var listner in _listners)
             {
                 factory.AddListener(listner);

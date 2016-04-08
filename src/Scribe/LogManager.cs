@@ -66,6 +66,9 @@ namespace Scribe
         public void SetProcessor(ILogProcessor processor)
         {
             _processor = processor;
+
+            // reinitialize the processor to use the correct manager
+            processor.Initialize(this);
         }
 
         /// <summary>

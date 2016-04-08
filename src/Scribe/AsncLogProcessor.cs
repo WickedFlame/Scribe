@@ -16,12 +16,17 @@ namespace Scribe
         private readonly Thread _loggingThread;
         private readonly Thread _mainThread;
 
-        private readonly ILogManager _logManager;
+        private ILogManager _logManager;
         private bool _isThreadAlive;
 
         public AsncLogProcessor(ILogManager manager)
+            : this()
         {
             _logManager = manager;
+        }
+
+        public AsncLogProcessor()
+        {
             _isThreadAlive = true;
             _logEntries = new List<ILogEntry>();
 
@@ -34,14 +39,44 @@ namespace Scribe
             _mainThread = Thread.CurrentThread;
         }
 
-        public IEnumerable<ILogEntry> LogEntries
+        /// <summary>
+        /// Gets or sets the minimal loglevel
+        /// </summary>
+        public LogLevel MinimalLogLevel { get; set; } = LogLevel.Verbose;
+
+        /// <summary>
+        /// Gets the processed logenties
+        /// </summary>
+        public IEnumerable<ILogEntry> LogEntries => _logEntries;
+
+        /// <summary>
+        /// Initizalize the logprocessor with the manager
+        /// </summary>
+        /// <param name="logManager">The logmanager</param>
+        public void Initialize(ILogManager logManager)
         {
-            get
-            {
-                return _logEntries;
-            }
+            _logManager = logManager;
         }
-        
+
+        /// <summary>
+        /// Processes and stores the log
+        /// </summary>
+        /// <param name="row">The log entry</param>
+        public void ProcessLog(ILogEntry row)
+        {
+            if (row.LogLevel > MinimalLogLevel)
+            {
+                return;
+            }
+
+            lock (_queue)
+            {
+                _queue.Enqueue(() => AsyncLogMessage(row));
+            }
+
+            _hasNewItems.Set();
+        }
+
         private void ProcessQueue()
         {
             while (_isThreadAlive)
@@ -78,16 +113,6 @@ namespace Scribe
                     return;
                 }
             }
-        }
-
-        public void ProcessLog(ILogEntry row)
-        {
-            lock (_queue)
-            {
-                _queue.Enqueue(() => AsyncLogMessage(row));
-            }
-
-            _hasNewItems.Set();
         }
 
         protected void AsyncLogMessage(ILogEntry row)

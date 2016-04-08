@@ -1,4 +1,4 @@
-WickedFlame.Scribe
+Scribe
 =================
 [![Build Status](https://travis-ci.org/WickedFlame/Scribe.svg?branch=master)](https://travis-ci.org/WickedFlame/Scribe)
 [![Build status](https://ci.appveyor.com/api/projects/status/bxv7l0mb06wpej04/branch/master?svg=true)](https://ci.appveyor.com/project/chriswalpen/scribe/branch/master)
@@ -18,7 +18,7 @@ logger.Write("test", LogLevel.Error);
 ```
 
 Scribe can handle multiple Log Sources. For example all that is Traced to the Output to can be Logged with the help of the Scribe.TraceListener.  
-All that has to be implemented is the IListener interface.
+All that has to be implemented for a Listener is the IListener interface.
 ```csharp
 var manager = new LogManager();
 manager.AddListener(new Scribe.TraceListener());
@@ -28,5 +28,5 @@ Trace.Write("Test");
 Trace.TraceError("Error message");
 ```
 
-The configuration for the Listeners and Writers is per LoggerFactory instance.  
-The Loggers themselves all use the configuration defined in the LoggerFactory and can be created as many as desired.
+The Listeners and Writers are configured per LoggerFactory instance.  
+The Loggers that are created from the LoggerFactory all use the configuration defined in the LoggerFactory and can be created as many as desired.

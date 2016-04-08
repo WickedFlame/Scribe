@@ -13,6 +13,17 @@ namespace Scribe
         IEnumerable<ILogEntry> LogEntries { get; }
 
         /// <summary>
+        /// Gets or sets the minimal loglevel
+        /// </summary>
+        LogLevel MinimalLogLevel { get; set; }
+
+        /// <summary>
+        /// Initizalize the logprocessor with the manager
+        /// </summary>
+        /// <param name="logManager">The logmanager</param>
+        void Initialize(ILogManager logManager);
+
+        /// <summary>
         /// Processes and stores the log
         /// </summary>
         /// <param name="row">The log entry</param>
