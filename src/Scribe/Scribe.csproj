@@ -48,6 +48,7 @@
     <Compile Include="Configuration\ListenerElementCollection.cs" />
     <Compile Include="Configuration\LoggerElementCollection.cs" />
     <Compile Include="Configuration\ScribeSection.cs" />
+    <Compile Include="DelegateLogWriter.cs" />
     <Compile Include="FileLogWriter.cs" />
     <Compile Include="IListener.cs" />
     <Compile Include="ILogEntry.cs" />

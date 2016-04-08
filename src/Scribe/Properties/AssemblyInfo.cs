@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Scribe")]
-[assembly: AssemblyDescription("A lightweight diagnostics-component for logging and tracing")]
+[assembly: AssemblyDescription("A lightweight diagnostics-component for logging, tracing and delegating logmessages")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("WickedFlame")]
 [assembly: AssemblyProduct("Scribe")]
@@ -31,5 +31,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("0.3.0.1")]
-[assembly: AssemblyFileVersion("0.3.0.1")]
+[assembly: AssemblyVersion("0.3.2.0")]
+[assembly: AssemblyFileVersion("0.3.2.1")]

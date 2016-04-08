@@ -44,7 +44,7 @@ namespace Scribe
             return this;
         }
 
-        public ILoggerFactory CreateLogger()
+        public ILoggerFactory BuildFactory()
         {
             var factory = new LoggerFactory();
             if (_processor != null)

@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>Scribe</id>
-    <version>0.3.0-RC01</version>
+    <version>0.3.2</version>
     <title>Scribe</title>
     <authors>Christian Walpen</authors>
     <owners>Christian Walpen</owners>
@@ -12,9 +12,6 @@
     <description>A lightweight Diagnostics and Logging component</description>
     <summary>A lightweight Diagnostics and Logging component</summary>
     <releaseNotes>
-      Added: Complete implementation for default TraceListner
-      Added: ScribeBootstrapper to initialize Scribe
-      Fixed: Check if main thread is running
     </releaseNotes>
     <tags>Logging, Diagnostics, Tracing</tags>
   </metadata>

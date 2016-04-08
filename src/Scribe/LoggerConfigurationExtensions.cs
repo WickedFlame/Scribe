@@ -1,7 +1,21 @@
-﻿namespace Scribe
+﻿using System;
+
+namespace Scribe
 {
     public static class LoggerConfigurationExtensions
     {
+        /// <summary>
+        /// Add a TraceListener that listens to all traced message
+        /// </summary>
+        /// <param name="configuration">The configuration</param>
+        /// <returns>The configuration</returns>
+        public static LoggerConfiguration AddTraceListener(this LoggerConfiguration configuration)
+        {
+            configuration.AddListener(new TraceListener());
+
+            return configuration;
+        }
+
         /// <summary>
         /// Add a Log Writer that Traces to the Output
         /// </summary>
@@ -25,6 +39,19 @@
         public static LoggerConfiguration AddFileWriter(this LoggerConfiguration configuration, string fileName, string formatString = "[{LogTime:yyyy-MM-dd HH:mm:SS.fff zzz}] [{LogLevel}] [{Priority}] [{Category}] [{Message}]")
         {
             configuration.AddWriter(new FileLogWriter(fileName, formatString));
+
+            return configuration;
+        }
+
+        /// <summary>
+        /// Add a Log Writer that passes all logs to a delegate method
+        /// </summary>
+        /// <param name="configuration">The configuration</param>
+        /// <param name="predicate">The delegate method</param>
+        /// <returns>The configuration</returns>
+        public static LoggerConfiguration AddWriter(this LoggerConfiguration configuration, Action<ILogEntry> predicate)
+        {
+            configuration.AddWriter(new DelegateLogWriter(predicate));
 
             return configuration;
         }

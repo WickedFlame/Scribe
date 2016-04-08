@@ -30,3 +30,19 @@ Trace.TraceError("Error message");
 
 The Listeners and Writers are configured per LoggerFactory instance.  
 The Loggers that are created from the LoggerFactory all use the configuration defined in the LoggerFactory and can be created as many as desired.
+  
+The easiest way to setup and configure a logger is with the help of the LoggerConfiguration.
+```csharp
+var factory = new LoggerConfiguration()
+    .AddTraceListener()
+    .AddFileWriter(fileName: "logfile.log", formatString: "[{LogTime:d}] [{Message}]")
+    .SetMinimalLogLevel(LogLevel.Warning)
+    .CreateLogger();
+
+// log the output from trace
+System.Diagnostics.Trace.TraceError("Some error from trace");
+
+// log through the default logger
+var logger = factory.GetLogger();
+logger.Write("Some error from Logger", LogLevel.Error);
+```

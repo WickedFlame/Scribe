@@ -12,7 +12,7 @@ namespace Scribe.Test
             var configuration = new LoggerConfiguration();
             configuration.AddTraceWriter();
 
-            var factory = configuration.CreateLogger() as LoggerFactory;
+            var factory = configuration.BuildFactory() as LoggerFactory;
 
             Assert.IsInstanceOf<TraceLogWriter>(factory.Manager.Writers.Single());
         }
@@ -22,7 +22,7 @@ namespace Scribe.Test
         {
             var factory = new LoggerConfiguration()
                 .AddTraceWriter()
-                .CreateLogger() as LoggerFactory;
+                .BuildFactory() as LoggerFactory;
 
             Assert.IsInstanceOf<TraceLogWriter>(factory.Manager.Writers.Single());
         }
@@ -32,7 +32,7 @@ namespace Scribe.Test
         {
             var factory = new LoggerConfiguration()
                 .AddTraceWriter(formatString: "[{LogTime:d}][{Message}]")
-                .CreateLogger() as LoggerFactory;
+                .BuildFactory() as LoggerFactory;
 
             Assert.IsInstanceOf<TraceLogWriter>(factory.Manager.Writers.Single());
         }
@@ -43,7 +43,7 @@ namespace Scribe.Test
             var configuration = new LoggerConfiguration();
             configuration.AddFileWriter(fileName: "logfile.log");
 
-            var factory = configuration.CreateLogger() as LoggerFactory;
+            var factory = configuration.BuildFactory() as LoggerFactory;
 
             Assert.IsInstanceOf<FileLogWriter>(factory.Manager.Writers.Single());
         }
@@ -53,7 +53,7 @@ namespace Scribe.Test
         {
             var factory = new LoggerConfiguration()
                 .AddFileWriter(fileName: "logfile.log")
-                .CreateLogger() as LoggerFactory;
+                .BuildFactory() as LoggerFactory;
 
             Assert.IsInstanceOf<FileLogWriter>(factory.Manager.Writers.Single());
         }
@@ -63,9 +63,31 @@ namespace Scribe.Test
         {
             var factory = new LoggerConfiguration()
                 .AddFileWriter(fileName: "logfile.log", formatString: "[{LogTime:d}][{Message}]")
-                .CreateLogger() as LoggerFactory;
+                .BuildFactory() as LoggerFactory;
 
             Assert.IsInstanceOf<FileLogWriter>(factory.Manager.Writers.Single());
+        }
+
+        [Test]
+        public void Scribe_LoggerConfigurationExtension_AddTraceListener_Fluent()
+        {
+            var factory = new LoggerConfiguration()
+                .AddTraceListener()
+                .BuildFactory() as LoggerFactory;
+
+            Assert.IsInstanceOf<TraceListener>(factory.Manager.Listeners.Single());
+        }
+
+        [Test]
+        public void Scribe_LoggerConfigurationExtension_AddWriter_Delegate_Fluent()
+        {
+            var factory = new LoggerConfiguration()
+                .AddWriter(l => System.Diagnostics.Trace.WriteLine(l.ToString()))
+                .BuildFactory() as LoggerFactory;
+
+            factory.GetLogger().Write("Test message");
+
+            Assert.IsInstanceOf<DelegateLogWriter>(factory.Manager.Writers.Single());
         }
     }
 }
