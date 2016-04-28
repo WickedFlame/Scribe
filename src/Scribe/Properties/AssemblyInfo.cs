@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Scribe")]
-[assembly: AssemblyDescription("A lightweight diagnostics-component for logging, tracing and delegating logmessages")]
+[assembly: AssemblyDescription("A lightweight diagnostics-component for logging, tracing and delegating log messages")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("WickedFlame")]
 [assembly: AssemblyProduct("Scribe")]
