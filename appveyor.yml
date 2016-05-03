@@ -2,7 +2,7 @@
 
 
 # version format
-version: 1.0.{build}
+version: 0.3.3.{build}
 
 # you can use {branch} name in version format too
 # version: 1.0.{build}-{branch}
@@ -26,7 +26,7 @@ install:
 assembly_info:
   patch: true
   file: AssemblyInfo.*
-  assembly_version: "0.3.{build}"
+  assembly_version: "0.3.3.{build}"
   assembly_file_version: "{version}"
   assembly_informational_version: "{version}"
  
@@ -90,6 +90,7 @@ before_test:
 
 # scripts to run after tests
 after_test:
+  - ps: .\pack.ps1
 
 # to run your custom scripts instead of automatic tests
 test_script:
