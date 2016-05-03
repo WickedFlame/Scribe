@@ -90,7 +90,7 @@ before_test:
 
 # scripts to run after tests
 after_test:
-  - ps: .\pack.ps1
+  - ps: .\pack.ps1   # Run a script to create the nuget package
 
 # to run your custom scripts instead of automatic tests
 test_script:
@@ -108,16 +108,16 @@ artifacts:
     name: Scribe.dll
 
   # pushing all *.nupkg files in directory
-  - path: '**\*.nupkg'
+  - path: '.\*.nupkg'
   
 # providers: Local, FTP, WebDeploy, AzureCS, AzureBlob, S3, NuGet, Environment
 # provider names are case-sensitive!
-deploy:
+#deploy:
     # Deploying to NuGet feed
-  - provider: NuGet
-    server: https://my.nuget.server/feed
-    api_key:
-      secure: FYWX6NfjZIVw==
-    skip_symbols: false
-    symbol_server: https://your.symbol.server/feed
-    artifact: Scribe.nupkg
+#  - provider: NuGet
+#    server: https://my.nuget.server/feed
+#    api_key:
+#      secure: FYWX6NfjZIVw==
+#    skip_symbols: false
+#    symbol_server: https://your.symbol.server/feed
+#    artifact: Scribe.nupkg
