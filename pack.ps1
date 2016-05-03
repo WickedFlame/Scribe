@@ -1,4 +1,8 @@
 $root = (split-path -parent $MyInvocation.MyCommand.Definition) + '\..'
+
+Write-Host $root
+Write-Host "$root\src\Scribe\bin\Release\Scribe.dll"
+
 $version = [System.Reflection.Assembly]::LoadFile("$root\src\Scribe\bin\Release\Scribe.dll").GetName().Version
 $versionStr = "{0}.{1}.{2}" -f ($version.Major, $version.Minor, $version.Build)
 

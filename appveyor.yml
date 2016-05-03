@@ -104,9 +104,11 @@ test_script:
 #---------------------------------#
 
 artifacts:
+  - path: src\Scribe\bin\Release\Scribe.dll
+    name: Scribe.dll
 
   # pushing all *.nupkg files in directory
-  - path: out\*.nupkg
+  - path: '**\*.nupkg'
   
 # providers: Local, FTP, WebDeploy, AzureCS, AzureBlob, S3, NuGet, Environment
 # provider names are case-sensitive!
