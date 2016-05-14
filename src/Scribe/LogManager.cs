@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Diagnostics;
+using System.Linq;
 
 namespace Scribe
 {
@@ -20,7 +21,7 @@ namespace Scribe
             _loggerFactory = new LoggerFactory(this);
 
 
-            _processor = new AsncLogProcessor(this);
+            _processor = new AsyncLogProcessor(this);
             _listeners = new List<IListener>();
             _logWriters = new List<ILogWriter>();
 
@@ -30,9 +31,9 @@ namespace Scribe
         public LogManager(LoggerFactory loggerFactory)
         {
             _loggerFactory = loggerFactory;
+            _loggerFactory.Manager = this;
 
-
-            _processor = new AsncLogProcessor(this);
+            _processor = new AsyncLogProcessor(this);
             _listeners = new List<IListener>();
             _logWriters = new List<ILogWriter>();
 
@@ -77,6 +78,13 @@ namespace Scribe
         /// <param name="listener">The listener</param>
         public void AddListener(IListener listener)
         {
+            var listenerType = listener.GetType();
+            if (_listeners.Any(l => l.GetType() == listenerType))
+            {
+                _loggerFactory.GetLogger().Write($"There is already a listener of type {listenerType.Name} contained in the collection.");
+                return;
+            }
+             
             listener.Initialize(LoggerFactory);
 
             // keep a reference to the listener
@@ -89,6 +97,13 @@ namespace Scribe
         /// <param name="writer">The log writer</param>
         public void AddWriter(ILogWriter writer)
         {
+            var writerType = writer.GetType();
+            if (_logWriters.Any(w => w.GetType() == writerType))
+            {
+                _loggerFactory.GetLogger().Write($"There is already a writer of type {writerType.Name} contained in the collection.");
+                return;
+            }
+
             _logWriters.Add(writer);
         }
 

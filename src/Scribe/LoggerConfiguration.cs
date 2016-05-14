@@ -16,6 +16,11 @@ namespace Scribe
             _writers = new List<ILogWriter>();
         }
 
+        /// <summary>
+        /// Add a log listener to the configuration
+        /// </summary>
+        /// <param name="listener">The listener to add</param>
+        /// <returns>The configuration</returns>
         public LoggerConfiguration AddListener(IListener listener)
         {
             _listners.Add(listener);
@@ -23,6 +28,11 @@ namespace Scribe
             return this;
         }
 
+        /// <summary>
+        /// Add a log writer to the configuration
+        /// </summary>
+        /// <param name="writer">The writer to add</param>
+        /// <returns>The configuration</returns>
         public LoggerConfiguration AddWriter(ILogWriter writer)
         {
             _writers.Add(writer);
@@ -30,6 +40,11 @@ namespace Scribe
             return this;
         }
 
+        /// <summary>
+        /// Set the LogProcessor for processing logs
+        /// </summary>
+        /// <param name="processor">The LogProcessor</param>
+        /// <returns>The configuration</returns>
         public LoggerConfiguration SetProcessor(ILogProcessor processor)
         {
             _processor = processor;
@@ -37,6 +52,11 @@ namespace Scribe
             return this;
         }
 
+        /// <summary>
+        /// Set the minimal loglevel
+        /// </summary>
+        /// <param name="loglevel">The minimal loglevel</param>
+        /// <returns>The configuration</returns>
         public LoggerConfiguration SetMinimalLogLevel(LogLevel loglevel)
         {
             _loglevel = loglevel;

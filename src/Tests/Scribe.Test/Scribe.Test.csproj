@@ -61,6 +61,7 @@
     <Compile Include="LoggerTests.cs" />
     <Compile Include="Component\TraceLogListnerTests.cs" />
     <Compile Include="LogEntryFormatProviderTests.cs" />
+    <Compile Include="LogManagerTests.cs" />
     <Compile Include="TraceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

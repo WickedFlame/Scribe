@@ -29,6 +29,11 @@ namespace Scribe
         public IEnumerable<ILogEntry> LogEntries => _logEntries;
 
         /// <summary>
+        /// Gets the Logmanager associated with the processor
+        /// </summary>
+        public ILogManager Manager => _logManager;
+
+        /// <summary>
         /// Initizalize the logprocessor with the manager
         /// </summary>
         /// <param name="logManager">The logmanager</param>

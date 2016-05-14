@@ -4,7 +4,7 @@ using System.Threading;
 
 namespace Scribe
 {
-    public class AsncLogProcessor : ILogProcessor, IDisposable
+    public class AsyncLogProcessor : ILogProcessor, IDisposable
     {
         private readonly Queue<Action> _queue = new Queue<Action>();
         private readonly ManualResetEvent _hasNewItems = new ManualResetEvent(false);
@@ -19,13 +19,13 @@ namespace Scribe
         private ILogManager _logManager;
         private bool _isThreadAlive;
 
-        public AsncLogProcessor(ILogManager manager)
+        public AsyncLogProcessor(ILogManager manager)
             : this()
         {
             _logManager = manager;
         }
 
-        public AsncLogProcessor()
+        public AsyncLogProcessor()
         {
             _isThreadAlive = true;
             _logEntries = new List<ILogEntry>();

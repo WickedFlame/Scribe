@@ -4,7 +4,7 @@ namespace Scribe
 {
     public class LoggerFactory : ILoggerFactory
     {
-        private readonly ILogManager _logManager;
+        private ILogManager _logManager;
 
         /// <summary>
         /// Creates a new LoggerFactory. The LogManager will be created when neede
@@ -36,6 +36,10 @@ namespace Scribe
             get
             {
                 return _logManager;
+            }
+            internal set
+            {
+                _logManager = value;
             }
         }
 

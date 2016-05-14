@@ -64,7 +64,7 @@
     <Compile Include="ILoggerFactory.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="LoggerFactory.cs" />
-    <Compile Include="AsncLogProcessor.cs" />
+    <Compile Include="AsyncLogProcessor.cs" />
     <Compile Include="LogProcessor.cs" />
     <Compile Include="Priority.cs" />
     <Compile Include="Bootstrapper.cs" />
