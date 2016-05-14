@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scribe", "src\Scribe\Scribe.csproj", "{A9014AEE-8D87-4115-90B9-D06B6C11858B}"
 EndProject
@@ -13,6 +13,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scribe.Configuration.Test",
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E6A4F8E7-D88D-46C1-AB63-8A4616C5126C}"
 	ProjectSection(SolutionItems) = preProject
+		.travis.yml = .travis.yml
+		appveyor.yml = appveyor.yml
+		pack.ps1 = pack.ps1
 		src\Scribe.nuspec = src\Scribe.nuspec
 	EndProjectSection
 EndProject

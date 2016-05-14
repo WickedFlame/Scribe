@@ -7,27 +7,10 @@ namespace Scribe.Test
     public class LogManagerTests
     {
         [Test]
-        public void Scribe_LogManager_GetFactory()
-        {
-            var manager = new LogManager();
-
-            Assert.That(manager.LoggerFactory.GetType() == typeof(LoggerFactory));
-        }
-
-        [Test]
-        public void Scribe_LogManager_SetFactory()
-        {
-            var factory = new LoggerFactory();
-            var manager = new LogManager(factory);
-
-            Assert.That(manager.LoggerFactory, Is.SameAs(factory));
-        }
-
-        [Test]
         public void Scribe_LogManager_CheckManagerInFactory()
         {
-            var factory = new LoggerFactory();
-            var manager = new LogManager(factory);
+            var manager = new LogManager();
+            var factory = new LoggerFactory(manager);
 
             Assert.That(factory.Manager, Is.SameAs(manager));
         }

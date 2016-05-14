@@ -11,7 +11,7 @@ namespace Scribe
         /// </summary>
         public LoggerFactory()
         {
-            _logManager = new LogManager(this);
+            _logManager = new LogManager();
         }
 
         /// <summary>

@@ -16,7 +16,7 @@ namespace Scribe.Test
 
             var manager = new LogManager();
             manager.SetProcessor(new LogProcessor());
-            var logger = manager.LoggerFactory.GetLogger();
+            var logger = new LoggerFactory(manager).GetLogger();
 
             logger.Write(exception2, formatter: e =>
             {
@@ -31,7 +31,7 @@ namespace Scribe.Test
                 return sb.ToString();
             });
 
-            var processor = manager.LoggerFactory.GetProcessor();
+            var processor = new LoggerFactory(manager).GetProcessor();
             Assert.IsTrue(processor.LogEntries.Any());
             //Assert.IsTrue(processor.LogEntries.First().Message == "Exception 2\r\nException 1\r\n");
         }

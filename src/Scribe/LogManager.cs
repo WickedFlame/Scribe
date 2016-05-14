@@ -9,7 +9,7 @@ namespace Scribe
 {
     public class LogManager : ILogManager
     {
-        private readonly LoggerFactory _loggerFactory;
+        //private readonly LoggerFactory _loggerFactory;
         private readonly IList<ILogWriter> _logWriters;
         private readonly IList<IListener> _listeners;
 
@@ -18,7 +18,7 @@ namespace Scribe
 
         public LogManager()
         {
-            _loggerFactory = new LoggerFactory(this);
+            //_loggerFactory = new LoggerFactory(this);
 
 
             _processor = new AsyncLogProcessor(this);
@@ -28,22 +28,22 @@ namespace Scribe
             Initialize();
         }
 
-        public LogManager(LoggerFactory loggerFactory)
-        {
-            _loggerFactory = loggerFactory;
-            _loggerFactory.Manager = this;
+        //public LogManager(LoggerFactory loggerFactory)
+        //{
+        //    _loggerFactory = loggerFactory;
+        //    _loggerFactory.Manager = this;
 
-            _processor = new AsyncLogProcessor(this);
-            _listeners = new List<IListener>();
-            _logWriters = new List<ILogWriter>();
+        //    _processor = new AsyncLogProcessor(this);
+        //    _listeners = new List<IListener>();
+        //    _logWriters = new List<ILogWriter>();
 
-            Initialize();
-        }
+        //    Initialize();
+        //}
 
-        /// <summary>
-        /// Gets the ILoggerFactory associated with this manager
-        /// </summary>
-        public ILoggerFactory LoggerFactory => _loggerFactory;
+        ///// <summary>
+        ///// Gets the ILoggerFactory associated with this manager
+        ///// </summary>
+        //public ILoggerFactory LoggerFactory => _loggerFactory;
 
         /// <summary>
         /// Gets the ILogProcessor associated with this manager
@@ -81,11 +81,12 @@ namespace Scribe
             var listenerType = listener.GetType();
             if (_listeners.Any(l => l.GetType() == listenerType))
             {
-                _loggerFactory.GetLogger().Write($"There is already a listener of type {listenerType.Name} contained in the collection.");
+                var factory = new LoggerFactory(this);
+                factory.GetLogger().Write($"There is already a listener of type {listenerType.Name} contained in the collection.");
                 return;
             }
              
-            listener.Initialize(LoggerFactory);
+            listener.Initialize(this);
 
             // keep a reference to the listener
             _listeners.Add(listener);
@@ -100,7 +101,8 @@ namespace Scribe
             var writerType = writer.GetType();
             if (_logWriters.Any(w => w.GetType() == writerType))
             {
-                _loggerFactory.GetLogger().Write($"There is already a writer of type {writerType.Name} contained in the collection.");
+                var factory = new LoggerFactory(this);
+                factory.GetLogger().Write($"There is already a writer of type {writerType.Name} contained in the collection.");
                 return;
             }
 

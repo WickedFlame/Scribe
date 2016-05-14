@@ -6,19 +6,13 @@ namespace Scribe
 {
     public class TraceListener : System.Diagnostics.TraceListener, IListener
     {
-        private Lazy<ILogger> _logger;
+        private ILogger _logger;
 
-        protected ILogger Logger
-        {
-            get
-            {
-                return _logger != null ? _logger.Value : null;
-            }
-        }
+        protected ILogger Logger => _logger;
 
-        public void Initialize(ILoggerFactory loggerFactory)
+        public void Initialize(ILogManager manager)
         {
-            _logger = new Lazy<ILogger>(() => loggerFactory.GetLogger());
+            _logger = new LoggerFactory(manager).GetLogger();
 
             Trace.Listeners.Add(this);
         }
@@ -27,7 +21,7 @@ namespace Scribe
         {
             if (Logger == null)
             {
-                Trace.WriteLine(string.Format("Log listener {0} is not initialized", GetType().Name));
+                Trace.WriteLine($"Log listener {GetType().Name} is not initialized");
                 return;
             }
 
@@ -48,9 +42,9 @@ namespace Scribe
         {
             var sb = new StringBuilder(100);
             sb.AppendLine(data.ToString());
-            sb.AppendLine(string.Format("Id: {0}", id));
-            sb.AppendLine(string.Format("Process: {0}", eventCache.ProcessId));
-            sb.AppendLine(string.Format("Thread: {0}", eventCache.ThreadId));
+            sb.AppendLine($"Id: {id}");
+            sb.AppendLine($"Process: {eventCache.ProcessId}");
+            sb.AppendLine($"Thread: {eventCache.ThreadId}");
 
             var traceType = Convert(eventType);
             switch (traceType)

@@ -16,9 +16,8 @@ namespace Scribe.Test
 
             Trace.Write("Test");
             Trace.TraceError("Error message");
-
-            var processor = manager.LoggerFactory.GetProcessor();
-            Assert.IsTrue(processor.LogEntries.First().Message == "Test");
+            
+            Assert.IsTrue(manager.Processor.LogEntries.First().Message == "Test");
         }
 
         [Test]
@@ -43,12 +42,11 @@ namespace Scribe.Test
             manager.AddWriter(new TraceLogWriter());
             manager.SetProcessor(new LogProcessor());
 
-            var logger = manager.LoggerFactory.GetLogger();
+            var logger = new LoggerFactory(manager).GetLogger();
             logger.Write("Test");
             logger.Write("Error message");
             
-            var processor = manager.LoggerFactory.GetProcessor();
-            Assert.IsTrue(processor.LogEntries.First().Message == "Test");
+            Assert.IsTrue(manager.Processor.LogEntries.First().Message == "Test");
         }
     }
 }

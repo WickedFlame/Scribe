@@ -5,10 +5,10 @@ namespace Scribe
 {
     public interface ILogManager
     {
-        /// <summary>
-        /// Gets the ILoggerFactory associated with this manager
-        /// </summary>
-        ILoggerFactory LoggerFactory { get; }
+        ///// <summary>
+        ///// Gets the ILoggerFactory associated with this manager
+        ///// </summary>
+        //ILoggerFactory LoggerFactory { get; }
 
         /// <summary>
         /// Gets the ILogProcessor associated with this manager
