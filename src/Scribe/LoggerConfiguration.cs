@@ -66,28 +66,28 @@ namespace Scribe
 
         public ILoggerFactory BuildFactory()
         {
-            var factory = new LoggerFactory();
+            var manager = new LogManager();
             if (_processor != null)
             {
-                factory.SetProcessor(_processor);
+                manager.SetProcessor(_processor);
             }
 
-            if (_loglevel < LogLevel.Verbose)
+            if (_loglevel > LogLevel.Verbose)
             {
-                var processor = factory.GetProcessor();
-                processor.MinimalLogLevel = _loglevel;
+                manager.SetMinimalLogLevel(_loglevel);
             }
 
             foreach (var listner in _listners)
             {
-                factory.AddListener(listner);
+                manager.AddListener(listner);
             }
 
             foreach (var writer in _writers)
             {
-                factory.AddWriter(writer);
+                manager.AddWriter(writer);
             }
 
+            var factory = new LoggerFactory(manager);
             return factory;
         }
     }

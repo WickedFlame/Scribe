@@ -42,7 +42,7 @@ namespace Scribe
         /// <summary>
         /// Gets or sets the minimal loglevel
         /// </summary>
-        public LogLevel MinimalLogLevel { get; set; } = LogLevel.Verbose;
+        //public LogLevel MinimalLogLevel { get; set; } = LogLevel.Verbose;
 
         /// <summary>
         /// Gets the processed logenties
@@ -64,10 +64,10 @@ namespace Scribe
         /// <param name="row">The log entry</param>
         public void ProcessLog(ILogEntry row)
         {
-            if (row.LogLevel > MinimalLogLevel)
-            {
-                return;
-            }
+            //if (row.LogLevel > MinimalLogLevel)
+            //{
+            //    return;
+            //}
 
             lock (_queue)
             {

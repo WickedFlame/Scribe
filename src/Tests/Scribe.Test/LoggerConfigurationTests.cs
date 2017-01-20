@@ -114,49 +114,49 @@ namespace Scribe.Test
                 .SetMinimalLogLevel(LogLevel.Critical)
                 .BuildFactory() as LoggerFactory;
 
-            Assert.That(factory.Manager.Processor.MinimalLogLevel == LogLevel.Critical);
+            Assert.That(factory.Manager.MinimalLogLevel == LogLevel.Critical);
         }
 
         [Test]
         public void Scribe_LoggerConfiguration_SetProcessor_SetMinimalLogLevel_Higher_Fluent()
         {
-            var processor = new LogProcessor();
-            processor.MinimalLogLevel = LogLevel.Critical;
+            var manager = new LogManager();
+            manager.SetMinimalLogLevel(LogLevel.Critical);
 
             var factory = new LoggerConfiguration()
-                .SetProcessor(processor)
+                .SetProcessor(new LogProcessor(manager))
                 .SetMinimalLogLevel(LogLevel.Information)
                 .BuildFactory() as LoggerFactory;
 
-            Assert.That(factory.Manager.Processor.MinimalLogLevel == LogLevel.Information);
+            Assert.That(factory.Manager.MinimalLogLevel == LogLevel.Information);
         }
 
         [Test]
         public void Scribe_LoggerConfiguration_SetMinimalLogLevel_SetProcessor_Lower_Fluent()
         {
-            var processor = new LogProcessor();
-            processor.MinimalLogLevel = LogLevel.Critical;
+            var manager = new LogManager();
+            manager.SetMinimalLogLevel(LogLevel.Critical);
 
             var factory = new LoggerConfiguration()
                 .SetMinimalLogLevel(LogLevel.Information)
-                .SetProcessor(processor)
+                .SetProcessor(new LogProcessor(manager))
                 .BuildFactory() as LoggerFactory;
 
-            Assert.That(factory.Manager.Processor.MinimalLogLevel == LogLevel.Information);
+            Assert.That(factory.Manager.MinimalLogLevel == LogLevel.Information);
         }
 
         [Test]
         public void Scribe_LoggerConfiguration_SetMinimalLogLevel_SetProcessor_Higher_Fluent()
         {
-            var processor = new LogProcessor();
-            processor.MinimalLogLevel = LogLevel.Information;
+            var manager = new LogManager();
+            manager.SetMinimalLogLevel(LogLevel.Critical);
 
             var factory = new LoggerConfiguration()
                 .SetMinimalLogLevel(LogLevel.Critical)
-                .SetProcessor(processor)
+                .SetProcessor(new LogProcessor(manager))
                 .BuildFactory() as LoggerFactory;
 
-            Assert.That(factory.Manager.Processor.MinimalLogLevel == LogLevel.Critical);
+            Assert.That(factory.Manager.MinimalLogLevel == LogLevel.Critical);
         }
     }
 }

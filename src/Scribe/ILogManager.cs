@@ -25,6 +25,8 @@ namespace Scribe
         /// </summary>
         IEnumerable<IListener> Listeners { get; }
 
+        LogLevel MinimalLogLevel { get; }
+
         /// <summary>
         /// Set a logprocessor that is used to pass the log entires from the listeners to the writers
         /// </summary>
@@ -42,6 +44,8 @@ namespace Scribe
         /// </summary>
         /// <param name="writer">The log writer</param>
         void AddWriter(ILogWriter writer);
+
+        void SetMinimalLogLevel(LogLevel logLevel);
 
         void Initialize();
     }

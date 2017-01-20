@@ -9,42 +9,22 @@ namespace Scribe
 {
     public class LogManager : ILogManager
     {
-        //private readonly LoggerFactory _loggerFactory;
         private readonly IList<ILogWriter> _logWriters;
         private readonly IList<IListener> _listeners;
 
         private bool _isInitialized;
         private ILogProcessor _processor;
+        private LogLevel _minimalLogLevel;
 
         public LogManager()
         {
-            //_loggerFactory = new LoggerFactory(this);
-
-
             _processor = new AsyncLogProcessor(this);
             _listeners = new List<IListener>();
             _logWriters = new List<ILogWriter>();
 
             Initialize();
         }
-
-        //public LogManager(LoggerFactory loggerFactory)
-        //{
-        //    _loggerFactory = loggerFactory;
-        //    _loggerFactory.Manager = this;
-
-        //    _processor = new AsyncLogProcessor(this);
-        //    _listeners = new List<IListener>();
-        //    _logWriters = new List<ILogWriter>();
-
-        //    Initialize();
-        //}
-
-        ///// <summary>
-        ///// Gets the ILoggerFactory associated with this manager
-        ///// </summary>
-        //public ILoggerFactory LoggerFactory => _loggerFactory;
-
+        
         /// <summary>
         /// Gets the ILogProcessor associated with this manager
         /// </summary>
@@ -59,6 +39,8 @@ namespace Scribe
         /// Gets the log listeners assigned to this manager
         /// </summary>
         public IEnumerable<IListener> Listeners =>  _listeners;
+
+        public LogLevel MinimalLogLevel => _minimalLogLevel;
 
         /// <summary>
         /// Set a logprocessor that is used to pass the log entires from the listeners to the writers
@@ -107,6 +89,11 @@ namespace Scribe
             }
 
             _logWriters.Add(writer);
+        }
+
+        public void SetMinimalLogLevel(LogLevel logLevel)
+        {
+            _minimalLogLevel = logLevel;
         }
 
         /// <summary>

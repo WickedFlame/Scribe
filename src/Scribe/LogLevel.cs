@@ -3,10 +3,10 @@ namespace Scribe
 {
     public enum LogLevel
     {
-        Critical = 1,
-        Error = 2,
+        Critical = 16,
+        Error = 8,
         Warning = 4,
-        Information = 8,
-        Verbose = 16
+        Information = 2,
+        Verbose = 1
     }
 }

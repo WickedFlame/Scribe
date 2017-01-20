@@ -42,7 +42,7 @@ namespace Scribe
                 _logManager = value;
             }
         }
-
+        
         /// <summary>
         /// Gets a instance of the ILogger
         /// </summary>
@@ -56,7 +56,9 @@ namespace Scribe
             }
 
             // return a default logger
-            return new Logger(this);
+            var logger = new Logger(Manager);
+
+            return logger;
         }
 
         /// <summary>
@@ -93,6 +95,11 @@ namespace Scribe
         public void AddWriter(ILogWriter writer)
         {
             Manager.AddWriter(writer);
+        }
+
+        public void SetMinimalLogLevel(LogLevel logLevel)
+        {
+            Manager.SetMinimalLogLevel(logLevel);
         }
     }
 }

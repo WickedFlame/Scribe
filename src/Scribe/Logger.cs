@@ -5,26 +5,31 @@ namespace Scribe
     /// <summary>
     /// The default logger
     /// </summary>
-    internal class Logger : ILogger
+    public class Logger : ILogger
     {
-        private readonly Lazy<ILogProcessor> _logProcessor;
+        private readonly ILogManager _manager;
 
         /// <summary>
         /// Creates a instance of the default logger
         /// </summary>
-        /// <param name="loggerFactory">The logger factory</param>
-        public Logger(ILoggerFactory loggerFactory)
+        /// <param name="processor">The log processor</param>
+        public Logger(ILogManager manager)
         {
-            _logProcessor = new Lazy<ILogProcessor>(() => loggerFactory.GetProcessor());
+            _manager = manager;
         }
-
+        
         /// <summary>
         /// Write the log entry
         /// </summary>
         /// <param name="logEntry">The item to log</param>
         public void Write(ILogEntry logEntry)
         {
-            _logProcessor.Value.ProcessLog(logEntry);
+            if (logEntry.LogLevel < _manager.MinimalLogLevel)
+            {
+                return;
+            }
+
+            _manager.Processor.ProcessLog(logEntry);
         }
     }
 }

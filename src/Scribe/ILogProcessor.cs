@@ -15,7 +15,7 @@ namespace Scribe
         /// <summary>
         /// Gets or sets the minimal loglevel
         /// </summary>
-        LogLevel MinimalLogLevel { get; set; }
+        //LogLevel MinimalLogLevel { get; set; }
 
         /// <summary>
         /// Initizalize the logprocessor with the manager
