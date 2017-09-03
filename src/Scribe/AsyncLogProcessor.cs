@@ -43,12 +43,7 @@ namespace Scribe
         /// Gets or sets the minimal loglevel
         /// </summary>
         //public LogLevel MinimalLogLevel { get; set; } = LogLevel.Verbose;
-
-        /// <summary>
-        /// Gets the processed logenties
-        /// </summary>
-        public IEnumerable<ILogEntry> LogEntries => _logEntries;
-
+        
         /// <summary>
         /// Initizalize the logprocessor with the manager
         /// </summary>
@@ -115,13 +110,11 @@ namespace Scribe
             }
         }
 
-        protected void AsyncLogMessage(ILogEntry row)
+        protected void AsyncLogMessage(ILogEntry entry)
         {
-            _logEntries.Add(row);
-
             foreach (var logger in _logManager.Writers)
             {
-                logger.Write(row.Message, row.LogLevel, category: row.Category, logtime: row.LogTime);
+                logger.Write(entry);
             }
         }
 

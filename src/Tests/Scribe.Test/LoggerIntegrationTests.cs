@@ -14,10 +14,13 @@ namespace Scribe.Test
             var exception1 = new Exception("Exception 1");
             var exception2 = new Exception("Exception 2", exception1);
 
-            var manager = new LogManager();
-            manager.SetProcessor(new LogProcessor());
+            var manager = new LogManager()
+                .SetProcessor(new LogProcessor());
 
-            var logger = new LoggerFactory(manager).GetLogger();
+            var writer = new QueueLogWriter();
+            var logger = new LoggerFactory(manager)
+                .AddWriter(writer)
+                .GetLogger();
 
             logger.Write(exception2, formatter: e =>
             {
@@ -33,7 +36,7 @@ namespace Scribe.Test
             });
 
             var processor = new LoggerFactory(manager).GetProcessor();
-            Assert.IsTrue(processor.LogEntries.Any());
+            Assert.IsTrue(writer.LogEntries.Any());
             //Assert.IsTrue(processor.LogEntries.First().Message == "Exception 2\r\nException 1\r\n");
         }
     }

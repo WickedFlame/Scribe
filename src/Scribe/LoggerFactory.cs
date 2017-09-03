@@ -74,32 +74,43 @@ namespace Scribe
         /// Set a logprocessor that is used to pass the log entires from the listeners to the writers
         /// </summary>
         /// <param name="processor">The processor</param>
-        public void SetProcessor(ILogProcessor processor)
+        /// <returns>this instance of the factory</returns>
+        public ILoggerFactory SetProcessor(ILogProcessor processor)
         {
             Manager.SetProcessor(processor);
+
+            return this;
         }
 
         /// <summary>
         /// Add a log listener to the log manager
         /// </summary>
         /// <param name="listener">The listener</param>
-        public void AddListener(IListener listener)
+        /// <returns>this instance of the factory</returns>
+        public ILoggerFactory AddListener(IListener listener)
         {
             Manager.AddListener(listener);
+
+            return this;
         }
 
         /// <summary>
         /// Add a log writer to the log manager
         /// </summary>
         /// <param name="writer">The log writer</param>
-        public void AddWriter(ILogWriter writer)
+        /// <returns>this instance of the factory</returns>
+        public ILoggerFactory AddWriter(ILogWriter writer)
         {
             Manager.AddWriter(writer);
+
+            return this;
         }
 
-        public void SetMinimalLogLevel(LogLevel logLevel)
+        public ILoggerFactory SetMinimalLogLevel(LogLevel logLevel)
         {
             Manager.SetMinimalLogLevel(logLevel);
+
+            return this;
         }
     }
 }

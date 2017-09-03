@@ -7,25 +7,27 @@ namespace Scribe.Test.Component
     public class LogProcessorTests
     {
         [Test]
+        [Ignore("The logprocessor should only pass the logs to the writers")]
         public void LogProcessor_ProcessLogTest()
         {
             var processor = new LogProcessor(new LogManager());
             processor.ProcessLog(new LogEntry("Message"));
 
-            Assert.IsTrue(processor.LogEntries.Count() == 1);
+            //Assert.IsTrue(processor.LogEntries.Count() == 1);
         }
 
         [Test]
+        [Ignore("The logprocessor should only pass the logs to the writers")]
         public void LogProcessor_FlushTest()
         {
             var processor = new LogProcessor(new LogManager());
             processor.ProcessLog(new LogEntry("Message"));
 
-            Assert.IsTrue(processor.LogEntries.Any());
+            //Assert.IsTrue(processor.LogEntries.Any());
 
-            processor.Flush();
+            //processor.Flush();
 
-            Assert.IsFalse(processor.LogEntries.Any());
+            //Assert.IsFalse(processor.LogEntries.Any());
         }
     }
 }

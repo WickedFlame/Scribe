@@ -7,13 +7,15 @@ namespace Scribe
     /// </summary>
     public class LogEntry : ILogEntry
     {
-        public LogEntry(string message, LogLevel logLevel = LogLevel.Information, Priority priority = Priority.Medium, string category = null, DateTime? logtime = null)
+        public LogEntry(string message, LogLevel logLevel = LogLevel.Information, Priority priority = Priority.Medium, string category = null, DateTime? logtime = null, string source = null, string module = null)
         {
             Message = message;
             LogLevel = logLevel;
             Priority = priority;
             Category = category;
             LogTime = logtime ?? DateTime.UtcNow;
+            Source = source;
+            Module = module;
         }
 
         /// <summary>
@@ -40,6 +42,16 @@ namespace Scribe
         /// Gets the log time
         /// </summary>
         public DateTime LogTime { get; private set; }
+
+        /// <summary>
+        /// Gets or sets the source that wrote the log
+        /// </summary>
+        public string Source { get; set; }
+
+        /// <summary>
+        /// The name of the module that produced the log
+        /// </summary>
+        public string Module { get; set; }
 
         public override string ToString()
         {

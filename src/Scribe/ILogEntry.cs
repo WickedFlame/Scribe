@@ -31,5 +31,9 @@ namespace Scribe
         /// The log time
         /// </summary>
         DateTime LogTime { get; }
+
+        string Source { get; set; }
+
+        string Module { get; set; }
     }
 }

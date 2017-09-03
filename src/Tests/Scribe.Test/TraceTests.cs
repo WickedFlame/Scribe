@@ -10,14 +10,17 @@ namespace Scribe.Test
         [Test]
         public void BasicTraceListnerTest()
         {
-            var manager = new LogManager();
-            manager.AddListener(new TraceListener());
-            manager.SetProcessor(new LogProcessor());
+            var writer = new QueueLogWriter();
+
+            var manager = new LogManager()
+                .AddListener(new TraceListener())
+                .AddWriter(writer)
+                .SetProcessor(new LogProcessor());
 
             Trace.Write("Test");
             Trace.TraceError("Error message");
             
-            Assert.IsTrue(manager.Processor.LogEntries.First().Message == "Test");
+            Assert.IsTrue(writer.LogEntries.First().Message == "Test");
         }
 
         [Test]
@@ -38,15 +41,18 @@ namespace Scribe.Test
         [Test]
         public void BasicTraceLoggerWritertest()
         {
-            var manager = new LogManager();
-            manager.AddWriter(new TraceLogWriter());
-            manager.SetProcessor(new LogProcessor());
+            var writer = new QueueLogWriter();
+
+            var manager = new LogManager()
+                .AddWriter(new TraceLogWriter())
+                .AddWriter(writer)
+                .SetProcessor(new LogProcessor());
 
             var logger = new LoggerFactory(manager).GetLogger();
             logger.Write("Test");
             logger.Write("Error message");
             
-            Assert.IsTrue(manager.Processor.LogEntries.First().Message == "Test");
+            Assert.IsTrue(writer.LogEntries.First().Message == "Test");
         }
     }
 }

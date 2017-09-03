@@ -17,7 +17,16 @@ namespace Scribe
         {
             _manager = manager;
         }
-        
+
+        /// <summary>
+        /// Adds a log writer to the logger
+        /// </summary>
+        /// <param name="writer">The log writer</param>
+        public void AddWriter(ILogWriter writer)
+        {
+            _manager.AddWriter(writer);
+        }
+
         /// <summary>
         /// Write the log entry
         /// </summary>

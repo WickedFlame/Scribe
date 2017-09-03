@@ -11,43 +11,51 @@ namespace Scribe.Test
         [Test]
         public void Logger_LoggExceptionWithFormatter_LogLevel_Same()
         {
-            var manager = new LogManager();
-            manager.SetProcessor(new LogProcessor());
-            manager.SetMinimalLogLevel(LogLevel.Error);
+            var writer = new QueueLogWriter();
+
+            var manager = new LogManager()
+                .SetProcessor(new LogProcessor())
+                .AddWriter(writer)
+                .SetMinimalLogLevel(LogLevel.Error);
 
             var logger = new Logger(manager);
 
             logger.Write(new LogEntry("Log message", LogLevel.Error));
 
-            Assert.That(manager.Processor.LogEntries.Any());
+            Assert.That(writer.LogEntries.Any());
         }
 
         [Test]
         public void Logger_LoggExceptionWithFormatter_LogLevel_Higher()
         {
-            var manager = new LogManager();
-            manager.SetProcessor(new LogProcessor());
-            manager.SetMinimalLogLevel(LogLevel.Warning);
+            var writer = new QueueLogWriter();
+
+            var manager = new LogManager()
+                .SetProcessor(new LogProcessor())
+                .AddWriter(writer)
+                .SetMinimalLogLevel(LogLevel.Warning);
 
             var logger = new Logger(manager);
 
             logger.Write(new LogEntry("Log message", LogLevel.Error));
 
-            Assert.That(manager.Processor.LogEntries.Any());
+            Assert.That(writer.LogEntries.Any());
         }
 
         [Test]
         public void Logger_LoggExceptionWithFormatter_LogLevel_Lower()
         {
-            var manager = new LogManager();
-            manager.SetProcessor(new LogProcessor());
-            manager.SetMinimalLogLevel(LogLevel.Warning);
+            var writer = new QueueLogWriter();
+
+            var manager = new LogManager()
+                .SetProcessor(new LogProcessor())
+                .AddWriter(writer).SetMinimalLogLevel(LogLevel.Warning);
 
             var logger = new Logger(manager);
 
             logger.Write(new LogEntry("Log message", LogLevel.Information));
 
-            Assert.That(!manager.Processor.LogEntries.Any());
+            Assert.That(!writer.LogEntries.Any());
         }
     }
 }

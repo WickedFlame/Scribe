@@ -46,54 +46,65 @@ namespace Scribe
         /// Set a logprocessor that is used to pass the log entires from the listeners to the writers
         /// </summary>
         /// <param name="processor">The processor</param>
-        public void SetProcessor(ILogProcessor processor)
+        /// <returns>The logmanager</returns>
+        public ILogManager SetProcessor(ILogProcessor processor)
         {
             _processor = processor;
 
             // reinitialize the processor to use the correct manager
             processor.Initialize(this);
+
+            return this;
         }
 
         /// <summary>
         /// Add a log listener to the log manager
         /// </summary>
         /// <param name="listener">The listener</param>
-        public void AddListener(IListener listener)
+        /// <returns>the logmanager</returns>
+        public ILogManager AddListener(IListener listener)
         {
             var listenerType = listener.GetType();
             if (_listeners.Any(l => l.GetType() == listenerType))
             {
                 var factory = new LoggerFactory(this);
                 factory.GetLogger().Write($"There is already a listener of type {listenerType.Name} contained in the collection.");
-                return;
+                return this;
             }
              
             listener.Initialize(this);
 
             // keep a reference to the listener
             _listeners.Add(listener);
+
+            return this;
         }
         
         /// <summary>
         /// Add a log writer to the log manager
         /// </summary>
         /// <param name="writer">The log writer</param>
-        public void AddWriter(ILogWriter writer)
+        /// <returns>the logmanager</returns>
+        public ILogManager AddWriter(ILogWriter writer)
         {
             var writerType = writer.GetType();
             if (_logWriters.Any(w => w.GetType() == writerType))
             {
                 var factory = new LoggerFactory(this);
                 factory.GetLogger().Write($"There is already a writer of type {writerType.Name} contained in the collection.");
-                return;
+                return this;
             }
 
             _logWriters.Add(writer);
+
+            return this;
         }
 
-        public void SetMinimalLogLevel(LogLevel logLevel)
+        public ILogManager SetMinimalLogLevel(LogLevel logLevel)
         {
             _minimalLogLevel = logLevel;
+
+            return this;
         }
 
         /// <summary>

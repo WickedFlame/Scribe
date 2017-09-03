@@ -23,6 +23,11 @@ namespace Scribe.Test
 
         private class CustomLogger : ILogger
         {
+            public void AddWriter(ILogWriter writer)
+            {
+                // do nothing
+            }
+
             public void Write(ILogEntry logEntry)
             {
                 // just mock the ILogger...

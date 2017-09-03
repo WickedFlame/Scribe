@@ -22,12 +22,7 @@ namespace Scribe
         /// Gets or sets the minimal loglevel
         /// </summary>
         //public LogLevel MinimalLogLevel { get; set; } = LogLevel.Verbose;
-
-        /// <summary>
-        /// Gets the processed logenties
-        /// </summary>
-        public IEnumerable<ILogEntry> LogEntries => _logEntries;
-
+        
         /// <summary>
         /// Gets the Logmanager associated with the processor
         /// </summary>
@@ -43,29 +38,19 @@ namespace Scribe
         }
         
         /// <summary>
-        /// Flush the logqueue
-        /// </summary>
-        public void Flush()
-        {
-            _logEntries.Clear();
-        }
-
-        /// <summary>
         /// Processes and stores the log
         /// </summary>
-        /// <param name="row">The log entry</param>
-        public void ProcessLog(ILogEntry row)
+        /// <param name="entry">The log entry</param>
+        public void ProcessLog(ILogEntry entry)
         {
             //if (row.LogLevel > MinimalLogLevel)
             //{
             //    return;
             //}
-
-            _logEntries.Add(row);
-
+            
             foreach (var logger in _logManager.Writers)
             {
-                logger.Write(row.Message, row.LogLevel, category: row.Category, logtime: row.LogTime);
+                logger.Write(entry);
             }
         }
     }
