@@ -60,16 +60,7 @@ namespace Scribe
 
             return logger;
         }
-
-        /// <summary>
-        /// Gets a instance of the ILogProcessor
-        /// </summary>
-        /// <returns>The Logprocessor</returns>
-        public ILogProcessor GetProcessor()
-        {
-            return Manager.Processor;
-        }
-
+        
         /// <summary>
         /// Set a logprocessor that is used to pass the log entires from the listeners to the writers
         /// </summary>

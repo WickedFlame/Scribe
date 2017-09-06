@@ -11,13 +11,7 @@ namespace Scribe
         /// </summary>
         /// <returns>A new instance of a ILogger</returns>
         ILogger GetLogger();
-
-        /// <summary>
-        /// Gets a instance of the ILogProcessor
-        /// </summary>
-        /// <returns>The log processor</returns>
-        ILogProcessor GetProcessor();
-
+        
         /// <summary>
         /// Set a logprocessor that is used to pass the log entires from the listeners to the writers
         /// </summary>

@@ -7,7 +7,7 @@ namespace Scribe.Test.Component
     [TestFixture]
     public class TraceLogListnerTests
     {
-        private ILoggerFactory CreateLoggerFactor(ILogWriter writer)
+        private ILoggerFactory BuildLoggerFactoryWithTraceListener(ILogWriter writer)
         {
             var loggerFactory = new LoggerFactory()
                 .AddListener(new TraceListener())
@@ -21,12 +21,10 @@ namespace Scribe.Test.Component
         public void TraceWriteObject()
         {
             var writer = new QueueLogWriter();
-            var loggerFactory = CreateLoggerFactor(writer);
+            var loggerFactory = BuildLoggerFactoryWithTraceListener(writer);
 
             Trace.Write(loggerFactory);
             
-            var logprocessor = loggerFactory.GetProcessor();
-
             Assert.IsTrue(writer.LogEntries.Count() == 1);
             Assert.IsTrue(writer.LogEntries.First().Message == "Scribe.LoggerFactory");
         }
@@ -35,12 +33,10 @@ namespace Scribe.Test.Component
         public void TraceWriteMessage()
         {
             var writer = new QueueLogWriter();
-            var loggerFactory = CreateLoggerFactor(writer);
+            var loggerFactory = BuildLoggerFactoryWithTraceListener(writer);
 
             Trace.Write("Test message");
             
-            var logprocessor = loggerFactory.GetProcessor();
-
             Assert.IsTrue(writer.LogEntries.Count() == 1);
             Assert.IsTrue(writer.LogEntries.First().Message == "Test message");
         }
@@ -49,12 +45,10 @@ namespace Scribe.Test.Component
         public void TraceWriteObjectWithCategory()
         {
             var writer = new QueueLogWriter();
-            var loggerFactory = CreateLoggerFactor(writer);
+            var loggerFactory = BuildLoggerFactoryWithTraceListener(writer);
 
             Trace.Write(loggerFactory, "TestCategory");
             
-            var logprocessor = loggerFactory.GetProcessor();
-
             Assert.IsTrue(writer.LogEntries.Count() == 1);
             Assert.IsTrue(writer.LogEntries.First().Message == "Scribe.LoggerFactory");
             Assert.IsTrue(writer.LogEntries.First().Category == "TestCategory");
@@ -64,12 +58,10 @@ namespace Scribe.Test.Component
         public void TraceWriteMessageWithCategory()
         {
             var writer = new QueueLogWriter();
-            var loggerFactory = CreateLoggerFactor(writer);
+            var loggerFactory = BuildLoggerFactoryWithTraceListener(writer);
 
             Trace.Write("Test message", "TestCategory");
             
-            var logprocessor = loggerFactory.GetProcessor();
-
             Assert.IsTrue(writer.LogEntries.Count() == 1);
             Assert.IsTrue(writer.LogEntries.First().Message == "Test message");
             Assert.IsTrue(writer.LogEntries.First().Category == "TestCategory");
@@ -79,12 +71,10 @@ namespace Scribe.Test.Component
         public void TraceWriteLineObject()
         {
             var writer = new QueueLogWriter();
-            var loggerFactory = CreateLoggerFactor(writer);
+            var loggerFactory = BuildLoggerFactoryWithTraceListener(writer);
 
             Trace.WriteLine(loggerFactory);
             
-            var logprocessor = loggerFactory.GetProcessor();
-
             Assert.IsTrue(writer.LogEntries.Count() == 1);
             Assert.IsTrue(writer.LogEntries.First().Message == "Scribe.LoggerFactory");
         }
@@ -93,12 +83,10 @@ namespace Scribe.Test.Component
         public void TraceWriteLineMessage()
         {
             var writer = new QueueLogWriter();
-            var loggerFactory = CreateLoggerFactor(writer);
+            var loggerFactory = BuildLoggerFactoryWithTraceListener(writer);
 
             Trace.WriteLine("Test message");
             
-            var logprocessor = loggerFactory.GetProcessor();
-
             Assert.IsTrue(writer.LogEntries.Count() == 1);
             Assert.IsTrue(writer.LogEntries.First().Message == "Test message");
         }
@@ -107,12 +95,10 @@ namespace Scribe.Test.Component
         public void TraceWriteLineObjectWithCategory()
         {
             var writer = new QueueLogWriter();
-            var loggerFactory = CreateLoggerFactor(writer);
+            var loggerFactory = BuildLoggerFactoryWithTraceListener(writer);
 
             Trace.WriteLine(loggerFactory, "TestCategory");
             
-            var logprocessor = loggerFactory.GetProcessor();
-
             Assert.IsTrue(writer.LogEntries.Count() == 1);
             Assert.IsTrue(writer.LogEntries.First().Message == "Scribe.LoggerFactory");
             Assert.IsTrue(writer.LogEntries.First().Category == "TestCategory");
@@ -122,12 +108,10 @@ namespace Scribe.Test.Component
         public void TraceWriteLineMessageWithCategory()
         {
             var writer = new QueueLogWriter();
-            var loggerFactory = CreateLoggerFactor(writer);
+            var loggerFactory = BuildLoggerFactoryWithTraceListener(writer);
 
             Trace.WriteLine("Test message", "TestCategory");
             
-            var logprocessor = loggerFactory.GetProcessor();
-
             Assert.IsTrue(writer.LogEntries.Count() == 1);
             Assert.IsTrue(writer.LogEntries.First().Message == "Test message");
             Assert.IsTrue(writer.LogEntries.First().Category == "TestCategory");
@@ -137,12 +121,10 @@ namespace Scribe.Test.Component
         public void TraceTraceError()
         {
             var writer = new QueueLogWriter();
-            var loggerFactory = CreateLoggerFactor(writer);
+            var loggerFactory = BuildLoggerFactoryWithTraceListener(writer);
 
             Trace.TraceError("Error message");
             
-            var logprocessor = loggerFactory.GetProcessor();
-
             Assert.IsTrue(writer.LogEntries.Count() == 1);
             Assert.IsTrue(writer.LogEntries.First().Message.StartsWith("Error message"));
             Assert.IsTrue(writer.LogEntries.First().Message.Contains("StackTrace"));
@@ -153,12 +135,10 @@ namespace Scribe.Test.Component
         public void TraceTraceErrorWithParams()
         {
             var writer = new QueueLogWriter();
-            var loggerFactory = CreateLoggerFactor(writer);
+            var loggerFactory = BuildLoggerFactoryWithTraceListener(writer);
 
             Trace.TraceError("Error message {0} {1}", "parama 1", loggerFactory);
             
-            var logprocessor = loggerFactory.GetProcessor();
-
             Assert.IsTrue(writer.LogEntries.Count() == 1);
             Assert.IsTrue(writer.LogEntries.First().Message.StartsWith("Error message parama 1 Scribe.LoggerFactory"));
             Assert.IsTrue(writer.LogEntries.First().Message.Contains("StackTrace"));
@@ -169,12 +149,10 @@ namespace Scribe.Test.Component
         public void TraceTraceInformation()
         {
             var writer = new QueueLogWriter();
-            var loggerFactory = CreateLoggerFactor(writer);
+            var loggerFactory = BuildLoggerFactoryWithTraceListener(writer);
 
             Trace.TraceInformation("Information message");
             
-            var logprocessor = loggerFactory.GetProcessor();
-
             Assert.IsTrue(writer.LogEntries.Count() == 1);
             Assert.IsTrue(writer.LogEntries.First().Message.StartsWith("Information message"));
             // No StackTrace
@@ -186,12 +164,10 @@ namespace Scribe.Test.Component
         public void TraceTraceInformationWithParams()
         {
             var writer = new QueueLogWriter();
-            var loggerFactory = CreateLoggerFactor(writer);
+            var loggerFactory = BuildLoggerFactoryWithTraceListener(writer);
 
             Trace.TraceInformation("Information message {0} {1}", "parama 1", loggerFactory);
             
-            var logprocessor = loggerFactory.GetProcessor();
-
             Assert.IsTrue(writer.LogEntries.Count() == 1);
             Assert.IsTrue(writer.LogEntries.First().Message.StartsWith("Information message parama 1 Scribe.LoggerFactory"));
             // No StackTrace
@@ -203,12 +179,10 @@ namespace Scribe.Test.Component
         public void TraceTraceWarning()
         {
             var writer = new QueueLogWriter();
-            var loggerFactory = CreateLoggerFactor(writer);
+            var loggerFactory = BuildLoggerFactoryWithTraceListener(writer);
 
             Trace.TraceWarning("Warning message");
             
-            var logprocessor = loggerFactory.GetProcessor();
-
             Assert.IsTrue(writer.LogEntries.Count() == 1);
             Assert.IsTrue(writer.LogEntries.First().Message.StartsWith("Warning message"));
             // No StackTrace
@@ -220,12 +194,10 @@ namespace Scribe.Test.Component
         public void TraceTraceWarningWithParams()
         {
             var writer = new QueueLogWriter();
-            var loggerFactory = CreateLoggerFactor(writer);
+            var loggerFactory = BuildLoggerFactoryWithTraceListener(writer);
 
             Trace.TraceWarning("Warning message {0} {1}", "parama 1", loggerFactory);
             
-            var logprocessor = loggerFactory.GetProcessor();
-
             Assert.IsTrue(writer.LogEntries.Count() == 1);
             Assert.IsTrue(writer.LogEntries.First().Message.StartsWith("Warning message parama 1 Scribe.LoggerFactory"));
             // No StackTrace
