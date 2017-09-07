@@ -69,7 +69,7 @@ namespace Scribe.Test
             });
             
             // ensure the writer uses both loggers
-            Assert.IsTrue(writer.LogEntries.First().Message == "Exception 2\r\nException 1\r\n");
+            Assert.IsTrue(writer.LogEntries.First().Message.Contains("Exception 2") && writer.LogEntries.First().Message.Contains("Exception 1"));
         }
     }
 }
