@@ -5,6 +5,7 @@ namespace Scribe
     public class LoggerFactory : ILoggerFactory
     {
         private ILogManager _logManager;
+        private ILogProcessor _processor;
 
         /// <summary>
         /// Creates a new LoggerFactory. The LogManager will be created when neede
@@ -57,10 +58,14 @@ namespace Scribe
 
             // return a default logger
             var logger = new Logger(Manager);
+            if (_processor != null)
+            {
+                logger.SetProcessor(_processor);
+            }
 
             return logger;
         }
-        
+
         /// <summary>
         /// Set a logprocessor that is used to pass the log entires from the listeners to the writers
         /// </summary>
@@ -68,7 +73,7 @@ namespace Scribe
         /// <returns>this instance of the factory</returns>
         public ILoggerFactory SetProcessor(ILogProcessor processor)
         {
-            Manager.SetProcessor(processor);
+            _processor = processor;
 
             return this;
         }

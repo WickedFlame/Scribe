@@ -64,13 +64,37 @@ namespace Scribe
             return this;
         }
 
+        public ILogger BuildLogger()
+        {
+            var manager = new LogManager();
+            
+            if (_loglevel > LogLevel.Verbose)
+            {
+                manager.SetMinimalLogLevel(_loglevel);
+            }
+
+            foreach (var listner in _listners)
+            {
+                manager.AddListener(listner);
+            }
+
+            foreach (var writer in _writers)
+            {
+                manager.AddWriter(writer);
+            }
+
+            var logger = new Logger(manager);
+            if (_processor != null)
+            {
+                logger.SetProcessor(_processor);
+            }
+
+            return logger;
+        }
+
         public ILoggerFactory BuildFactory()
         {
             var manager = new LogManager();
-            if (_processor != null)
-            {
-                manager.SetProcessor(_processor);
-            }
 
             if (_loglevel > LogLevel.Verbose)
             {

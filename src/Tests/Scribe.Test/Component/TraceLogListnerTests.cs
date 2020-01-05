@@ -11,8 +11,7 @@ namespace Scribe.Test.Component
         {
             var loggerFactory = new LoggerFactory()
                 .AddListener(new TraceListener())
-                .AddWriter(writer)
-                .SetProcessor(new LogProcessor());
+                .AddWriter(writer);
             
             return loggerFactory;
         }

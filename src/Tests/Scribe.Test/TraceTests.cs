@@ -14,8 +14,8 @@ namespace Scribe.Test
 
             var manager = new LogManager()
                 .AddListener(new TraceListener())
-                .AddWriter(writer)
-                .SetProcessor(new LogProcessor());
+                .AddWriter(writer);
+                //.SetProcessor(new LogProcessor());
 
             Trace.Write("Test");
             Trace.TraceError("Error message");
@@ -45,10 +45,9 @@ namespace Scribe.Test
 
             var manager = new LogManager()
                 .AddWriter(new TraceLogWriter())
-                .AddWriter(writer)
-                .SetProcessor(new LogProcessor());
+                .AddWriter(writer);
 
-            var logger = new LoggerFactory(manager).GetLogger();
+            var logger = new Logger(manager).SetProcessor(new LogProcessor());
             logger.Write("Test");
             logger.Write("Error message");
             

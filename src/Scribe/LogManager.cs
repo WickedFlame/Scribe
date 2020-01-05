@@ -13,22 +13,18 @@ namespace Scribe
         private readonly IList<IListener> _listeners;
 
         private bool _isInitialized;
-        private ILogProcessor _processor;
+        
         private LogLevel _minimalLogLevel;
 
         public LogManager()
         {
-            _processor = new AsyncLogProcessor(this);
             _listeners = new List<IListener>();
             _logWriters = new List<ILogWriter>();
 
             Initialize();
         }
         
-        /// <summary>
-        /// Gets the ILogProcessor associated with this manager
-        /// </summary>
-        public ILogProcessor Processor => _processor;
+        
         
         /// <summary>
         /// Gets the log writers assigned to this manager
@@ -41,21 +37,6 @@ namespace Scribe
         public IEnumerable<IListener> Listeners =>  _listeners;
 
         public LogLevel MinimalLogLevel => _minimalLogLevel;
-
-        /// <summary>
-        /// Set a logprocessor that is used to pass the log entires from the listeners to the writers
-        /// </summary>
-        /// <param name="processor">The processor</param>
-        /// <returns>The logmanager</returns>
-        public ILogManager SetProcessor(ILogProcessor processor)
-        {
-            _processor = processor;
-
-            // reinitialize the processor to use the correct manager
-            processor.Initialize(this);
-
-            return this;
-        }
 
         /// <summary>
         /// Add a log listener to the log manager

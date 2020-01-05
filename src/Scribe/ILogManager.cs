@@ -5,16 +5,6 @@ namespace Scribe
 {
     public interface ILogManager
     {
-        ///// <summary>
-        ///// Gets the ILoggerFactory associated with this manager
-        ///// </summary>
-        //ILoggerFactory LoggerFactory { get; }
-
-        /// <summary>
-        /// Gets the ILogProcessor associated with this manager
-        /// </summary>
-        ILogProcessor Processor { get; }
-
         /// <summary>
         /// Gets the log writers assigned to this manager
         /// </summary>
@@ -26,12 +16,6 @@ namespace Scribe
         IEnumerable<IListener> Listeners { get; }
 
         LogLevel MinimalLogLevel { get; }
-
-        /// <summary>
-        /// Set a logprocessor that is used to pass the log entires from the listeners to the writers
-        /// </summary>
-        /// <param name="processor">The processor</param>
-        ILogManager SetProcessor(ILogProcessor processor);
 
         /// <summary>
         /// Add a log listener to the log manager

@@ -28,7 +28,7 @@ namespace Scribe.Test
         public void Scribe_LogManager_AddWriter_MultipleSameWriters()
         {
             var manager = new LogManager();
-            manager.SetProcessor(new LogProcessor());
+            //manager.SetProcessor(new LogProcessor());
             manager.AddWriter(new TraceLogWriter());
             manager.AddWriter(new TraceLogWriter());
 
@@ -48,7 +48,7 @@ namespace Scribe.Test
         public void Scribe_LogManager_AddListener_MultipleSameListeners()
         {
             var manager = new LogManager();
-            manager.SetProcessor(new LogProcessor());
+            //manager.SetProcessor(new LogProcessor());
             manager.AddListener(new TraceListener());
             manager.AddListener(new TraceListener());
 
@@ -56,20 +56,20 @@ namespace Scribe.Test
         }
 
         [Test]
-        public void Scribe_LogManager_DefaultProcessor()
+        public void Scribe_Logger_DefaultProcessor()
         {
-            var manager = new LogManager();
+            var logger = new Logger();
 
-            Assert.That(manager.Processor.GetType() == typeof(AsyncLogProcessor));
+            Assert.That(logger.Processor.GetType() == typeof(AsyncLogProcessor));
         }
 
         [Test]
         public void Scribe_LogManager_SetProcessor()
         {
-            var manager = new LogManager();
-            manager.SetProcessor(new LogProcessor());
+            var logger = new Logger();
+            logger.SetProcessor(new LogProcessor());
 
-            Assert.That(manager.Processor.GetType() == typeof(LogProcessor));
+            Assert.That(logger.Processor.GetType() == typeof(LogProcessor));
         }
 
         [Test]
@@ -77,7 +77,10 @@ namespace Scribe.Test
         {
             var processor = new LogProcessor();
             var manager = new LogManager();
-            manager.SetProcessor(processor);
+
+            var logger = new Logger(manager);
+
+            logger.SetProcessor(processor);
 
             Assert.That(processor.Manager, Is.SameAs(manager));
         }

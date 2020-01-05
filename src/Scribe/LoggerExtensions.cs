@@ -15,5 +15,20 @@ namespace Scribe
 
             logger.Write(new LogEntry(messageString, traceType, priority, category, logtime ?? DateTime.Now));
         }
+
+        /// <summary>
+        /// Adds a log writer to the logger
+        /// </summary>
+        /// <param name="writer">The log writer</param>
+        public static void AddWriter(this Logger logger, ILogWriter writer)
+        {
+            logger.Manager.AddWriter(writer);
+        }
+
+        public static Logger SetProcessor(this Logger logger, ILogProcessor processor)
+        {
+            logger.Processor = processor;
+            return logger;
+        }
     }
 }

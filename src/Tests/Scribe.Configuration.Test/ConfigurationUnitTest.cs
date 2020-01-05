@@ -13,7 +13,7 @@ namespace Scribe.Configuration.Test
         {
             var factory = new LoggerFactory();
             var manager = factory.Manager;
-            manager.SetProcessor(new LogProcessor());
+            //manager.SetProcessor(new LogProcessor());
 
             Assert.IsTrue(manager.Listeners.Any());
             Assert.IsTrue(manager.Listeners.First().GetType() == typeof(TraceListener));
@@ -47,7 +47,7 @@ namespace Scribe.Configuration.Test
         public void TestConfigurationWithLogManager()
         {
             var manager = new LogManager();
-            manager.SetProcessor(new LogProcessor());
+            //manager.SetProcessor(new LogProcessor());
 
             Assert.IsTrue(manager.Listeners.Any());
             Assert.IsTrue(manager.Listeners.First().GetType() == typeof(TraceListener));

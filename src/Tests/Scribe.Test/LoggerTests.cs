@@ -14,11 +14,10 @@ namespace Scribe.Test
             var writer = new QueueLogWriter();
 
             var manager = new LogManager()
-                .SetProcessor(new LogProcessor())
                 .AddWriter(writer)
                 .SetMinimalLogLevel(LogLevel.Error);
 
-            var logger = new Logger(manager);
+            var logger = new Logger(manager, new LogProcessor());
 
             logger.Write(new LogEntry("Log message", LogLevel.Error));
 
@@ -31,11 +30,10 @@ namespace Scribe.Test
             var writer = new QueueLogWriter();
 
             var manager = new LogManager()
-                .SetProcessor(new LogProcessor())
                 .AddWriter(writer)
                 .SetMinimalLogLevel(LogLevel.Warning);
 
-            var logger = new Logger(manager);
+            var logger = new Logger(manager, new LogProcessor());
 
             logger.Write(new LogEntry("Log message", LogLevel.Error));
 
@@ -48,10 +46,9 @@ namespace Scribe.Test
             var writer = new QueueLogWriter();
 
             var manager = new LogManager()
-                .SetProcessor(new LogProcessor())
                 .AddWriter(writer).SetMinimalLogLevel(LogLevel.Warning);
 
-            var logger = new Logger(manager);
+            var logger = new Logger(manager, new LogProcessor());
 
             logger.Write(new LogEntry("Log message", LogLevel.Information));
 

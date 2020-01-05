@@ -12,12 +12,12 @@ namespace Scribe
         /// <returns>A new instance of a ILogger</returns>
         ILogger GetLogger();
         
-        /// <summary>
-        /// Set a logprocessor that is used to pass the log entires from the listeners to the writers
-        /// </summary>
-        /// <param name="processor">The processor</param>
-        /// <returns>this instance of the factory</returns>
-        ILoggerFactory SetProcessor(ILogProcessor processor);
+        ///// <summary>
+        ///// Set a logprocessor that is used to pass the log entires from the listeners to the writers
+        ///// </summary>
+        ///// <param name="processor">The processor</param>
+        ///// <returns>this instance of the factory</returns>
+        //ILoggerFactory SetProcessor(ILogProcessor processor);
 
         /// <summary>
         /// Add a log listener to the log manager

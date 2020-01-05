@@ -100,11 +100,11 @@ namespace Scribe.Test
         [Test]
         public void Scribe_LoggerConfiguration_SetProcessor_Fluent()
         {
-            var factory = new LoggerConfiguration()
+            var logger = new LoggerConfiguration()
                 .SetProcessor(new LogProcessor())
-                .BuildFactory() as LoggerFactory;
+                .BuildLogger() as Logger;
 
-            Assert.IsInstanceOf<LogProcessor>(factory.Manager.Processor);
+            Assert.IsInstanceOf<LogProcessor>(logger.Processor);
         }
 
         [Test]

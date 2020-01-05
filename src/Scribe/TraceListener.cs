@@ -12,7 +12,7 @@ namespace Scribe
 
         public void Initialize(ILogManager manager)
         {
-            _logger = new LoggerFactory(manager).GetLogger();
+            _logger = new Logger(manager);
 
             Trace.Listeners.Add(this);
         }
