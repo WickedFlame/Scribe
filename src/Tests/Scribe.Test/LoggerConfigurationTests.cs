@@ -26,6 +26,25 @@ namespace Scribe.Test
         }
 
         [Test]
+        public void Scribe_LoggerConfiguration_BuildLogger()
+        {
+            var configuration = new LoggerConfiguration();
+
+            var logger = configuration.BuildLogger();
+
+            Assert.IsInstanceOf<Logger>(logger);
+        }
+
+        [Test]
+        public void Scribe_LoggerConfiguration_BuildLogger_Fluent()
+        {
+            var logger = new LoggerConfiguration()
+                .BuildLogger();
+
+            Assert.IsInstanceOf<Logger>(logger);
+        }
+
+        [Test]
         public void Scribe_LoggerConfiguration_AddWriter()
         {
             var writer = new TraceLogWriter();
@@ -33,9 +52,9 @@ namespace Scribe.Test
             var configuration = new LoggerConfiguration();
             configuration.AddWriter(writer);
 
-            var factory = configuration.BuildFactory() as LoggerFactory;
+            var logger = configuration.BuildLogger() as Logger;
 
-            Assert.AreSame(writer, factory.Manager.Writers.Single());
+            Assert.AreSame(writer, logger.Manager.Writers.Single());
         }
 
         [Test]
@@ -43,58 +62,22 @@ namespace Scribe.Test
         {
             var writer = new TraceLogWriter();
 
-            var factory = new LoggerConfiguration()
+            var logger = new LoggerConfiguration()
                 .AddWriter(writer)
-                .BuildFactory() as LoggerFactory;
+                .BuildLogger() as Logger;
 
-            Assert.AreSame(writer, factory.Manager.Writers.Single());
+            Assert.AreSame(writer, logger.Manager.Writers.Single());
         }
 
         [Test]
         public void Scribe_LoggerConfiguration_AddWriter_Multiple_Fluent()
         {
-            var factory = new LoggerConfiguration()
+            var logger = new LoggerConfiguration()
                 .AddWriter(new TraceLogWriter())
                 .AddWriter(new TraceLogWriter())
-                .BuildFactory() as LoggerFactory;
+                .BuildLogger() as Logger;
 
-            Assert.That(factory.Manager.Writers.All(w => w is TraceLogWriter));
-        }
-
-        [Test]
-        public void Scribe_LoggerConfiguration_AddListener()
-        {
-            var listener = new TraceListener();
-
-            var configuration = new LoggerConfiguration();
-            configuration.AddListener(listener);
-
-            var factory = configuration.BuildFactory() as LoggerFactory;
-
-            Assert.AreSame(listener, factory.Manager.Listeners.Single());
-        }
-
-        [Test]
-        public void Scribe_LoggerConfiguration_AddListener_Fluent()
-        {
-            var listener = new TraceListener();
-
-            var factory = new LoggerConfiguration()
-                .AddListener(listener)
-                .BuildFactory() as LoggerFactory;
-
-            Assert.AreSame(listener, factory.Manager.Listeners.Single());
-        }
-
-        [Test]
-        public void Scribe_LoggerConfiguration_AddListener_Multiple_Fluent()
-        {
-            var factory = new LoggerConfiguration()
-                .AddListener(new TraceListener())
-                .AddListener(new TraceListener())
-                .BuildFactory() as LoggerFactory;
-
-            Assert.That(factory.Manager.Listeners.All(l => l is TraceListener));
+            Assert.That(logger.Manager.Writers.All(w => w is TraceLogWriter));
         }
 
         [Test]
@@ -110,11 +93,11 @@ namespace Scribe.Test
         [Test]
         public void Scribe_LoggerConfiguration_SetMinimalLogLevel_Fluent()
         {
-            var factory = new LoggerConfiguration()
+            var logger = new LoggerConfiguration()
                 .SetMinimalLogLevel(LogLevel.Critical)
-                .BuildFactory() as LoggerFactory;
+                .BuildLogger() as Logger;
 
-            Assert.That(factory.Manager.MinimalLogLevel == LogLevel.Critical);
+            Assert.That(logger.Manager.MinimalLogLevel == LogLevel.Critical);
         }
 
         [Test]
@@ -123,12 +106,12 @@ namespace Scribe.Test
             var manager = new LogManager();
             manager.SetMinimalLogLevel(LogLevel.Critical);
 
-            var factory = new LoggerConfiguration()
+            var logger = new LoggerConfiguration()
                 .SetProcessor(new LogProcessor(manager))
                 .SetMinimalLogLevel(LogLevel.Information)
-                .BuildFactory() as LoggerFactory;
+                .BuildLogger() as Logger;
 
-            Assert.That(factory.Manager.MinimalLogLevel == LogLevel.Information);
+            Assert.That(logger.Manager.MinimalLogLevel == LogLevel.Information);
         }
 
         [Test]
@@ -137,12 +120,12 @@ namespace Scribe.Test
             var manager = new LogManager();
             manager.SetMinimalLogLevel(LogLevel.Critical);
 
-            var factory = new LoggerConfiguration()
+            var logger = new LoggerConfiguration()
                 .SetMinimalLogLevel(LogLevel.Information)
                 .SetProcessor(new LogProcessor(manager))
-                .BuildFactory() as LoggerFactory;
+                .BuildLogger() as Logger;
 
-            Assert.That(factory.Manager.MinimalLogLevel == LogLevel.Information);
+            Assert.That(logger.Manager.MinimalLogLevel == LogLevel.Information);
         }
 
         [Test]
@@ -151,12 +134,12 @@ namespace Scribe.Test
             var manager = new LogManager();
             manager.SetMinimalLogLevel(LogLevel.Critical);
 
-            var factory = new LoggerConfiguration()
+            var logger = new LoggerConfiguration()
                 .SetMinimalLogLevel(LogLevel.Critical)
                 .SetProcessor(new LogProcessor(manager))
-                .BuildFactory() as LoggerFactory;
+                .BuildLogger() as Logger;
 
-            Assert.That(factory.Manager.MinimalLogLevel == LogLevel.Critical);
+            Assert.That(logger.Manager.MinimalLogLevel == LogLevel.Critical);
         }
     }
 }

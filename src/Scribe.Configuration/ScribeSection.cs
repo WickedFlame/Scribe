@@ -13,15 +13,5 @@ namespace Scribe.Configuration
                 return (LoggerElementCollection)this["writers"];
             }
         }
-
-        [ConfigurationProperty("listeners", IsDefaultCollection = true)]
-        [ConfigurationCollection(typeof(ListenerElement), AddItemName = "add")]
-        public ListenerElementCollection Listeners
-        {
-            get
-            {
-                return (ListenerElementCollection)this["listeners"];
-            }
-        }
     }
 }

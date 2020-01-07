@@ -70,16 +70,6 @@ namespace Scribe.Test
         }
 
         [Test]
-        public void Scribe_LoggerConfigurationExtension_AddTraceListener_Fluent()
-        {
-            var factory = new LoggerConfiguration()
-                .AddTraceListener()
-                .BuildFactory() as LoggerFactory;
-
-            Assert.IsInstanceOf<TraceListener>(factory.Manager.Listeners.Single());
-        }
-
-        [Test]
         public void Scribe_LoggerConfigurationExtension_AddWriter_Delegate_Fluent()
         {
             var factory = new LoggerConfiguration()

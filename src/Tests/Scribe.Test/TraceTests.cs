@@ -13,13 +13,14 @@ namespace Scribe.Test
             var writer = new QueueLogWriter();
 
             var manager = new LogManager()
-                .AddListener(new TraceListener())
                 .AddWriter(writer);
-                //.SetProcessor(new LogProcessor());
+
+            var logger = new Logger(manager, new LogProcessor())
+                .SetTraceListener();
 
             Trace.Write("Test");
             Trace.TraceError("Error message");
-            
+
             Assert.IsTrue(writer.LogEntries.First().Message == "Test");
         }
 

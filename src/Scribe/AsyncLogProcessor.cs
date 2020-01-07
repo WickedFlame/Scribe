@@ -40,11 +40,6 @@ namespace Scribe
         }
 
         /// <summary>
-        /// Gets or sets the minimal loglevel
-        /// </summary>
-        //public LogLevel MinimalLogLevel { get; set; } = LogLevel.Verbose;
-        
-        /// <summary>
         /// Initizalize the logprocessor with the manager
         /// </summary>
         /// <param name="logManager">The logmanager</param>

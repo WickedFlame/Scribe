@@ -16,19 +16,20 @@ branches:
 # Do not build on tags (GitHub only)
 skip_tags: true
 
-os: Visual Studio 2015
+os: Visual Studio 2019
 install:
-  - set PATH=C:\Program Files (x86)\MSBuild\14.0\Bin;%PATH%
+  - set PATH=C:\Program Files (x86)\MSBuild\16.0\Bin;%PATH%
 #  - sudo apt-get install nunit-console
 #  - nuget restore Scribe.sln
- 
-# enable patching of AssemblyInfo.* files
-assembly_info:
+
+dotnet_csproj:
   patch: true
-  file: AssemblyInfo.*
-  assembly_version: "{version}" # "0.3.3.{build}"
-  assembly_file_version: "{version}"
-  assembly_informational_version: "{version}"
+  file: '**\*.csproj'
+  version: '{version}'
+  package_version: '{version}'
+  assembly_version: '{version}'
+  file_version: '{version}'
+  informational_version: '{version}'
  
 # to add several platforms to build matrix:
 #platform:
@@ -106,6 +107,12 @@ test_script:
 artifacts:
   - path: src\Scribe\bin\Release\Scribe.dll
     name: Scribe.dll
+
+  - path: src\Scribe\bin\Release\Scribe.Configuration.dll
+    name: Scribe.Configuration.dll
+
+  - path: src\Scribe\bin\Release\Scribe.Extensions.dll
+    name: Scribe.Extensions.dll
 
   # pushing all *.nupkg files in directory
   - path: '.\*.nupkg'

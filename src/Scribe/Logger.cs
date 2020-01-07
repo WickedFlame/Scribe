@@ -36,6 +36,9 @@ namespace Scribe
         {
             _manager = manager;
             _processor = processor;
+
+            // ensure the processor is initialized with the manager
+            _processor.Initialize(_manager);
         }
 
         /// <summary>
@@ -51,6 +54,11 @@ namespace Scribe
             get => _processor;
             set
             {
+                if (_processor != null)
+                {
+                    _processor.Dispose();
+                }
+
                 _processor = value;
                 _processor.Initialize(_manager);
             }

@@ -36,26 +36,6 @@ namespace Scribe.Test
         }
 
         [Test]
-        public void Scribe_LogManager_AddListener()
-        {
-            var manager = new LogManager();
-            manager.AddListener(new TraceListener());
-
-            Assert.That(manager.Listeners.OfType<TraceListener>().Any());
-        }
-
-        [Test]
-        public void Scribe_LogManager_AddListener_MultipleSameListeners()
-        {
-            var manager = new LogManager();
-            //manager.SetProcessor(new LogProcessor());
-            manager.AddListener(new TraceListener());
-            manager.AddListener(new TraceListener());
-
-            Assert.That(manager.Listeners.OfType<TraceListener>().Count() == 1);
-        }
-
-        [Test]
         public void Scribe_Logger_DefaultProcessor()
         {
             var logger = new Logger();

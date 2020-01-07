@@ -10,9 +10,11 @@ namespace Scribe.Test.Component
         private ILoggerFactory BuildLoggerFactoryWithTraceListener(ILogWriter writer)
         {
             var loggerFactory = new LoggerFactory()
-                .AddListener(new TraceListener())
-                .AddWriter(writer);
-            
+                .AddWriter(writer)
+                .SetProcessor(new LogProcessor());
+
+            var listener = new TraceListener(loggerFactory.GetLogger());
+
             return loggerFactory;
         }
 

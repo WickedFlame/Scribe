@@ -3,7 +3,7 @@
   <metadata>
     <id>Scribe</id>
     <version>$version$</version>
-    <title>Scribe</title>
+    <title>Scribe.Configuration</title>
     <authors>Christian Walpen</authors>
     <owners>Christian Walpen</owners>
     <licenseUrl>https://github.com/WickedFlame/Scribe/raw/master/License.txt</licenseUrl>
@@ -16,7 +16,7 @@
     <tags>Logging, Diagnostics, Tracing</tags>
   </metadata>
   <files>
-    <file src="Scribe\bin\Release\Scribe.dll" target="lib\net45\Scribe.dll" />
-    <file src="Scribe\bin\Release\Scribe.XML" target="lib\net45\Scribe.XML" />
+    <file src="Scribe\bin\Release\Scribe.Configuration.dll" target="lib\net45\Scribe.Configuration.dll" />
+    <file src="Scribe\bin\Release\Scribe.Configuration.XML" target="lib\net45\Scribe.Configuration.XML" />
   </files>
 </package>

@@ -73,23 +73,16 @@ namespace Scribe
         /// <returns>this instance of the factory</returns>
         public ILoggerFactory SetProcessor(ILogProcessor processor)
         {
+            if (_processor != null)
+            {
+                _processor.Dispose();
+            }
+
             _processor = processor;
-
+            
             return this;
         }
-
-        /// <summary>
-        /// Add a log listener to the log manager
-        /// </summary>
-        /// <param name="listener">The listener</param>
-        /// <returns>this instance of the factory</returns>
-        public ILoggerFactory AddListener(IListener listener)
-        {
-            Manager.AddListener(listener);
-
-            return this;
-        }
-
+        
         /// <summary>
         /// Add a log writer to the log manager
         /// </summary>

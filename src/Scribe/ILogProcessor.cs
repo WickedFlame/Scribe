@@ -1,11 +1,11 @@
-using System.Collections.Generic;
+using System;
 
 namespace Scribe
 {
     /// <summary>
     /// Interface that provides a logic for processing and storing log entries
     /// </summary>
-    public interface ILogProcessor
+    public interface ILogProcessor : IDisposable
     {
         /// <summary>
         /// Initizalize the logprocessor with the manager

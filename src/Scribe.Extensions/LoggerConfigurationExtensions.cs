@@ -5,18 +5,6 @@ namespace Scribe
     public static class LoggerConfigurationExtensions
     {
         /// <summary>
-        /// Add a TraceListener that listens to all traced message
-        /// </summary>
-        /// <param name="configuration">The configuration</param>
-        /// <returns>The configuration</returns>
-        public static LoggerConfiguration AddTraceListener(this LoggerConfiguration configuration)
-        {
-            configuration.AddListener(new TraceListener());
-
-            return configuration;
-        }
-
-        /// <summary>
         /// Add a Log Writer that Traces to the Output
         /// </summary>
         /// <param name="configuration">The configuration</param>

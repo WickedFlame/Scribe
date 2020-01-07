@@ -1,13 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Scribe
 {
-    public class LogProcessor : ILogProcessor
+    public class LogProcessor : ILogProcessor, IDisposable
     {
         private readonly List<ILogEntry> _logEntries;
         private ILogManager _logManager;
 
-        public LogProcessor()
+        public LogProcessor():this(new LogManager())
         {
             _logEntries = new List<ILogEntry>();
         }
@@ -18,11 +19,6 @@ namespace Scribe
             _logEntries = new List<ILogEntry>();
         }
 
-        /// <summary>
-        /// Gets or sets the minimal loglevel
-        /// </summary>
-        //public LogLevel MinimalLogLevel { get; set; } = LogLevel.Verbose;
-        
         /// <summary>
         /// Gets the Logmanager associated with the processor
         /// </summary>
@@ -52,6 +48,10 @@ namespace Scribe
             {
                 logger.Write(entry);
             }
+        }
+
+        public void Dispose()
+        {
         }
     }
 }

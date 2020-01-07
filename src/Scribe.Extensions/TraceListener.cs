@@ -4,18 +4,17 @@ using System.Text;
 
 namespace Scribe
 {
-    public class TraceListener : System.Diagnostics.TraceListener, IListener
+    public class TraceListener : System.Diagnostics.TraceListener
     {
         private ILogger _logger;
 
-        protected ILogger Logger => _logger;
-
-        public void Initialize(ILogManager manager)
+        public TraceListener(ILogger logger)
         {
-            _logger = new Logger(manager);
-
+            _logger = logger;
             Trace.Listeners.Add(this);
         }
+
+        protected ILogger Logger => _logger;
 
         private void Log(string message, LogLevel loglevel = LogLevel.Information, string category = null)
         {

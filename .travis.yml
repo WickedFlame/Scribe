@@ -2,12 +2,21 @@
 sudo: false
 language: csharp
 solution: Scribe.sln
- 
+mono: none
+dotnet: 3.0.100
+
+notifications:
+  email:
+#    recipients:
+#      - one@example.com
+#      - other@example.com
+    on_success: never #[always|never|change] # default: change
+    on_failure: always #[always|never|change] # default: always
+    
 install:
-  - nuget restore Scribe.sln
-  - nuget install NUnit.Console -Version 3.0.1 -OutputDirectory testrunner
- 
+  - sudo apt-get install -qq dotnet-sdk-2.0.0
+  - dotnet restore
+
 script:
-  - xbuild /p:Configuration=Release Scribe.sln
-  - mono ./testrunner/NUnit.Console.3.0.1/tools/nunit3-console.exe ./src/Tests/Scribe.Test/bin/Release/Scribe.Test.dll
-  - mono ./testrunner/NUnit.Console.3.0.1/tools/nunit3-console.exe ./src/Tests/Scribe.Configuration.Test/bin/Release/Scribe.Configuration.Test.dll
+  - dotnet build
+  - dotnet test

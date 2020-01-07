@@ -36,11 +36,15 @@ namespace Scribe.Test
             });
 
             // create a new logger and add a message
-            var secondLogger = new LoggerFactory(manager).GetLogger();
+            var secondLogger = new LoggerFactory(manager)
+                .SetProcessor(new LogProcessor())
+                .GetLogger();
+
             secondLogger.Write("message 2");
 
             // ensure the writer is used by both loggers
-            Assert.IsTrue(writer.LogEntries.Count() == 2);
+            var cnt = writer.LogEntries.Count();
+            Assert.IsTrue(cnt == 2);
         }
 
         [Test]
