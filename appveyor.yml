@@ -105,13 +105,13 @@ test_script:
 #---------------------------------#
 
 artifacts:
-  - path: src\Scribe\bin\Release\Scribe.dll
+  - path: src\Scribe\bin\Release\netstandard2.0\Scribe.dll
     name: Scribe.dll
 
-  - path: src\Scribe\bin\Release\Scribe.Configuration.dll
+  - path: src\Scribe.Configuration\bin\Release\netstandard2.0\Scribe.Configuration.dll
     name: Scribe.Configuration.dll
 
-  - path: src\Scribe\bin\Release\Scribe.Extensions.dll
+  - path: src\Scribe.Extensions\bin\Release\netstandard2.0\Scribe.Extensions.dll
     name: Scribe.Extensions.dll
 
   # pushing all *.nupkg files in directory
