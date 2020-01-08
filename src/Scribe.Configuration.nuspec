@@ -16,7 +16,7 @@
     <tags>Logging, Diagnostics, Tracing</tags>
   </metadata>
   <files>
-    <file src="Scribe\bin\Release\Scribe.Configuration.dll" target="lib\net45\Scribe.Configuration.dll" />
-    <file src="Scribe\bin\Release\Scribe.Configuration.XML" target="lib\net45\Scribe.Configuration.XML" />
+    <file src="Scribe.Configuration\bin\Release\Scribe.Configuration.dll" target="lib\net45\Scribe.Configuration.dll" />
+    <file src="Scribe.Configuration\bin\Release\Scribe.Configuration.XML" target="lib\net45\Scribe.Configuration.XML" />
   </files>
 </package>
