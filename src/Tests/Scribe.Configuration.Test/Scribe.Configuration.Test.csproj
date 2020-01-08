@@ -58,7 +58,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="App2.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Scribe.Configuration\Scribe.Configuration.csproj">
