@@ -18,7 +18,8 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>\bin\Debug\netstandard2.0\Scribe.xml</DocumentationFile>
+    <DocumentationFile>\bin\Debug\Scribe.xml</DocumentationFile>
+    <OutputPath>\bin\Debug\</OutputPath>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
