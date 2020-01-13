@@ -70,7 +70,7 @@ build:
 test:
   # assemblies to test - optional
   assemblies:
-    - '**\Scribe.Configuration.Test.dll'
+#    - '**\Scribe.Configuration.Test.dll'
     - '**\Scribe.Test.dll'
 
 #  categories:
@@ -108,8 +108,8 @@ artifacts:
   - path: src\Scribe\bin\Release\netstandard2.0\Scribe.dll
     name: Scribe.dll
 
-  - path: src\Scribe.Configuration\bin\Release\Scribe.Configuration.dll
-    name: Scribe.Configuration.dll
+#  - path: src\Scribe.Configuration\bin\Release\Scribe.Configuration.dll
+#    name: Scribe.Configuration.dll
 
   - path: src\Scribe.Extensions\bin\Release\netstandard2.0\Scribe.Extensions.dll
     name: Scribe.Extensions.dll
