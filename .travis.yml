@@ -18,5 +18,5 @@ install:
   - dotnet restore Scribe.Core.sln
 
 script:
-  - dotnet build
-  - dotnet test
+  - dotnet build Scribe.Core.sln
+  - dotnet test Scribe.Core.sln
