@@ -2,6 +2,7 @@
 using System;
 using System.Linq;
 using System.Text;
+using Scribe.Processing;
 
 namespace Scribe.Test
 {
@@ -57,7 +58,7 @@ namespace Scribe.Test
 
             var writer = new QueueLogWriter();
             var logger = new LoggerFactory(manager)
-                .SetProcessor(new LogProcessor())
+                .SetProcessor(new BasicLogProcessor())
                 .AddWriter(writer)
                 .GetLogger();
 
@@ -76,7 +77,7 @@ namespace Scribe.Test
 
             // create a new logger and add a message
             var secondLogger = new LoggerFactory(manager)
-                .SetProcessor(new LogProcessor())
+                .SetProcessor(new BasicLogProcessor())
                 .GetLogger();
 
             secondLogger.Write("message 2");
@@ -124,7 +125,7 @@ namespace Scribe.Test
 
             var writer = new QueueLogWriter();
             var logger = new LoggerFactory()
-                .SetProcessor(new LogProcessor())
+                .SetProcessor(new BasicLogProcessor())
                 .AddWriter(writer)
                 .GetLogger();
 

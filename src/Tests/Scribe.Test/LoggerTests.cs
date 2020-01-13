@@ -2,6 +2,7 @@
 using System;
 using System.Linq;
 using System.Text;
+using Scribe.Processing;
 
 namespace Scribe.Test
 {
@@ -17,7 +18,7 @@ namespace Scribe.Test
                 .AddWriter(writer)
                 .SetMinimalLogLevel(LogLevel.Error);
 
-            var logger = new Logger(manager, new LogProcessor());
+            var logger = new Logger(manager, new BasicLogProcessor());
 
             logger.Write(new LogEntry("Log message", LogLevel.Error));
 
@@ -33,7 +34,7 @@ namespace Scribe.Test
                 .AddWriter(writer)
                 .SetMinimalLogLevel(LogLevel.Warning);
 
-            var logger = new Logger(manager, new LogProcessor());
+            var logger = new Logger(manager, new BasicLogProcessor());
 
             logger.Write(new LogEntry("Log message", LogLevel.Error));
 
@@ -48,7 +49,7 @@ namespace Scribe.Test
             var manager = new LogManager()
                 .AddWriter(writer).SetMinimalLogLevel(LogLevel.Warning);
 
-            var logger = new Logger(manager, new LogProcessor());
+            var logger = new Logger(manager, new BasicLogProcessor());
 
             logger.Write(new LogEntry("Log message", LogLevel.Information));
 

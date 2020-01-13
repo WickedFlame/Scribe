@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using System.Diagnostics;
 using System.Linq;
+using Scribe.Processing;
 
 namespace Scribe.Test
 {
@@ -15,7 +16,7 @@ namespace Scribe.Test
             var manager = new LogManager()
                 .AddWriter(writer);
 
-            var logger = new Logger(manager, new LogProcessor())
+            var logger = new Logger(manager, new BasicLogProcessor())
                 .SetTraceListener();
 
             Trace.Write("Test");
@@ -48,7 +49,7 @@ namespace Scribe.Test
                 .AddWriter(new TraceLogWriter())
                 .AddWriter(writer);
 
-            var logger = new Logger(manager).SetProcessor(new LogProcessor());
+            var logger = new Logger(manager).SetProcessor(new BasicLogProcessor());
             logger.Write("Test");
             logger.Write("Error message");
             

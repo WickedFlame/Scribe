@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Linq;
 using NUnit.Framework;
+using Scribe.Processing;
 
 namespace Scribe.Test.Component
 {
@@ -11,7 +12,7 @@ namespace Scribe.Test.Component
         {
             var loggerFactory = new LoggerFactory()
                 .AddWriter(writer)
-                .SetProcessor(new LogProcessor());
+                .SetProcessor(new BasicLogProcessor());
 
             var listener = new TraceListener(loggerFactory.GetLogger());
 

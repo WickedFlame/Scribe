@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using System.Linq;
+using Scribe.Processing;
 
 namespace Scribe.Test.Component
 {
@@ -10,7 +11,7 @@ namespace Scribe.Test.Component
         [Ignore("The logprocessor should only pass the logs to the writers")]
         public void LogProcessor_ProcessLogTest()
         {
-            var processor = new LogProcessor(new LogManager());
+            var processor = new BasicLogProcessor(new LogManager());
             processor.ProcessLog(new LogEntry("Message"));
 
             //Assert.IsTrue(processor.LogEntries.Count() == 1);
@@ -20,7 +21,7 @@ namespace Scribe.Test.Component
         [Ignore("The logprocessor should only pass the logs to the writers")]
         public void LogProcessor_FlushTest()
         {
-            var processor = new LogProcessor(new LogManager());
+            var processor = new BasicLogProcessor(new LogManager());
             processor.ProcessLog(new LogEntry("Message"));
 
             //Assert.IsTrue(processor.LogEntries.Any());

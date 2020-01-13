@@ -1,19 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Scribe
+namespace Scribe.Processing
 {
-    public class LogProcessor : ILogProcessor, IDisposable
+    public class BasicLogProcessor : ILogProcessor, IDisposable
     {
         private readonly List<ILogEntry> _logEntries;
         private ILogManager _logManager;
 
-        public LogProcessor():this(new LogManager())
+        public BasicLogProcessor():this(new LogManager())
         {
             _logEntries = new List<ILogEntry>();
         }
 
-        public LogProcessor(ILogManager manager)
+        public BasicLogProcessor(ILogManager manager)
         {
             _logManager = manager;
             _logEntries = new List<ILogEntry>();

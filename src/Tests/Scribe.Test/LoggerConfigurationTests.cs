@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using System.Linq;
+using Scribe.Processing;
 
 namespace Scribe.Test
 {
@@ -84,10 +85,10 @@ namespace Scribe.Test
         public void Scribe_LoggerConfiguration_SetProcessor_Fluent()
         {
             var logger = new LoggerConfiguration()
-                .SetProcessor(new LogProcessor())
+                .SetProcessor(new BasicLogProcessor())
                 .BuildLogger() as Logger;
 
-            Assert.IsInstanceOf<LogProcessor>(logger.Processor);
+            Assert.IsInstanceOf<BasicLogProcessor>(logger.Processor);
         }
 
         [Test]
@@ -107,7 +108,7 @@ namespace Scribe.Test
             manager.SetMinimalLogLevel(LogLevel.Critical);
 
             var logger = new LoggerConfiguration()
-                .SetProcessor(new LogProcessor(manager))
+                .SetProcessor(new BasicLogProcessor(manager))
                 .SetMinimalLogLevel(LogLevel.Information)
                 .BuildLogger() as Logger;
 
@@ -122,7 +123,7 @@ namespace Scribe.Test
 
             var logger = new LoggerConfiguration()
                 .SetMinimalLogLevel(LogLevel.Information)
-                .SetProcessor(new LogProcessor(manager))
+                .SetProcessor(new BasicLogProcessor(manager))
                 .BuildLogger() as Logger;
 
             Assert.That(logger.Manager.MinimalLogLevel == LogLevel.Information);
@@ -136,7 +137,7 @@ namespace Scribe.Test
 
             var logger = new LoggerConfiguration()
                 .SetMinimalLogLevel(LogLevel.Critical)
-                .SetProcessor(new LogProcessor(manager))
+                .SetProcessor(new BasicLogProcessor(manager))
                 .BuildLogger() as Logger;
 
             Assert.That(logger.Manager.MinimalLogLevel == LogLevel.Critical);
