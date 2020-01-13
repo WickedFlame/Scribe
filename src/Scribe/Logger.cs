@@ -23,7 +23,7 @@ namespace Scribe
         /// </summary>
         /// <param name="manager">The log manager</param>
         public Logger(ILogManager manager)
-            : this(manager, new AsyncLogProcessor(manager))
+            : this(manager, new Processing.LogProcessor(manager))
         {
         }
 

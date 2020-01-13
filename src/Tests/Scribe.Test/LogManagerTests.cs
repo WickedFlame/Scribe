@@ -28,7 +28,6 @@ namespace Scribe.Test
         public void Scribe_LogManager_AddWriter_MultipleSameWriters()
         {
             var manager = new LogManager();
-            //manager.SetProcessor(new LogProcessor());
             manager.AddWriter(new TraceLogWriter());
             manager.AddWriter(new TraceLogWriter());
 
@@ -40,7 +39,7 @@ namespace Scribe.Test
         {
             var logger = new Logger();
 
-            Assert.That(logger.Processor.GetType() == typeof(AsyncLogProcessor));
+            Assert.That(logger.Processor.GetType() == typeof(Processing.LogProcessor));
         }
 
         [Test]
