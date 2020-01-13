@@ -6,7 +6,7 @@ namespace Scribe.Processing
     public class BasicLogProcessor : ILogProcessor, IDisposable
     {
         private readonly List<ILogEntry> _logEntries;
-        private ILogManager _logManager;
+        private ILogManager _manager;
 
         public BasicLogProcessor():this(new LogManager())
         {
@@ -15,22 +15,22 @@ namespace Scribe.Processing
 
         public BasicLogProcessor(ILogManager manager)
         {
-            _logManager = manager;
+            _manager = manager;
             _logEntries = new List<ILogEntry>();
         }
 
         /// <summary>
         /// Gets the Logmanager associated with the processor
         /// </summary>
-        public ILogManager Manager => _logManager;
+        public ILogManager Manager => _manager;
 
         /// <summary>
         /// Initizalize the logprocessor with the manager
         /// </summary>
-        /// <param name="logManager">The logmanager</param>
-        public void Initialize(ILogManager logManager)
+        /// <param name="manager">The logmanager</param>
+        public void Initialize(ILogManager manager)
         {
-            _logManager = logManager;
+            _manager = manager;
         }
         
         /// <summary>
@@ -39,12 +39,12 @@ namespace Scribe.Processing
         /// <param name="entry">The log entry</param>
         public void ProcessLog(ILogEntry entry)
         {
-            //if (row.LogLevel > MinimalLogLevel)
-            //{
-            //    return;
-            //}
-            
-            foreach (var logger in _logManager.Writers)
+            if (entry.LogLevel < _manager.MinimalLogLevel)
+            {
+                return;
+            }
+
+            foreach (var logger in _manager.Writers)
             {
                 logger.Write(entry);
             }

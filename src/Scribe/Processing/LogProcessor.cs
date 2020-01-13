@@ -14,7 +14,7 @@ namespace Scribe.Processing
         private bool _isDisposed;
 
         private readonly List<WorkerThread> _threads = new List<WorkerThread>();
-        private ILogManager _logManager;
+        private ILogManager _manager;
 
         public LogProcessor()
         {
@@ -28,9 +28,9 @@ namespace Scribe.Processing
             Initialize(logManager);
         }
 
-        public void Initialize(ILogManager logManager)
+        public void Initialize(ILogManager manager)
         {
-            _logManager = logManager;
+            _manager = manager;
         }
 
         public void WaitAll()
@@ -47,6 +47,11 @@ namespace Scribe.Processing
 
         public void ProcessLog(ILogEntry @event)
         {
+            if (@event.LogLevel < _manager.MinimalLogLevel)
+            {
+                return;
+            }
+
             _queue.Enqueue(@event);
 
             if (_queue.Count / _threads.Count > 10)
@@ -64,7 +69,7 @@ namespace Scribe.Processing
         {
             while (_queue.TryDequeue(out var @event))
             {
-                foreach (var logger in _logManager.Writers)
+                foreach (var logger in _manager.Writers)
                 {
                     logger.Write(@event);
                 }

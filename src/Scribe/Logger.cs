@@ -70,11 +70,6 @@ namespace Scribe
         /// <param name="logEntry">The item to log</param>
         public void Write(ILogEntry logEntry)
         {
-            if (logEntry.LogLevel < _manager.MinimalLogLevel)
-            {
-                return;
-            }
-
             Processor.ProcessLog(logEntry);
         }
     }
