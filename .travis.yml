@@ -15,7 +15,7 @@ notifications:
 
 install:
   - sudo apt-get install -qq dotnet-sdk-2.0.0
-  - dotnet restore
+  - dotnet restore Scribe.Core.sln
 
 script:
   - dotnet build
