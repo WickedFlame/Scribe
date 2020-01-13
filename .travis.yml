@@ -24,7 +24,7 @@ notifications:
     
 install:
   - nuget restore Scribe.sln
-  - sudo apt-get install -qq dotnet-sdk-2.0.0
+#  - sudo apt-get install -qq dotnet-sdk-2.0.0
   - dotnet restore
 
 script:
