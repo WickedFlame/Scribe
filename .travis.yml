@@ -1,7 +1,7 @@
 # Travis is now container based which doesn't support sudo
 sudo: false
 language: csharp
-solution: Scribe.Core.sln
+solution: Scribe.sln
 mono: none
 dotnet: 3.0.100
 
@@ -15,8 +15,8 @@ notifications:
 
 install:
   - sudo apt-get install -qq dotnet-sdk-2.0.0
-  - dotnet restore Scribe.Core.sln
+  - dotnet restore Scribe.sln
 
 script:
-  - dotnet build Scribe.Core.sln
-  - dotnet test Scribe.Core.sln
+  - dotnet build Scribe.sln
+  - dotnet test Scribe.sln

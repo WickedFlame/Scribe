@@ -91,7 +91,7 @@ before_test:
 
 # scripts to run after tests
 after_test:
-  - ps: .\pack.ps1   # Run a script to create the nuget package
+#  - ps: .\pack.ps1   # Run a script to create the nuget package
 
 # to run your custom scripts instead of automatic tests
 test_script:
