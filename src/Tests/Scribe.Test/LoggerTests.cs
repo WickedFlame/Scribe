@@ -10,6 +10,28 @@ namespace Scribe.Test
     public class LoggerTests
     {
         [Test]
+        public void Scribe_Logger_Defaults()
+        {
+            Assert.That(() =>
+            {
+                var logger = new Logger();
+                logger.Write("test");
+            }, Throws.Nothing);
+        }
+
+        [Test]
+        public void Scribe_Logger_AddWriter()
+        {
+            var writer = new QueueLogWriter();
+            var logger = new Logger()
+                .AddWriter(writer);
+
+            Assert.That(logger.Manager.Writers.Single() == writer);
+
+            Assert.Fail();
+        }
+
+        [Test]
         public void Logger_LoggExceptionWithFormatter_LogLevel_Same()
         {
             var writer = new QueueLogWriter();
@@ -47,7 +69,8 @@ namespace Scribe.Test
             var writer = new QueueLogWriter();
 
             var manager = new LogManager()
-                .AddWriter(writer).SetMinimalLogLevel(LogLevel.Warning);
+                .AddWriter(writer)
+                .SetMinimalLogLevel(LogLevel.Warning);
 
             var logger = new Logger(manager, new BasicLogProcessor());
 

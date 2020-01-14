@@ -19,10 +19,13 @@ namespace Scribe
         /// <summary>
         /// Adds a log writer to the logger
         /// </summary>
+        /// <param name="logger">The logger to add the writer to</param>
         /// <param name="writer">The log writer</param>
-        public static void AddWriter(this Logger logger, ILogWriter writer)
+        public static Logger AddWriter(this Logger logger, ILogWriter writer)
         {
             logger.Manager.AddWriter(writer);
+
+            return logger;
         }
 
         public static Logger SetProcessor(this Logger logger, ILogProcessor processor)
