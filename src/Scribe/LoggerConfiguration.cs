@@ -55,13 +55,18 @@ namespace Scribe
             return this;
         }
 
-        public LoggerConfiguration SetLogManager(ILogManager manager)
-        {
-            _manager = manager;
+        //public LoggerConfiguration SetLogManager(ILogManager manager)
+        //{
+        //    _manager = manager;
 
-            return this;
-        }
+        //    return this;
+        //}
 
+
+        /// <summary>
+        /// Creates a new ILogger based on the configured values
+        /// </summary>
+        /// <returns>The created logger</returns>
         public ILogger BuildLogger()
         {
             var manager = _manager ?? new LogManager();
@@ -85,6 +90,10 @@ namespace Scribe
             return logger;
         }
 
+        /// <summary>
+        /// Creates a new ILoggerFactory based on the configured values
+        /// </summary>
+        /// <returns>The factory</returns>
         public ILoggerFactory BuildFactory()
         {
             var manager = _manager ?? new LogManager();

@@ -7,7 +7,16 @@ namespace Scribe
     /// </summary>
     public class LogEntry : ILogEntry
     {
-        public LogEntry(string message, LogLevel logLevel = LogLevel.Information, Priority priority = Priority.Medium, string category = null, DateTime? logtime = null, string source = null, string module = null)
+        /// <summary>
+        /// Creates a new instance of the logentry
+        /// </summary>
+        /// <param name="message"></param>
+        /// <param name="logLevel"></param>
+        /// <param name="priority"></param>
+        /// <param name="category"></param>
+        /// <param name="logtime"></param>
+        /// <param name="source"></param>
+        public LogEntry(string message, LogLevel logLevel = LogLevel.Information, Priority priority = Priority.Medium, string category = null, DateTime? logtime = null, string source = null)
         {
             Message = message;
             LogLevel = logLevel;
@@ -15,56 +24,54 @@ namespace Scribe
             Category = category;
             LogTime = logtime ?? DateTime.UtcNow;
             Source = source;
-            Module = module;
         }
 
         /// <summary>
         /// Gets te log message
         /// </summary>
-        public string Message { get; private set; }
+        public string Message { get; }
 
         /// <summary>
         /// Gets the log level
         /// </summary>
-        public LogLevel LogLevel { get; private set; }
+        public LogLevel LogLevel { get; }
 
         /// <summary>
         /// Gets the log priority
         /// </summary>
-        public Priority Priority { get; private set; }
+        public Priority Priority { get; }
 
         /// <summary>
         /// Gets the log category
         /// </summary>
-        public string Category { get; private set; }
+        public string Category { get; }
 
         /// <summary>
         /// Gets the log time
         /// </summary>
-        public DateTime LogTime { get; private set; }
+        public DateTime LogTime { get; }
 
         /// <summary>
         /// Gets or sets the source that wrote the log
         /// </summary>
-        public string Source { get; set; }
+        public string Source { get; }
 
         /// <summary>
-        /// The name of the module that produced the log
+        /// Writes a custom string
         /// </summary>
-        public string Module { get; set; }
-
+        /// <returns></returns>
         public override string ToString()
         {
-            var logString = string.Format("## LogLevel: [{0}] Priority: [{1}] Logtime: [{2}]", LogLevel, Priority, LogTime);
+            var logString = $"## LogLevel: [{LogLevel}] Priority: [{Priority}] Logtime: [{LogTime}]";
 
             if (!string.IsNullOrEmpty(Category))
             {
-                logString += string.Format(" Category: [{0}]", Category);
+                logString += $" Category: [{Category}]";
             }
 
             if (!string.IsNullOrEmpty(Message))
             {
-                logString += string.Format(" Message: [{0}]", Message);
+                logString += $" Message: [{Message}]";
             }
 
             return logString;

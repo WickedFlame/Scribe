@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Scribe.Processing
 {
+    /// <summary>
+    /// Default LogProcessor
+    /// </summary>
     public class LogProcessor : ILogProcessor, IDisposable
     {
         private readonly object _syncRoot = new object();
@@ -16,23 +19,37 @@ namespace Scribe.Processing
         private readonly List<WorkerThread> _threads = new List<WorkerThread>();
         private ILogManager _manager;
 
+        /// <summary>
+        /// Creates a new instance of the processor
+        /// </summary>
         public LogProcessor()
         {
             _queue = new LogQueue();
             SetupWorkers(1);
         }
 
-        public LogProcessor(ILogManager logManager)
+        /// <summary>
+        /// Creates a new instance of the processor
+        /// </summary>
+        /// <param name="manager">The manager containing all writers and configuration</param>
+        public LogProcessor(ILogManager manager)
             : this()
         {
-            Initialize(logManager);
+            Initialize(manager);
         }
 
+        /// <summary>
+        /// Initializes the LogProcessor with a new manager
+        /// </summary>
+        /// <param name="manager">The new manager to initialize with</param>
         public void Initialize(ILogManager manager)
         {
             _manager = manager;
         }
 
+        /// <summary>
+        /// Waits for all threads to finish processing logs
+        /// </summary>
         public void WaitAll()
         {
             var tasks = _threads.Select(t => t.Task)
@@ -45,6 +62,10 @@ namespace Scribe.Processing
             }
         }
 
+        /// <summary>
+        /// Process the logentry
+        /// </summary>
+        /// <param name="event">The entry to process</param>
         public void ProcessLog(ILogEntry @event)
         {
             if (@event.LogLevel < _manager.MinimalLogLevel)
@@ -65,7 +86,10 @@ namespace Scribe.Processing
             }
         }
 
-        public void Process()
+        /// <summary>
+        /// Start processing the queue
+        /// </summary>
+        internal void Process()
         {
             while (_queue.TryDequeue(out var @event))
             {
@@ -78,6 +102,10 @@ namespace Scribe.Processing
             CleanupWorkers();
         }
 
+        /// <summary>
+        /// Creates and removes worker threads
+        /// </summary>
+        /// <param name="threadCount">Amount of threads to create</param>
         private void SetupWorkers(int threadCount)
         {
             if (threadCount < 1)
@@ -117,6 +145,9 @@ namespace Scribe.Processing
             }
         }
 
+        /// <summary>
+        /// Cleans all worker threads that are done with processing
+        /// </summary>
         public void CleanupWorkers()
         {
             lock (_syncRoot)
@@ -139,6 +170,9 @@ namespace Scribe.Processing
             }
         }
 
+        /// <summary>
+        /// Dispose the processor
+        /// </summary>
         public void Dispose()
         {
             Dispose(true);
@@ -162,7 +196,7 @@ namespace Scribe.Processing
             _isDisposed = true;
         }
 
-        public class WorkerThread : IDisposable
+        internal class WorkerThread : IDisposable
         {
             private readonly object _syncRoot = new object();
             private readonly Action _action;
