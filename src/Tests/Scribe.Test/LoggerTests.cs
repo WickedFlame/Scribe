@@ -27,8 +27,6 @@ namespace Scribe.Test
                 .AddWriter(writer);
 
             Assert.That(logger.Manager.Writers.Single() == writer);
-
-            Assert.Fail();
         }
 
         [Test]
