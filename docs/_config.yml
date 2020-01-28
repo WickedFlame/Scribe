@@ -1,0 +1,10 @@
+title: Scribe
+description: Background Loging and Dispatcher component for creating, manipulating and orchestrating of Logs.
+
+remote_theme: pmarsceill/just-the-docs
+
+aux_links:
+  "Scribe on Github":
+    - "//github.com/WickedFlame/Scribe"
+
+search_enabled: true
