@@ -1,7 +1,8 @@
 title: Scribe
 description: Background Loging and Dispatcher component for creating, manipulating and orchestrating of Logs.
 
-remote_theme: pmarsceill/just-the-docs
+#remote_theme: pmarsceill/just-the-docs
+remote_theme: allejo/jekyll-docs-theme
 
 aux_links:
   "Scribe on Github":
