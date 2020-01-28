@@ -16,6 +16,10 @@ links:
       - title: Issues
         url: https://github.com/WickedFlame/Scribe/issues?state=open
 
+license:
+    software: Ms-PL License
+    software_url: https://opensource.org/licenses/Ms-PL
+
 ui:
   header:
     color1: "#333333"
