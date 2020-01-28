@@ -1,9 +1,20 @@
+name: Scribe
 title: Scribe
 description: Background Loging and Dispatcher component for creating, manipulating and orchestrating of Logs.
 
 #remote_theme: pmarsceill/just-the-docs
 remote_theme: allejo/jekyll-docs-theme
 #remote_theme: mistic100/jekyll-bootstrap-doc
+
+links:
+    header:
+      - title: GitHub
+        url: https://github.com/WickedFlame/Scribe
+    footer:
+      - title: GitHub
+        url: https://github.com/WickedFlame/Scribe
+      - title: Issues
+        url: https://github.com/WickedFlame/Scribe/issues?state=open
 
 ui:
   header:
