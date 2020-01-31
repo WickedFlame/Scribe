@@ -9,29 +9,3 @@ Scribe is a background Logger and Diagnostics component that collects and delega
 All that is needed is the Interface Scribe.ILogger
 
 Visit [https://wickedflame.github.io/Scribe/](https://wickedflame.github.io/Scribe/) for the full documentation.
-
-```csharp
-var loggerFactory = new LoggerFactory();
-
-// add a log writer that Trace all Messages
-loggerFactory.AddWriter(new TraceLogWriter());
-
-// using the logger to log
-var logger = loggerFactory.GetLogger();
-logger.Write("test", LogLevel.Error);
-```
-
-Scribe can handle multiple Log Sources. For example all that is Traced to the Output to can be Logged with the help of the Scribe.TraceListener.  
-All that has to be implemented for a Listener is the IListener interface.
-```csharp
-var manager = new LogManager();
-manager.AddListener(new Scribe.TraceListener());
-
-// using the trace-system to log
-Trace.Write("Test");
-Trace.TraceError("Error message");
-```
-
-The Listeners and Writers are configured per LoggerFactory instance.  
-The Loggers that are created from the LoggerFactory all use the configuration defined in the LoggerFactory and can be created as many as desired.
-  
