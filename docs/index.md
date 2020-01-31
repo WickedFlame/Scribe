@@ -22,6 +22,3 @@ public class MyClass
     }
 }
 ```
-
-## Documentation
-- [Overview](overview)
