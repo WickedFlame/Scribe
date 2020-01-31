@@ -1,7 +1,7 @@
 ---
 title: Configuration
 nav_order: 2
-isHome: true
+isHome: false
 ---
 
 # Scribe

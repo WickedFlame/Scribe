@@ -1,7 +1,7 @@
 ---
 title: Writers
 nav_order: 3
-isHome: true
+isHome: false
 ---
 
 # Scribe
