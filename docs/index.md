@@ -11,6 +11,17 @@ Scribe is a background Logger and Dispatcher component for creating, manipulatin
 
 ## Installation
 
+## Usage
+All you need is the Interface Scribe.ILogger
+```csharp
+public class MyClass
+{
+    public MyClass(ILogger logger)
+    {
+        logger.Write("A message for the log", level: LogLevel.Information);
+    }
+}
+```
 
 ## Documentation
 - [Overview](overview)
