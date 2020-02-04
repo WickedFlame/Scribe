@@ -10,6 +10,9 @@ Scribe
 Scribe is a background Logger and Dispatcher component for creating, manipulating and dispatching of Logs.
 
 ## Installation
+```csharp
+PM> Install-Package Scribe
+```
 
 ## Usage
 All you need is the Interface Scribe.ILogger
