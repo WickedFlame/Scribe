@@ -1,36 +1,25 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFrameworks>netstandard2.0;net46</TargetFrameworks>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageLicenseExpression>Ms-PL</PackageLicenseExpression>
     <Authors>Christian Walpen</Authors>
     <Company>WickedFlame</Company>
     <Description>A lightweight Diagnostics and Logging component</Description>
     <Copyright>@WickedFlame 2020</Copyright>
     <PackageTags>Logging, Diagnostics, Tracing</PackageTags>
-    <PackageLicenseFile>License.txt</PackageLicenseFile>
     <NeutralLanguage>en</NeutralLanguage>
     <Version>1.0.0</Version>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <FileVersion>1.0.0.0</FileVersion>
     <Title>Scribe</Title>
-    <PackageProjectUrl>http://wickedflame.github.io/</PackageProjectUrl>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile></DocumentationFile>
-    <OutputPath></OutputPath>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <PackageProjectUrl>http://wickedflame.github.io/Scribe</PackageProjectUrl>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <DocumentationFile>\bin\Release\netstandard2.0\Scribe.xml</DocumentationFile>
   </PropertyGroup>
-
-  <ItemGroup>
-    <None Include="..\..\License.txt">
-      <Pack>True</Pack>
-      <PackagePath></PackagePath>
-    </None>
-  </ItemGroup>
 
 </Project>
